@@ -1,0 +1,560 @@
+a {
+    color: #388F53;
+    font-size: 1em;
+}
+
+.card h2 a{
+    color: #388F53;
+    font-size: 0.80em;
+}
+
+a:hover {
+    color: #388F53;
+}
+
+#iniciogrillaimg{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.inicioimagen {
+    margin: 0px;
+    padding: 0px;
+    border: 5px;
+    border-style: ridge;
+    border-width: thin;
+}
+
+.listadodivcards {
+    padding: 30px;
+}
+
+.card {
+    box-shadow: 4px 4px 4px #DFDFDF;
+    margin: 20px 0px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    color: #000000;
+    padding: 5px;
+    border-color: #388F53;
+    text-align: justify;
+    border-style: double;
+    height: 600px;
+    width: auto;
+}
+
+.card h2 {
+    margin-top: 5px;
+    font-size: 1.75em;
+    color: #388F53;
+    text-align: center;
+    text-decoration: none;
+}
+
+.card h2 a:hover {
+    background-color: #FFFFFF;
+    color: #388F53;
+    text-decoration: none;
+}
+
+.card h2 a:active {
+    background-color: #FFFFFF;
+    color: #388F53;
+    text-decoration: none;
+}
+
+.card h4 {
+    margin-top: 5px;
+    font-size: 1.5em;
+    color: #388F53;
+    text-align: center;
+}
+
+.card p {
+    font-size: 0.80em;
+}
+
+.card .visualcard{
+    position: absolute;
+    bottom: 15px;
+    padding-right: 5px;
+}
+
+.card .listadogenero {
+    color: #388F53;
+    border-bottom-style: dashed;
+    border-top-style: dashed;
+    border-width: thin;
+    text-align: center;
+}
+
+.card .listadoplataforma {
+    color: #388F53;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0px;
+}
+
+.card .listadoprecio {
+    color: #FFFFFF;
+    background-color: #388F53;
+    font-size: 1em;
+    text-align: center;
+    margin: 10px;
+}
+
+
+
+/* MINI CARD
+*/
+
+.cardmini {
+    box-shadow: 2px 2px 2px #DFDFDF;
+    margin: 20px 0px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    color: #000000;
+    padding: 5px;
+    border-color: #388F53;
+    text-align: justify;
+    border-style: double;
+    height: 415px;
+    width: auto;
+}
+
+.cardmini h2 {
+    margin-top: 5px;
+    font-size: 1em;
+    color: #388F53;
+    text-align: center;
+    text-decoration: none;
+}
+
+.cardmini h2 a:hover {
+    background-color: #FFFFFF;
+    color: #388F53;
+    text-decoration: none;
+}
+
+.cardmini h2 a:active {
+    background-color: #FFFFFF;
+    color: #388F53;
+    text-decoration: none;
+}
+
+.cardmini h4 {
+    margin-top: 5px;
+    font-size: 1em;
+    color: #388F53;
+    text-align: center;
+}
+
+.cardmini p {
+    font-size: 0.70em;
+}
+
+.cardmini .visualcardmini{
+    position: absolute;
+    bottom: 5px;
+    padding-right: 5px;
+}
+
+.cardmini .listadogenero {
+    color: #388F53;
+    border-bottom-style: dashed;
+    border-top-style: dashed;
+    border-width: thin;
+    text-align: center;
+}
+
+.cardmini .listadoplataforma {
+    color: #388F53;
+    text-align: center;
+    font-size: 1em;
+    margin: 0px;
+}
+
+.cardmini .listadoprecio {
+    color: #FFFFFF;
+    background-color: #388F53;
+    font-size: 0.80em;
+    text-align: center;
+    margin: 10px;
+}
+
+listadoplataforma listadogenero #cuerpodetalle {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#micarousel {
+    box-shadow: 10px 10px 10px #FFFFFF;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+#textomain {
+    margin-top: 50px;
+    padding: 20px;
+    box-shadow: 2px 2px 5px 2px #FFFFFF;
+    text-align: justify;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+#textomain h2 {
+    margin-top: 50px;
+    border-radius: 0px;
+    box-shadow: none;
+    padding-left: 0px;
+    text-shadow: -7px -7px #FFFFFF;
+    color: #FFFFFF;
+}
+
+.card .pcomentarios {
+    font-size: 1em;
+    text-align: left;
+    padding: 15px;
+}
+
+.card .emailcomentarios {
+    border-bottom-style: double;
+    border-top-style: double;
+    font-size: 0.75em;
+    padding: 0px 15px;
+    margin: 0px;
+}
+
+.card .fechacomentarios {
+    text-align: center;
+    font-size: 0.75em;
+    font-style: italic;
+    color: darkgray;
+}
+.titulodetalle{
+    margin-top: 50px;
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 6px -6px #DFDFDF;
+    color: #388F53;
+    border-color: #388F53;
+    text-align: center;
+    border-bottom-style: double;
+    padding-bottom: 5px;
+}
+
+#carouseldetalle{
+    padding: 20px;
+    box-shadow: 2px 2px 5px 2px #DFDFDF;
+    text-align: justify;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+#cuerpodetalle h2{
+    margin-top: 50px;
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 6px -6px #DFDFDF;
+    color: #388F53;
+    border-color: #388F53;
+    text-align: center;
+    border-bottom-style: double;
+    padding-bottom: 5px;
+}
+
+body {
+    background-color: #f6f5f5;
+    text-justify: auto;
+    color: #402F36;
+    margin-top: 20px;
+    padding-top: 55px;
+    padding-bottom: 40px;
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* estrellas */
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+
+#form p {
+  text-align: center;
+}
+
+#form label {
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  font-size: 2em;
+}
+
+#estrella {
+   font-size: 3em; 
+    text-align: center;
+    margin: 0px;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
+/* fin estrellas */
+.contactosections {
+    margin: 30px;
+    text-align: left;
+}
+
+.contactoh3 {
+    margin-top: 30px;
+}
+
+.contactoiconos {
+    margin: 30px 0px;
+    text-align: center;
+}
+
+.contactoh2 {
+    border-radius: 0px;
+    box-shadow: 2px 2px 2px #DDDDDD;
+    background-color: #FFFFFF;
+    text-shadow: 3px -3px #388F53;
+    color: #388F53;
+    text-align: center;
+}
+
+#contactoiconosdiv {
+    text-align: center;
+}
+/*header*/
+.navbar {
+    background-color: rgb(224, 220, 220);
+    box-shadow: 2px 2px 2px #8a8a8a;
+    font-size: 1.15em;
+    font-family: 'Staatliches', cursive;
+}
+
+.navbar a {
+    color: #388F53;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.15em;
+    font-family: 'Staatliches', cursive;
+}
+
+.navbar a:hover {
+    background-color: #388F53;
+    color: #FFFFFF;
+}
+
+.navbar a:active {
+    background-color: #388F53;
+    color: #FFFFFF;
+}
+
+a {
+    color: #388F53;
+}
+
+.navbar-toggler-icon {
+    background-image: url(../imagenes/iconos/iconohamburguesa.png);
+}
+
+.navbar-toggler-icon:active {
+    background-image: url(../imagenes/iconos/iconohamburguesacierre.png);
+}
+
+
+    /*finheader*/
+ 
+    /*footer*/
+
+.footer-copyright{
+    color: rgb(0, 0, 0);
+    margin-top: 50px;
+    font-family: 'Lobster', cursive;
+    font-size: 1.2em;
+    padding-left: 20px;
+}
+.piepagina{
+    color: #388F53;
+}
+
+#footer2{
+    background-color:rgb(224, 220, 220);
+}
+.gs{
+    color: #388F53;
+    margin-top: 20px;
+    font-family: 'Staatliches', cursive;
+    font-size: 1.8em;
+    padding-left: 20px;
+}
+.desc{
+    color: rgb(61, 85, 64);
+    font-size: 1.4em;
+    font-family: 'Lobster', cursive;
+    padding-left: 20px;
+}
+#link {
+    color: rgb(61, 85, 64);
+    font-family: 'Staatliches', cursive;
+    font-size: 1.4em;
+    padding-left: 20px;
+}
+#link:hover{
+    color: #388F53;
+    
+}
+#logo{
+    padding-left: 20px;
+}
+/*paginacontacto*/
+.contactoh2{
+    font-family: 'Lobster', cursive;
+    color: rgb(61, 85, 64);
+    font-size: 4em;
+    text-shadow: -2px -1px rgb(141, 138, 138);
+}
+
+.contactoh3{
+    font-family: 'Staatliches', cursive;
+    color: rgb(61, 85, 64);
+
+}
+.contactosections{
+    font-family: 'Staatliches', cursive;
+    color: rgb(61, 85, 64);
+    padding-left: 40px;
+    padding-top: 30px;
+    text-align: center;
+    
+}
+#bd{
+    background-color: #cecaca;
+}
+#envboton{
+    color: rgb(45, 168, 45);;
+}
+
+.tituloseccion {
+    text-align: left;
+    color: #388F53;
+    font-size: 3.5em;
+    font-family: 'Staatliches', cursive;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.tituloseccioncontacto{
+    text-align: center;
+    color: #388F53;
+    font-size: 3.5em;
+    font-family: 'Staatliches', cursive;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.cardcomentarios{
+    box-shadow: 4px 4px 4px #DFDFDF;
+    margin: 20px 0px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    color: #000000;
+    padding: 5px;
+    border-color: #388F53;
+    text-align: justify;
+    border-style: double;
+    height: auto;
+    width: auto;
+}
+
+.cardcomentarios .clasificacion{
+    color: orange;
+    font-size: 1.25em;
+}
+
+.cardcomentarios .emailcomentarios{
+    color: #388F53;
+    font-family: 'Staatliches', cursive;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.cardcomentarios .pcomentarios{
+    font-style: oblique;
+    color: rgb(61, 85, 64);
+    font-size: 1.60em;
+}
+
+.comentariosconicono{
+    text-align: left;
+    color: #388F53;
+    font-size: 3.5em;
+    font-family: 'Staatliches', cursive;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 10px;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+#buttonOrderBy{
+    float: right;
+    overflow: auto;
+    margin-right: 0px;
+    right: 0px;
+}
+
+#errorComentario {
+    margin-top: 10px;
+    color: #e43b3b;
+}
+
+#okComentario {
+    margin-top: 10px;
+    color: #3e8e41;
+}
