@@ -8,7 +8,7 @@
         }
 
         public function getGeneros(){
-            $query = "SELECT * FROM GENEROS WHERE Estado = 1";
+            $query = "SELECT * FROM generos WHERE estado = 1";
             return $this->con->query($query);
         }
     }

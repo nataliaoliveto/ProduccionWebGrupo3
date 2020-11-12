@@ -8,26 +8,26 @@
         }
 
         public function getProductosRandom(){
-            $query = "SELECT * FROM Productos WHERE Estado = 1 AND Destacado = 1 ORDER BY RAND() LIMIT 6";
+            $query = "SELECT * FROM productos WHERE estado = 1 AND destacado = 1 ORDER BY RAND() LIMIT 6";
             return $this->con->query($query);
         }
         
         public function getProductoUnico($prodId){
-            $query = "SELECT * FROM Productos WHERE ID = $prodId";
+            $query = "SELECT * FROM productos WHERE id = $prodId";
             return $this->con->query($query);          
         }
 
         public function getProductos($platID, $genID, $edadID, $sortID){
-            $query = "SELECT * FROM productos WHERE Estado = 1 AND (Plataforma = $platID OR $platID = 0) AND (Genero = $genID OR $genID = 0) AND (Edad = $edadID OR $edadID = 0)";
+            $query = "SELECT * FROM productos WHERE estado = 1 AND (plataforma = $platID OR $platID = 0) AND (genero = $genID OR $genID = 0) AND (edad = $edadID OR $edadID = 0)";
             switch($sortID){
                 case "1":
-                    $query .= "ORDER BY Destacado DESC, RAND()";
+                    $query .= "ORDER BY destacado DESC, RAND()";
                     break;
                 case "2":
-                    $query .= "ORDER BY Nombre ASC";
+                    $query .= "ORDER BY nombre ASC";
                     break;
                 case "3":
-                    $query .= "ORDER BY Nombre DESC";
+                    $query .= "ORDER BY nombre DESC";
                     break; 
             }
             return $this->con->query($query);

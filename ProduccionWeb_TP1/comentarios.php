@@ -8,12 +8,12 @@
         }
 
         public function getComentarios($prodID){
-            $query = "SELECT * FROM COMENTARIOS WHERE IDproducto = $prodID AND estado = 1 ORDER BY ID DESC LIMIT 10";
+            $query = "SELECT * FROM comentarios WHERE idproducto = $prodID AND estado = 1 ORDER BY id DESC LIMIT 10";
             return $this->con->query($query);
         }
 
         public function validaComentario($prodID){
-            $query = "SELECT COUNT(*) FROM COMENTARIOS WHERE IP = '".$_SERVER['SERVER_ADDR']."' AND CAST(now() AS DATE)  = CAST(fecha AS DATE) AND IDproducto = $prodID";
+            $query = "SELECT COUNT(*) FROM comentarios WHERE ip = '".$_SERVER['REMOTE_ADDR']."' AND CAST(now() AS DATE)  = CAST(fecha AS DATE) AND idproducto = $prodID";
             return $this->con->query($query)->fetchColumn();           
         }
 
@@ -21,7 +21,7 @@
             
             if(!empty($data)){
 
-                $sql = "INSERT INTO COMENTARIOS (mail, descripcion, IDproducto, calificacion, fecha, estado, IP) VALUES ('".$data['mail']."', '".$data['descripcion']."', ".$data['IDproducto'].", ".$data['calificacion'].", now(), false, '".$_SERVER['SERVER_ADDR']."')";                 
+                $sql = "INSERT INTO comentarios (mail, descripcion, idproducto, calificacion, fecha, estado, ip) VALUES ('".$data['mail']."', '".$data['descripcion']."', ".$data['IDproducto'].", ".$data['calificacion'].", now(), false, '".$_SERVER['REMOTE_ADDR']."')";                 
                 
                 if($this->con->exec($sql) > 0){
                     return 'comentario almacenado';

@@ -7,7 +7,7 @@
             $this->con = $con;
         }
         public function getPlataformas(){
-            $query = "SELECT * FROM PLATAFORMAS WHERE Estado = 1";
+            $query = "SELECT * FROM plataformas WHERE estado = 1";
             return $this->con->query($query);
         }
     }
