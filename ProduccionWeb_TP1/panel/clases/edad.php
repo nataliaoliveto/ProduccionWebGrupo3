@@ -23,7 +23,7 @@ Class Edad{
 					WHERE edades.id=".$id." AND generos.enabled = 1 AND generos.estado = 1 ";
 		return $this->con->query($query); 
 	}
-	
+
 	public function get($id){
 		$query = "SELECT id, nombre
 				FROM edades WHERE id = ".$id;
@@ -31,16 +31,24 @@ Class Edad{
 			
 		$perfil = $query->fetch(PDO::FETCH_OBJ);
 			
-			$sql = 'SELECT perfil_id, permiso_id
-					FROM perfil_permisos  
-					WHERE perfil_id = '.$perfil->id;
+			$sql = 'SELECT idedad, idgen
+					FROM genero_edades  
+					WHERE idedad = '.$perfil->id;
 					
 			foreach($this->con->query($sql) as $permiso){
-				$perfil->permisos[] = $permiso['permiso_id'];
+				$perfil->permisos[] = $permiso['idedad'];
 			}
 			/*echo '<pre>';
 			var_dump($perfil);echo '</pre>'; */
             return $perfil;
+	}
+
+	public function selGen($id){
+		$query = "SELECT idgen
+					FROM genero_edades
+					WHERE idedad =".$id;
+		$query = $this->con->query($query);
+		return $query;
 	}
 
 	public function update($modif, $id){
@@ -60,10 +68,29 @@ Class Edad{
 	} 
 
 	public function edit($data){
-			$id = $data['id'];
-			unset($data['id']);
-            
-			$this->con->exec("UPDATE edades SET nombre = '".$data['nombre']."' WHERE id = ".$id);
-	}
+		$id = $data['id'];
+		unset($data['id']);
+
+		foreach($data as $key => $value){
+			if(!is_array($value)){
+				if($value != null){	
+					$columns[]=$key." = '".$value."'"; 
+				}
+			}
+		}
+		$sql = "UPDATE edades SET ".implode(',',$columns)." WHERE id = ".$id;
+		//echo $sql; die();
+		$this->con->exec($sql);
+				
+		$sql = 'DELETE FROM genero_edades WHERE idedad= '.$id;
+		$this->con->exec($sql); 
+		
+		$sql = '';
+		foreach($data['generos'] as $generos){
+			$sql .= 'INSERT INTO genero_edades(idedad,idgen) 
+						VALUES ('.$id.','.$generos.');';
+		}
+		$this->con->exec($sql);
+}
 	
 }

@@ -11,6 +11,9 @@ require('inc/header.php');
     $query = 'SELECT * FROM permisos';
     $permisos = $con->query($query);
 
+    $queryGeneros = 'SELECT * FROM generos';
+    $generos = $con->query($queryGeneros);
+
     if (isset($_GET['edit'])) {
         $edadmini = $edad->get($_GET['edit']);
     }
@@ -34,6 +37,24 @@ require('inc/header.php');
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="name" value="<?php echo (isset($edadmini->nombre) ? $edadmini->nombre : ''); ?> " required>
                 </div>
             </div>
+
+            <div class="form-group">
+                    <label for="tipo" class="col-sm-2 control-label">Géneros</label>
+                    <div class="col-sm-10">
+                        <select name="generos[]" id="generos" multiple='multiple' >
+                            <?php  foreach($generos as $g){?>
+                                <option value="<?php echo $g['id']?>"
+                                <?php 
+                                    foreach ($edad->selGen($edadmini->id) as $cate) {
+                                        if($cate['idgen'] == $g['id']){
+                                            echo ' selected="selected" ';
+                                        }
+                                    }
+								?>><?php echo $g['nombre']?></option>
+                            <?php }?>
+                        </select>
+                    </div>
+            </div> 
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">

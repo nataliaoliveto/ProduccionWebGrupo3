@@ -4,10 +4,11 @@ Class Genero{
     /*conexion a la base*/
 	private $con;
 	
+	/*ok*/
 	public function __construct($con){
 		$this->con = $con;
 	}
-
+	/*ok*/
 	public function getList(){
 		$query = "SELECT * 
 					FROM generos
@@ -15,7 +16,7 @@ Class Genero{
         return $this->con->query($query); 
 	}
 	
-
+	/*nuevo*/
 	public function getSubcategoria($id){
 		$query = "	SELECT edades.nombre
 					FROM generos INNER JOIN genero_edades
@@ -33,12 +34,12 @@ Class Genero{
 			
 		$perfil = $query->fetch(PDO::FETCH_OBJ);
 			
-			$sql = 'SELECT perfil_id, permiso_id
-					FROM perfil_permisos  
-					WHERE perfil_id = '.$perfil->id;
+			$sql = 'SELECT idedad, idgen
+					FROM genero_edades  
+					WHERE idgen = '.$perfil->id;
 					
 			foreach($this->con->query($sql) as $permiso){
-				$perfil->permisos[] = $permiso['permiso_id'];
+				$perfil->permisos[] = $permiso['idgen'];
 			}
 			/*echo '<pre>';
 			var_dump($perfil);echo '</pre>'; */
@@ -47,9 +48,10 @@ Class Genero{
 
 	public function selEdad($id){
 		$query = "SELECT idedad
-					FORM genero_edades
+					FROM genero_edades
 					WHERE idgen =".$id;
-		$this->con->exec($query);
+		$query = $this->con->query($query);
+		return $query;
 	}
 
 	public function update($modif, $id){
@@ -71,8 +73,28 @@ Class Genero{
 	public function edit($data){
 			$id = $data['id'];
 			unset($data['id']);
-            
-			$this->con->exec("UPDATE generos SET nombre = '".$data['nombre']."' WHERE id = ".$id);
+			//$this->con->exec("UPDATE generos SET nombre = '".$data['nombre']."' WHERE id = ".$id);
+
+			foreach($data as $key => $value){
+				if(!is_array($value)){
+					if($value != null){	
+						$columns[]=$key." = '".$value."'"; 
+					}
+				}
+			}
+			$sql = "UPDATE generos SET ".implode(',',$columns)." WHERE id = ".$id;
+			//echo $sql; die();
+			$this->con->exec($sql);
+					
+			$sql = 'DELETE FROM genero_edades WHERE idgen= '.$id;
+			$this->con->exec($sql); 
+			
+			$sql = '';
+			foreach($data['edades'] as $edades){
+				$sql .= 'INSERT INTO genero_edades(idgen,idedad) 
+							VALUES ('.$id.','.$edades.');';
+			}
+			$this->con->exec($sql);
 	}
-	
+
 }

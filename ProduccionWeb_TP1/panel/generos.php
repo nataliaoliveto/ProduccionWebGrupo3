@@ -14,15 +14,16 @@ require('inc/header.php');
 	}
 
 	if(isset($_POST['formulario_generos'])){ 
-		$gen->edit($_POST); 
-	} 
-
-	$mensaje = false;
+		$gen->edit($_POST);
+	}
+	
+		$mensaje = false;
 	if(isset($_POST['alta_generos'])){
 		if($gen->save($_POST) == 1){
 			$mensaje = true;
 		} 
 	}
+
 	
 	?>
 

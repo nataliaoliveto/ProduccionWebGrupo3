@@ -37,7 +37,7 @@ require('inc/header.php');
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="name" value="<?php echo (isset($generitos->nombre) ? $generitos->nombre : ''); ?> " required>
                 </div>
             </div>
-
+            
             <div class="form-group">
                     <label for="tipo" class="col-sm-2 control-label">Edades</label>
                     <div class="col-sm-10">
@@ -45,9 +45,11 @@ require('inc/header.php');
                             <?php  foreach($edades as $e){?>
                                 <option value="<?php echo $e['id']?>"
                                 <?php 
-                                	if(isset($edades->edades)){
-                                    	echo ' selected="selected" ';
-									}
+                                    foreach ($gen->selEdad($generitos->id) as $subcat) {
+                                        if($subcat['idedad'] == $e['id']){
+                                            echo ' selected="selected" ';
+                                        }
+                                    }
 								?>><?php echo $e['nombre']?></option>
                             <?php }?>
                         </select>
