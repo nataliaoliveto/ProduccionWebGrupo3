@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Dashboard with Off-canvas Sidebar</title>
+    <title>Panel de Control</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,9 +27,9 @@
                 <form action="index.php" method="post" class=" from-horizontal">
 
                 <div class="form-group">
-                        <label for="usuario" class="col-sm-2 control-label">Usuario</label>
+                        <label for="usuario" class="col-sm-2 control-label">Mail</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="" value="<?php echo isset($usuario->usuario) ? $usuario->usuario : ''; ?>">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?php echo isset($usuario->email) ? $usuario->email : ''; ?>">
                         </div>
                     </div>
 

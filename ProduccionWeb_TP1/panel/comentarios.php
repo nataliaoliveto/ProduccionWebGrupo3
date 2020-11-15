@@ -83,9 +83,9 @@ require('inc/header.php');
 						<td><?php echo $comentarios['descripcion'];?></td>
 						<td>
 							<?php if($comentarios['estado'] == 0){ ?>
-								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>"><button type="button" class="btn btn-success" title="Agregar">A</button></a>
+								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 							<?php } else { ?>
-								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>"><button type="button" class="btn btn-danger" title="Borrar">I</button></a>
+								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>"><button type="button" class="btn btn-danger" title="Desactivar">D</button></a>
 							<?php } ?>
 						</td>
 						</tr>
