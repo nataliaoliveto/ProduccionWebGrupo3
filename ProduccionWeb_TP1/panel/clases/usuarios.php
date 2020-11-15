@@ -149,7 +149,7 @@ class Usuario
 	public function login($data)
 	{
 		$sql = "SELECT id_usuario,nombre,apellido,email,usuario,clave,activo,salt
-		        FROM usuarios WHERE activo = 1 AND usuario = '" . $data['usuario'] . "'";
+		        FROM usuarios WHERE activo = 1 AND email = '" . $data['email'] . "'";
 		$datos = $this->con->query($sql)->fetch(PDO::FETCH_ASSOC);
 		if (isset($datos['id_usuario'])) {
 			if ($this->encrypt($data['clave'], $datos['salt']) == $datos['clave']) {

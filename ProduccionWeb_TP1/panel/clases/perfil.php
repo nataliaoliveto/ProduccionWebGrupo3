@@ -1,20 +1,20 @@
 <?php 
 Class Perfil{
 
-    /*conexion a la base*/
+    /*OK*/
 	private $con;
-	
+	/*OK*/
 	public function __construct($con){
 		$this->con = $con;
 	}
-
+	/*OK*/
 	public function getList(){
 		$query = "SELECT id, nombre 
 					FROM perfil
 					WHERE enabled = '1' ";
         return $this->con->query($query); 
 	}
-	
+	/*OK*/
 	public function get($id){
 	    $query = "SELECT id,nombre
 		        	FROM perfil WHERE id = ".$id;

@@ -5,6 +5,9 @@ include('../dbo_con.php');
 include('clases/usuarios.php');
 include('clases/perfil.php');
 include('clases/comentario.php');
+include('clases/plataforma.php');
+include('clases/genero.php');
+include('clases/edad.php');
 
 
 try {
