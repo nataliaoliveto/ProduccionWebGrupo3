@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 01:31 AM
+-- Generation Time: Nov 15, 2020 at 09:57 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -34,7 +34,7 @@ CREATE TABLE `comentarios` (
   `IDproducto` int(11) NOT NULL,
   `calificacion` int(1) NOT NULL,
   `fecha` datetime NOT NULL,
-  `estado` tinyint(1) NOT NULL DEFAULT 0,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
   `IP` varchar(15) NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -56,7 +56,7 @@ INSERT INTO `comentarios` (`id`, `mail`, `descripcion`, `IDproducto`, `calificac
 CREATE TABLE `edades` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
   `enabled` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -69,7 +69,8 @@ INSERT INTO `edades` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (2, 'PEGI 7 - Mayores de 7 años', 1, 1),
 (3, 'PEGI 12 - Mayores de 12 años', 1, 1),
 (4, 'PEGI 16 - Mayores de 16 años', 1, 1),
-(5, 'PEGI 18 - Mayores de 18 años', 1, 1);
+(5, 'PEGI 18 - Mayores de 18 años', 1, 1),
+(6, 'sdasda s', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,7 @@ INSERT INTO `edades` (`id`, `nombre`, `estado`, `enabled`) VALUES
 CREATE TABLE `generos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
   `enabled` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -91,12 +92,14 @@ CREATE TABLE `generos` (
 INSERT INTO `generos` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (1, 'Acción', 1, 1),
 (2, 'Aventura', 1, 1),
-(3, 'Deportes', 1, 1),
+(3, 'Deporte', 1, 1),
 (4, 'Horror', 1, 1),
 (5, 'Lucha', 1, 1),
 (6, 'Plataformas', 1, 1),
 (7, 'RPG', 1, 1),
-(8, 'Shooter', 1, 1);
+(8, 'Shooter', 1, 1),
+(9, 'sdsdsdsd', 0, 1),
+(10, 'a', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +159,8 @@ INSERT INTO `perfil` (`id`, `nombre`, `enabled`) VALUES
 (1, 'Administrador', 1),
 (2, 'Ventas', 1),
 (3, 'Entregas', 1),
-(10, ' test2', 0);
+(10, ' test2', 0),
+(11, 'sadasdasd', 1);
 
 -- --------------------------------------------------------
 
@@ -183,7 +187,10 @@ INSERT INTO `perfil_permisos` (`id`, `perfil_id`, `permiso_id`, `enabled`) VALUE
 (20, 10, 4, 0),
 (29, 1, 1, 1),
 (30, 1, 2, 1),
-(31, 1, 4, 1);
+(31, 1, 4, 1),
+(33, 11, 1, 1),
+(34, 11, 2, 1),
+(35, 11, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -219,7 +226,7 @@ INSERT INTO `permisos` (`id`, `nombre`, `cod`, `seccion`, `enabled`) VALUES
 CREATE TABLE `plataformas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
   `enabled` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -231,7 +238,10 @@ INSERT INTO `plataformas` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (1, 'Xbox', 1, 1),
 (2, 'Nintendo Switch', 1, 1),
 (3, 'PS4', 1, 1),
-(4, 'PC', 1, 1);
+(4, 'PC', 1, 1),
+(6, 'FUNCIONA', 0, 1),
+(7, 'asdaaa', 0, 1),
+(8, 'aaaaaaa', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -243,7 +253,7 @@ CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `descripcion` text NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
   `precio` float NOT NULL,
   `destacado` tinyint(1) NOT NULL,
   `stock` int(11) NOT NULL,
@@ -360,8 +370,7 @@ INSERT INTO `usuarios_perfiles` (`id`, `usuario_id`, `perfil_id`, `enabled`) VAL
 -- Indexes for table `comentarios`
 --
 ALTER TABLE `comentarios`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDproducto` (`IDproducto`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `edades`
@@ -379,9 +388,7 @@ ALTER TABLE `generos`
 -- Indexes for table `genero_edades`
 --
 ALTER TABLE `genero_edades`
-  ADD PRIMARY KEY (`idedad`,`idgen`),
-  ADD KEY `idedad` (`idedad`),
-  ADD KEY `idgen` (`idgen`);
+  ADD PRIMARY KEY (`idedad`,`idgen`);
 
 --
 -- Indexes for table `perfil`
@@ -411,10 +418,7 @@ ALTER TABLE `plataformas`
 -- Indexes for table `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `edad` (`edad`),
-  ADD KEY `genero` (`genero`),
-  ADD KEY `plataforma` (`plataforma`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `usuarios`
@@ -439,22 +443,46 @@ ALTER TABLE `comentarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `edades`
+--
+ALTER TABLE `edades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `generos`
+--
+ALTER TABLE `generos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `perfil_permisos`
 --
 ALTER TABLE `perfil_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `plataformas`
+--
+ALTER TABLE `plataformas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -467,31 +495,6 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `usuarios_perfiles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `comentarios`
---
-ALTER TABLE `comentarios`
-  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`IDproducto`) REFERENCES `productos` (`id`);
-
---
--- Constraints for table `genero_edades`
---
-ALTER TABLE `genero_edades`
-  ADD CONSTRAINT `genero_edades_ibfk_1` FOREIGN KEY (`idedad`) REFERENCES `edades` (`id`),
-  ADD CONSTRAINT `genero_edades_ibfk_2` FOREIGN KEY (`idgen`) REFERENCES `generos` (`id`);
-
---
--- Constraints for table `productos`
---
-ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`edad`) REFERENCES `edades` (`id`),
-  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`genero`) REFERENCES `generos` (`id`),
-  ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`plataforma`) REFERENCES `plataformas` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
