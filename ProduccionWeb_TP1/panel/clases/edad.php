@@ -43,6 +43,17 @@ Class Edad{
             return $perfil;
 	}
 
+	public function del($id){
+		$query = "SELECT count(1) as cantidad FROM genero_edades INNER JOIN productos ON genero_edades.idedad = productos.edad WHERE idedad = ".$id." AND genero_edades.enabled = 1 AND productos.enabled = 1";
+		$consulta = $this->con->query($query)->fetch(PDO::FETCH_OBJ);
+		if($consulta->cantidad == 0){
+			$query = "UPDATE edades SET enabled = '0' WHERE id = ".$id.";"; 
+			$this->con->exec($query); 
+			return 1;
+		}
+		return 'Edad asignada a un género y/o producto';
+	}
+
 	public function selGen($id){
 		$query = "SELECT idgen
 					FROM genero_edades

@@ -24,6 +24,14 @@ require('inc/header.php');
 		} 
 	}
 	
+	if (isset($_GET['del'])) {
+		$resp = $edad->del($_GET['del']);
+		if ($resp == 1) {
+			header('Location: edades.php');
+		}
+		echo '<script>alert("' . $resp . '");</script>';
+	}
+
 	?>
 
 	<div class="col-sm-9 col-md-10 main">
@@ -84,8 +92,9 @@ require('inc/header.php');
 							<?php if($edades['estado'] == 0){ ?>
 								<a href="edades.php?modif=<?php echo $edades['estado'] ?>&id=<?php echo $edades['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 							<?php } else { ?>
-								<a href="edades.php?modif=<?php echo $edades['estado'] ?>&id=<?php echo $edades['id']?>"><button type="button" class="btn btn-danger" title="Desactivar">D</button></a>
-							<?php } ?>
+								<a href="edades.php?modif=<?php echo $edades['estado'] ?>&id=<?php echo $edades['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+							<?php } 
+							?><a href="edades.php?del=<?php echo $edades['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
 						</td>
 						</tr>
 					<?php } ?> 

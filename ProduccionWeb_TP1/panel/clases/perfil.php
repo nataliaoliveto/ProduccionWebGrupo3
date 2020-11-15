@@ -9,7 +9,7 @@ Class Perfil{
 	}
 	/*OK*/
 	public function getList(){
-		$query = "SELECT id, nombre 
+		$query = "SELECT id, nombre, estado 
 					FROM perfil
 					WHERE enabled = '1' ";
         return $this->con->query($query); 
@@ -32,6 +32,21 @@ Class Perfil{
 			/*echo '<pre>';
 			var_dump($perfil);echo '</pre>'; */
             return $perfil;
+	}
+
+	public function update($modif, $id){
+		$act = ($modif -1) * -1;
+		$this->con->exec("UPDATE perfil SET estado = ".$act." WHERE id = ".$id);
+	}
+
+	public function getPermisos($id){
+		$query = "	SELECT permisos.nombre
+					FROM perfil INNER JOIN perfil_permisos
+					ON perfil.id = perfil_permisos.perfil_id
+					INNER JOIN permisos 
+					ON permisos.id = perfil_permisos.permiso_id
+					WHERE perfil.id=".$id." AND permisos.enabled = 1 ";
+		return $this->con->query($query); 
 	}
 
 	public function del($id){
@@ -77,9 +92,6 @@ Class Perfil{
 			$this->con->exec($sql);
 	} 
 	
-	
-
-	
 	public function edit($data){
 			$id = $data['id'];
 			unset($data['id']);
@@ -94,8 +106,6 @@ Class Perfil{
             $sql = "UPDATE perfil SET ".implode(',',$columns)." WHERE id = ".$id;
             //echo $sql; die();
             $this->con->exec($sql);
-			
-			
 			
 			$sql = 'DELETE FROM perfil_permisos WHERE perfil_id= '.$id;
 			$this->con->exec($sql);

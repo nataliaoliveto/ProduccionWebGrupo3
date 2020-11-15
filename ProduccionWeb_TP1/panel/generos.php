@@ -24,6 +24,13 @@ require('inc/header.php');
 		} 
 	}
 
+	if (isset($_GET['del'])) {
+		$resp = $gen->del($_GET['del']);
+		if ($resp == 1) {
+			header('Location: generos.php');
+		}
+		echo '<script>alert("' . $resp . '");</script>';
+	}
 	
 	?>
 
@@ -85,8 +92,9 @@ require('inc/header.php');
 							<?php if($generos['estado'] == 0){ ?>
 								<a href="generos.php?modif=<?php echo $generos['estado'] ?>&id=<?php echo $generos['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 							<?php } else { ?>
-								<a href="generos.php?modif=<?php echo $generos['estado'] ?>&id=<?php echo $generos['id']?>"><button type="button" class="btn btn-danger" title="Desactivar">D</button></a>
+								<a href="generos.php?modif=<?php echo $generos['estado'] ?>&id=<?php echo $generos['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
 							<?php } ?>
+							<a href="generos.php?del=<?php echo $generos['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
 						</td>
 						</tr>
 					<?php } ?> 

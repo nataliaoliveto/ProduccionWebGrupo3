@@ -24,7 +24,15 @@ require('inc/header.php');
 			$mensaje = true;
 		} 
 	}
-	
+
+	if (isset($_GET['del'])) {
+		$resp = $plata->del($_GET['del']);
+		if ($resp == 1) {
+			header('Location: plataformas.php');
+		}
+		echo '<script>alert("' . $resp . '");</script>';
+	}
+
 	?>
 
 	<div class="col-sm-9 col-md-10 main">
@@ -74,8 +82,9 @@ require('inc/header.php');
 							<?php if($plataformas['estado'] == 0){ ?>
 								<a href="plataformas.php?modif=<?php echo $plataformas['estado'] ?>&id=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 							<?php } else { ?>
-								<a href="plataformas.php?modif=<?php echo $plataformas['estado'] ?>&id=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-danger" title="Desactivar">D</button></a>
+								<a href="plataformas.php?modif=<?php echo $plataformas['estado'] ?>&id=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
 							<?php } ?>
+							<a href="plataformas.php?del=<?php echo $plataformas['i	d'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
 						</td>
 						</tr>
 					<?php } ?> 

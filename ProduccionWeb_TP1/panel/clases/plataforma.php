@@ -34,6 +34,17 @@ Class Plataforma{
             return $perfil;
 	}
 
+	public function del($id){
+		$query = "SELECT count(1) as cantidad FROM productos WHERE plataforma = ".$id." AND enabled = '1' ;";
+		$consulta = $this->con->query($query)->fetch(PDO::FETCH_OBJ);
+		if($consulta->cantidad == 0){
+			$query = "UPDATE plataformas SET enabled = '0' WHERE id = ".$id.";"; 
+			$this->con->exec($query); 
+			return 1;
+		}
+		return 'Plataforma asignada a un juego';
+	}
+
 	public function update($modif, $id){
 		$act = ($modif -1) * -1;
 		$this->con->exec("UPDATE plataformas SET estado = ".$act." WHERE id = ".$id);

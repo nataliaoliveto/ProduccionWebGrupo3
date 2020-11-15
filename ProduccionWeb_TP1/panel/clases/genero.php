@@ -59,6 +59,17 @@ Class Genero{
 		$this->con->exec("UPDATE generos SET estado = ".$act." WHERE id = ".$id);
 	}
 	
+	public function del($id){
+		$query = "SELECT count(1) as cantidad FROM genero_edades INNER JOIN productos ON genero_edades.idgen = productos.genero WHERE idgen = ".$id." AND genero_edades.enabled = 1 AND productos.enabled = 1";
+		$consulta = $this->con->query($query)->fetch(PDO::FETCH_OBJ);
+		if($consulta->cantidad == 0){
+			$query = "UPDATE generos SET enabled = '0' WHERE id = ".$id.";"; 
+			$this->con->exec($query); 
+			return 1;
+		}
+		return 'Género relacionado con una edad y/o producto';
+	}
+	
 	public function save($data){
 		$query = "SELECT COUNT(*) FROM generos WHERE UPPER(nombre) = UPPER('".$data['nombre']."')";
 		$consulta = $this->con->query($query)->fetchColumn();  
