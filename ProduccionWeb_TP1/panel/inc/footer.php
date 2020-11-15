@@ -1,5 +1,5 @@
 <footer>
-  <p class="pull-right">2020 GameStore</p>
+	<p class="pull-right">2020 GameStore</p>
 </footer>
         
 	<!-- script references -->

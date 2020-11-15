@@ -1,6 +1,6 @@
 <?php
     $hostname = 'localhost';
-    $database = 'produccionweb';
+    $database = 'parcial2';
     $username = 'root';
     $password = '';
     $puerto = 3306;

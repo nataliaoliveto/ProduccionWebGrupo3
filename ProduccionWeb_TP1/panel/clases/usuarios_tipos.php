@@ -1,7 +1,6 @@
-<?php 
+<?php /*
 Class UsuarioTipos{
 
-    /*conexion a la base*/
 	private $con;
 	
 	public function __construct($con){
@@ -13,5 +12,5 @@ Class UsuarioTipos{
 		           FROM usuarios_tipos";
         return $this->con->query($query); 
 	}
-}
-?>
+} */
+?> 

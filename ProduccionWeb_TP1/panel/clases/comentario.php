@@ -1,51 +1,43 @@
 <?php 
-Class Perfil{
+Class Comentario{
 
-    /*conexion a la base*/
 	private $con;
 	
 	public function __construct($con){
 		$this->con = $con;
 	}
 
-	public function getList(){
-		$query = "SELECT id, nombre 
-					FROM perfil
-					WHERE enabled = '1' ";
+	public function getList($estado){
+		$query = "SELECT productos.nombre, comentarios.id, comentarios.descripcion, comentarios.calificacion, comentarios.fecha, comentarios.estado
+					FROM comentarios INNER JOIN productos 
+					ON comentarios.IDproducto = productos.id
+					WHERE comentarios.enabled = 1 AND (comentarios.estado = $estado or $estado = 2) ";
         return $this->con->query($query); 
 	}
 	
 	public function get($id){
-	    $query = "SELECT id,nombre
-		        	FROM perfil WHERE id = ".$id;
+	    $query = "SELECT id
+		        	FROM comentarios WHERE id = ".$id;
         $query = $this->con->query($query); 
 			
-		$perfil = $query->fetch(PDO::FETCH_OBJ);
+		$comentario = $query->fetch(PDO::FETCH_OBJ);
 			
 			$sql = 'SELECT perfil_id, permiso_id
 					FROM perfil_permisos  
-					WHERE perfil_id = '.$perfil->id;
+					WHERE perfil_id = '.$comentario->id;
 					
 			foreach($this->con->query($sql) as $permiso){
-				$perfil->permisos[] = $permiso['permiso_id'];
+				$comentario->permisos[] = $permiso['permiso_id'];
 			}
 			/*echo '<pre>';
-			var_dump($perfil);echo '</pre>'; */
-            return $perfil;
+			var_dump($comentario);echo '</pre>'; */
+            return $comentario;
 	}
 
-	public function del($id){
-		$query = "SELECT count(1) as cantidad FROM usuarios_perfiles WHERE perfil_id = ".$id." AND enabled = '1' ;";
-		$consulta = $this->con->query($query)->fetch(PDO::FETCH_OBJ);
-		if($consulta->cantidad == 0){
-			$query = "UPDATE perfil SET enabled = '0' WHERE id = ".$id.";"; 
-			$this->con->exec($query); 
-			$query = "UPDATE perfil_permisos SET enabled = '0' WHERE perfil_id = ".$id.";";
-			$this->con->exec($query); 
-			return 1;
-		}
-		return 'Perfil asignado a un usuario';
-	}
+	public function update($modif, $id){
+		$act = ($modif -1) * -1;
+		$this->con->exec("UPDATE comentarios SET estado = ".$act." WHERE id = ".$id);
+	}	
 	
 	/**
 	* Guardo los datos en la base de datos

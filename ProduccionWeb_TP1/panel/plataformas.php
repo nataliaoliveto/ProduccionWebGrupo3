@@ -4,7 +4,7 @@ require('inc/header.php');
 
 <div class="container-fluid">
 
-	<?php $productsMenu = 'Productos';
+	<?php $plataformaMenu = 'Plataformas';
 	include('inc/side_bar.php');
 
 
@@ -20,7 +20,7 @@ require('inc/header.php');
 		</p>
 
 		<h1 class="page-header">
-			<?php echo $productsMenu ?>
+			<?php echo $plataformaMenu ?>
 		</h1>
 
 

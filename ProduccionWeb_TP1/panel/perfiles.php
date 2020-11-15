@@ -4,7 +4,7 @@ require('inc/header.php');
 
 <div class="container-fluid">
       
-      <?php $perfilMenu = 'Perfiles';
+	  <?php $perfilMenu = 'Perfiles';
 	  
 	 $perfiles = new Perfil($con);
 	include('inc/side_bar.php');

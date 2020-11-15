@@ -4,13 +4,9 @@ require('inc/header.php');
 
 <div class="container-fluid">
 
-	<?php $productsMenu = 'Productos';
+	<?php $generoMenu = 'Género';
 	include('inc/side_bar.php');
-
-
 	?>
-
-
 
 	<div class="col-sm-9 col-md-10 main">
 
@@ -20,9 +16,8 @@ require('inc/header.php');
 		</p>
 
 		<h1 class="page-header">
-			<?php echo $productsMenu ?>
+			<?php echo $generoMenu ?>
 		</h1>
-
 
 		<h2 class="sub-header">Listado <a href="#"><button type="button" class="btn btn-success" title="Agregar">A</button></a></h2>
 		<div class="table-responsive">
