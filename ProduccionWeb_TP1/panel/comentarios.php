@@ -18,7 +18,7 @@ require('inc/header.php');
 	<div class="col-sm-9 col-md-10 main">
 
 		<p class="visible-xs">
-			<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+			
 		</p>
 
 		<h1 class="page-header">
@@ -53,7 +53,7 @@ require('inc/header.php');
 						}
 					} ?>
 
-				<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+				<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
 					<div class="btn-group">
 					<button type="button" id= "buttonOrderBy" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<?php echo $lblSort ?>

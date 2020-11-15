@@ -56,7 +56,7 @@ require('inc/header.php');
                     </div>
                 </div> 
                  <div class="form-group">
-                    <label for="calve" class="col-sm-2 control-label">Clave</label>
+                    <label for="clave" class="col-sm-2 control-label">Clave</label>
                      <div class="col-sm-10">
                         <input type="password" class="form-control" id="clave" name="clave" placeholder="">
                     </div>
