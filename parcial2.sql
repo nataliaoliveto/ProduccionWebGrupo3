@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 09:57 PM
+-- Generation Time: Nov 15, 2020 at 11:44 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -66,11 +66,12 @@ CREATE TABLE `edades` (
 
 INSERT INTO `edades` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (1, 'PEGI 3 - Todas las edades', 1, 1),
-(2, 'PEGI 7 - Mayores de 7 años', 1, 1),
+(2, 'PEGI 7 - Mayores de 7 años ', 1, 1),
 (3, 'PEGI 12 - Mayores de 12 años', 1, 1),
 (4, 'PEGI 16 - Mayores de 16 años', 1, 1),
 (5, 'PEGI 18 - Mayores de 18 años', 1, 1),
-(6, 'sdasda s', 0, 1);
+(6, 'sdasda s', 0, 1),
+(7, 'asd', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -148,19 +149,21 @@ INSERT INTO `genero_edades` (`idedad`, `idgen`, `enabled`) VALUES
 CREATE TABLE `perfil` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT 1
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `perfil`
 --
 
-INSERT INTO `perfil` (`id`, `nombre`, `enabled`) VALUES
-(1, 'Administrador', 1),
-(2, 'Ventas', 1),
-(3, 'Entregas', 1),
-(10, ' test2', 0),
-(11, 'sadasdasd', 1);
+INSERT INTO `perfil` (`id`, `nombre`, `enabled`, `estado`) VALUES
+(1, 'Administrador', 1, 0),
+(2, 'Ventas', 1, 0),
+(3, 'Entregas', 1, 0),
+(10, ' test2', 0, 0),
+(11, 'sadasdasd', 0, 0),
+(12, 'Administrador', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -185,12 +188,12 @@ INSERT INTO `perfil_permisos` (`id`, `perfil_id`, `permiso_id`, `enabled`) VALUE
 (3, 9, 4, 1),
 (19, 10, 1, 0),
 (20, 10, 4, 0),
-(29, 1, 1, 1),
-(30, 1, 2, 1),
-(31, 1, 4, 1),
-(33, 11, 1, 1),
-(34, 11, 2, 1),
-(35, 11, 3, 1);
+(33, 11, 1, 0),
+(34, 11, 2, 0),
+(35, 11, 3, 0),
+(40, 1, 1, 1),
+(41, 1, 2, 1),
+(42, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -241,7 +244,7 @@ INSERT INTO `plataformas` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (4, 'PC', 1, 1),
 (6, 'FUNCIONA', 0, 1),
 (7, 'asdaaa', 0, 1),
-(8, 'aaaaaaa', 0, 1);
+(8, 'aaaaaaa', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -446,7 +449,7 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT for table `edades`
 --
 ALTER TABLE `edades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `generos`
@@ -458,13 +461,13 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT for table `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `perfil_permisos`
 --
 ALTER TABLE `perfil_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `permisos`
