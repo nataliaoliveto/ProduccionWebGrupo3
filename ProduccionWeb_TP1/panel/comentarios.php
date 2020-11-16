@@ -1,5 +1,5 @@
 <?php
-require('inc/header.php');
+require('inc/filtro.php');
 ?>
 
 <div class="container-fluid">
@@ -37,25 +37,9 @@ require('inc/header.php');
 						</tr> 
 				</thead>
 				
-				<?php $lblSort = 'Inactivos';
-					if (isset($_GET["estado"]) && $_GET["estado"] != '') {
-					$sortID = $_GET["estado"];
-					switch($sortID){
-						case "0":
-						$lblSort = 'Inactivos';
-						break;
-						case "1":
-						$lblSort = 'Activos';
-						break;
-						case "2":
-						$lblSort = 'Todos';
-						break;  
-						}
-					} ?>
-
 				<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
 					<div class="btn-group">
-					<button type="button" id= "buttonOrderBy" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<button type="button" id= "buttonOrderBy" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<?php echo $lblSort ?>
 					</button>
 					<div class="dropdown-menu">          
@@ -85,7 +69,7 @@ require('inc/header.php');
 							<?php if($comentarios['estado'] == 0){ ?>
 								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 							<?php } else { ?>
-								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>"><button type="button" class="btn btn-danger" title="Desactivar">D</button></a>
+								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
 							<?php } ?>
 						</td>
 						</tr>

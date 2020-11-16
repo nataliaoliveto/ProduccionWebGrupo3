@@ -8,6 +8,7 @@ include('clases/comentario.php');
 include('clases/plataforma.php');
 include('clases/genero.php');
 include('clases/edad.php');
+include('clases/producto.php');
 
 
 try {
