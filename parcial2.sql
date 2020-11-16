@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 11:44 PM
+-- Generation Time: Nov 16, 2020 at 03:30 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -65,8 +65,8 @@ CREATE TABLE `edades` (
 --
 
 INSERT INTO `edades` (`id`, `nombre`, `estado`, `enabled`) VALUES
-(1, 'PEGI 3 - Todas las edades', 1, 1),
-(2, 'PEGI 7 - Mayores de 7 años ', 1, 1),
+(1, 'PEGI 03 - Todas las edades ', 1, 1),
+(2, 'PEGI 07 - Mayores de 7 años  ', 1, 1),
 (3, 'PEGI 12 - Mayores de 12 años', 1, 1),
 (4, 'PEGI 16 - Mayores de 16 años', 1, 1),
 (5, 'PEGI 18 - Mayores de 18 años', 1, 1),
@@ -158,7 +158,7 @@ CREATE TABLE `perfil` (
 --
 
 INSERT INTO `perfil` (`id`, `nombre`, `enabled`, `estado`) VALUES
-(1, 'Administrador', 1, 0),
+(1, 'Administrador', 1, 1),
 (2, 'Ventas', 1, 0),
 (3, 'Entregas', 1, 0),
 (10, ' test2', 0, 0),
@@ -191,9 +191,14 @@ INSERT INTO `perfil_permisos` (`id`, `perfil_id`, `permiso_id`, `enabled`) VALUE
 (33, 11, 1, 0),
 (34, 11, 2, 0),
 (35, 11, 3, 0),
-(40, 1, 1, 1),
-(41, 1, 2, 1),
-(42, 1, 4, 1);
+(43, 2, 5, 1),
+(44, 3, 4, 1),
+(45, 3, 5, 1),
+(46, 1, 1, 1),
+(47, 1, 2, 1),
+(48, 1, 3, 1),
+(49, 1, 4, 1),
+(50, 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -467,7 +472,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT for table `perfil_permisos`
 --
 ALTER TABLE `perfil_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `permisos`
