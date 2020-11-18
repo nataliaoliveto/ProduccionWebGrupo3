@@ -5,7 +5,7 @@ require('inc/filtro.php');
 <div class="container-fluid">
 
 	<?php $comentarioMenu = 'Comentarios';
-	$comen = new Comentario($con);
+	
 	include('inc/side_bar.php');
 
 	if(isset($_GET['modif'], $_GET['id'])){

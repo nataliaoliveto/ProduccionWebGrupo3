@@ -85,7 +85,10 @@ echo '<script>alert("' . $resp . '");</script>';
 	</div>
 </div>
 <!-- fin filtro -->
-	
+<div>
+	href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo $edad['id'] ?>"
+	<a href="productos.php?edit=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a>
+</div>
 <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>

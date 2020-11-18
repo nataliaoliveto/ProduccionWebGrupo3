@@ -1,6 +1,7 @@
 <?php
 require('header.php');
 $produ = new Producto($con);
+$comen = new Comentario($con);
 
 $lblSort = 'Inactivos';
     if (isset($_GET["estado"]) && $_GET["estado"] != '') {

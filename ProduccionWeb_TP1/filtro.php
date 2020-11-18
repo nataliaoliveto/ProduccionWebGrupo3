@@ -47,6 +47,9 @@ if (isset($_GET["sort"]) && $_GET["sort"] != '') {
       break;
     case "3":
       $lblSort = 'Z-A';
+      break;
+    case "4":
+      $lblSort = 'Ranqueados';
       break;  
   }
 } 
@@ -122,6 +125,9 @@ if (isset($_GET["sort"]) && $_GET["sort"] != '') {
         <div class="dropdown-menu">          
             <a class="dropdown-item" href="listadoproductos.php?sort=1&plataformas=<?php echo isset($_GET['plataformas']) ? $_GET['plataformas'] : '' ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>">
               Destacados
+            </a>
+            <a class="dropdown-item" href="listadoproductos.php?sort=4&plataformas=<?php echo isset($_GET['plataformas']) ? $_GET['plataformas'] : '' ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>">
+              Ranqueados
             </a>
             <a class="dropdown-item" href="listadoproductos.php?sort=2&plataformas=<?php echo isset($_GET['plataformas']) ? $_GET['plataformas'] : '' ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>">
               A-Z

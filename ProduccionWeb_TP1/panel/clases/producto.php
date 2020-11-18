@@ -17,8 +17,8 @@ Class Producto{
 
 	/*OK*/
 	public function get($id){
-	    $query = "SELECT id,nombre
-		        	FROM productos WHERE id = ".$id;
+		$query = "SELECT id,nombre
+					FROM productos WHERE id = ".$id;
         $query = $this->con->query($query); 
 			
 		$perfil = $query->fetch(PDO::FETCH_OBJ);
@@ -153,4 +153,21 @@ Class Producto{
 			$this->con->exec($sql);
 			
 	} 
+
+	public function getPaginas($genID, $edadID){
+		$query = "	SELECT 
+					CASE
+						WHEN COUNT(*)> 0 THEN 
+							CASE
+								WHEN MOD(COUNT(*),10) = 0 THEN COUNT(*) DIV 10
+								ELSE (COUNT(*) DIV 10) + 1
+							END
+
+						ELSE 0
+					END
+					FROM productos 
+					WHERE enabled = 1 AND (genero = $genID OR $genID = 0) AND (edad = $edadID OR $edadID = 0)";
+
+		return $this->con->query($query)->fetchColumn(); 
+	}
 }
