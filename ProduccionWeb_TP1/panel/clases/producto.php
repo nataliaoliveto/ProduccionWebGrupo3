@@ -8,10 +8,13 @@ Class Producto{
 		$this->con = $con;
 	}
 	/*OK*/
-	public function getList($genID, $edadID){
+	public function getList($genID, $edadID, $pag){
+		$desde = ($pag - 1) * 10;
+        $hasta = $desde + 10;
 		$query = "SELECT id, nombre, descripcion, precio, plataforma, genero, edad, estado
 					FROM productos
-					WHERE enabled = '1' AND (genero = $genID OR $genID = 0) AND (edad = $edadID OR $edadID = 0)";
+					WHERE enabled = '1' AND (genero = ".$genID." OR ".$genID." = 0) AND (edad = ".$edadID." OR ".$edadID." = 0)
+					LIMIT $desde, $hasta";
         return $this->con->query($query); 
 	}
 
@@ -166,7 +169,7 @@ Class Producto{
 						ELSE 0
 					END
 					FROM productos 
-					WHERE enabled = 1 AND (genero = $genID OR $genID = 0) AND (edad = $edadID OR $edadID = 0)";
+					WHERE enabled = 1 AND (genero = ".$genID." OR ".$genID." = 0) AND (edad = ".$edadID." OR ".$edadID." = 0)";
 
 		return $this->con->query($query)->fetchColumn(); 
 	}

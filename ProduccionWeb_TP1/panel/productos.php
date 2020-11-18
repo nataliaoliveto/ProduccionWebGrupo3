@@ -13,21 +13,23 @@ if ($_POST['id'] > 0) {
 } else {
 	$produ->save($_POST);
 }
-header('Location: productos.php');
+header('Location: productos.php?pagina=1');
 }
 
 if (isset($_GET['modif'], $_GET['id'])) {
 $produ->update($_GET['modif'], $_GET['id']);
-header('Location: productos.php');
+header('Location: productos.php?pagina=1');
 }
 
 if (isset($_GET['del'])) {
 $resp = $produ->del($_GET['del']);
 if ($resp == 1) {
-	header('Location: productos.php');
+	header('Location: productos.php?pagina=1');
 }
 echo '<script>alert("' . $resp . '");</script>';
 }
+
+
 
 ?>
 
@@ -52,14 +54,14 @@ echo '<script>alert("' . $resp . '");</script>';
 		<?php
 		foreach ($produ->getGeneros() as $generos) {
 		?>
-			<a class="dropdown-item" href="productos.php?generos=<?php echo $generos['id'] ?>&edades=">
+			<a class="dropdown-item" href="productos.php?generos=<?php echo $generos['id'] ?>&edades=&pagina=1">
 				<?php echo $generos['nombre']; ?>
 			</a>
 		<?php
 		}
 		?>
 		<div class="dropdown-divider"></div>
-		<a class="dropdown-item" href="productos.php?generos=&edades=">Eliminar filtro</a>
+		<a class="dropdown-item" href="productos.php?generos=&edades=&pagina=1">Eliminar filtro</a>
 	</div>
 </div>
 <div class="btn-group">
@@ -72,7 +74,7 @@ echo '<script>alert("' . $resp . '");</script>';
 			foreach ($produ->getGeneroEdades($generoID) as $genEdad) {
 				foreach ($produ->getEdadNombre($genEdad['idedad']) as $edad) {
 		?>
-					<a class="dropdown-item" href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo $edad['id'] ?>">
+					<a class="dropdown-item" href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo $edad['id'] ?>&pagina=1">
 						<?php echo $edad['nombre']; ?>
 					</a>
 		<?php
@@ -81,14 +83,37 @@ echo '<script>alert("' . $resp . '");</script>';
 		}
 		?>
 		<div class="dropdown-divider"></div>
-		<a class="dropdown-item" href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=">Eliminar filtro</a>
+		<a class="dropdown-item" href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=&pagina=1">Eliminar filtro</a>
 	</div>
 </div>
 <!-- fin filtro -->
-<div>
-	href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo $edad['id'] ?>"
-	<a href="productos.php?edit=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a>
+
+<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
+<a href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=1"><button type="button" class="btn btn-warning" title="Primera">|<-</button></a>
+<a href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo(($_GET['pagina'] != 1) ? ($_GET['pagina'] - 1) : $_GET['pagina']); ?>"><button type="button" class="btn btn-warning" title="Anterior"><</button></a>
+
+<div class="btn-group">
+	<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<?php echo $_GET['pagina'] ?>
+	</button>
+		<?php
+		$generito = empty($_GET['generos']) ? 0 : $_GET['generos'];
+		$edadmini = empty($_GET['edades']) ? 0 : $_GET['edades']; 
+		$paginado = $produ->getPaginas($generito, $edadmini);?>
+		<div class="dropdown-menu">
+		<?php 
+			for($i = 1; $i <= $paginado; $i++){ ?>
+			<a class="dropdown-item" href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo $i ?>">
+			<?php 		
+			echo $i; ?> </a>
+		<?php }?>
+		</div>
 </div>
+
+<a href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo(($_GET['pagina'] != $paginado ) ? ($_GET['pagina'] + 1) : $_GET['pagina'])?>"><button type="button" class="btn btn-warning" title="Siguiente">></button></a>
+<a href="productos.php?generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo $paginado ?>"><button type="button" class="btn btn-warning" title="Última">->|</button></a>
+</div>
+
 <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>
@@ -109,7 +134,8 @@ echo '<script>alert("' . $resp . '");</script>';
 			<?php
 			$genID = empty($_GET['generos']) ? 0 : $_GET['generos'];
 			$edadID = empty($_GET['edades']) ? 0 : $_GET['edades'];	
-			foreach ($produ->getList($genID, $edadID) as $productos) { ?>
+			$pagina = empty($_GET['pagina']) ? 0 : $_GET['pagina'];
+			foreach ($produ->getList($genID, $edadID, $pagina) as $productos) { ?>
 
 				<tr>
 					<td><?php echo $productos['id']; ?></td>
