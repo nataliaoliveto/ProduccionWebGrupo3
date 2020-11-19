@@ -66,13 +66,13 @@ require('inc/header.php');
 							<td><?php 
 								$haypermis = false;
 								foreach ($perfiles->getPermisos($perfil['id']) as $permis) {
-											$haypermis = true;
-											echo $permis['nombre'];
-											?> <br> <?php
-										}
-										if(!$haypermis){
-											echo "No hay permisos asignados";
-										}
+									$haypermis = true;
+									echo $permis['nombre'];
+									?> <br> <?php
+								}
+								if(!$haypermis){
+									echo "No hay permisos asignados";
+								}
 								?></td>				
 							<td><?php if($perfil['estado'] == 1){
 								echo 'Activo';

@@ -22,11 +22,8 @@ header('Location: productos.php?pagina=1');
 }
 
 if (isset($_GET['del'])) {
-$resp = $produ->del($_GET['del']);
-if ($resp == 1) {
+	$produ->del($_GET['del']);
 	header('Location: productos.php?pagina=1');
-}
-echo '<script>alert("' . $resp . '");</script>';
 }
 
 

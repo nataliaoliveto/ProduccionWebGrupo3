@@ -32,34 +32,86 @@ require('inc/header.php');
         <div class="col-md-2"></div>
         <form action="productos.php" method="post" class="col-md-6 from-horizontal">
             <div class="form-group">
-                <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+                <label for="nombre" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Nombre</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="<?php echo (isset($productito->nombre) ? $productito->nombre : ''); ?>">
                 </div>
-            </div>
-
+            </div>          
+            
             <div class="form-group">
-                <label for="tipo" class="col-sm-2 control-label">Permisos</label>
-                <div class="col-sm-10">
-                    <select name="permisos[]" id="permisos" multiple='multiple'>
-                        <?php foreach ($permisos as $t) { ?>
-                            <option value="<?php echo $t['id'] ?>" 
-                            <?php
-                            if (isset($productito->permisos)) {
-                                if (in_array($t['id'], $productito->permisos)) {
-                                    echo ' selected="selected" ';
-                                }
-                            }
-                        ?>><?php echo $t['nombre'] ?></option>
-                        <?php } ?>
-                    </select>
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Descripción</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="" value="<?php echo (isset($productito->descripcion) ? $productito->descripcion : ''); ?>">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="descripcion" class="col-sm-2 control-label">Descripción</label>
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Precio $</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="precio" name="precio" placeholder="" value="<?php echo (isset($productito->precio) ? $productito->precio : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Destacado</label>
                 <div class="col-sm-10">
+                    <input type="text" class="form-control" id="destacado" name="destacado" placeholder="" value="<?php echo (isset($productito->destacado) ? $productito->destacado : ''); ?>">
+                </div>
+            </div>          
+            
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Stock</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="Stock" name="Stock" placeholder="" value="<?php echo (isset($productito->stock) ? $productito->stock : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Desarrollador</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="desarrolador" name="desarrollador" placeholder="" value="<?php echo (isset($productito->desarrollador) ? $productito->desarrollador : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Descripción</label>
+                <div class="col-sm-10">                    
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="" value="<?php echo (isset($productito->descripcion) ? $productito->descripcion : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Fecha de Lanzamiento</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="fechadelanzamiento" name="fechadelanzamiento" placeholder="" value="<?php echo (isset($productito->fechadelanzamiento) ? $productito->fechadelanzamiento : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Plataforma</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="plataforma" name="plataforma" placeholder="" value="<?php echo (isset($productito->plataforma) ? $productito->plataforma : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Genero</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="genero" name="genero" placeholder="" value="<?php echo (isset($productito->genero) ? $productito->genero : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Calificacion</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="calificacion" name="calificacion" placeholder="" value="<?php echo (isset($productito->calificacion) ? $productito->calificacion : ''); ?>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Edad</label>
+                <div class="col-sm-10">                    
+                    <input type="text" class="form-control" id="edad" name="edad" placeholder="" value="<?php echo (isset($productito->edad) ? $productito->edad : ''); ?>">
                 </div>
             </div>
 
@@ -68,6 +120,7 @@ require('inc/header.php');
                     <button type="submit" class="btn btn-default" name="formulario_productos">Guardar</button>
                 </div>
             </div>
+
             <input type="hidden" class="form-control" id="id" name="id" placeholder="" value="<?php echo (isset($productito->id) ? $productito->id : ''); ?>">
 
         </form>

@@ -20,7 +20,7 @@ Class Producto{
 
 	/*OK*/
 	public function get($id){
-		$query = "SELECT id,nombre
+		$query = "SELECT id, nombre, descripcion, precio, destacado, stock, desarrollador, fechadelanzamiento, plataforma, genero, calificacion, edad
 					FROM productos WHERE id = ".$id;
         $query = $this->con->query($query); 
 			

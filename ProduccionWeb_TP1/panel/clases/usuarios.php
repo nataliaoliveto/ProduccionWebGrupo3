@@ -16,7 +16,7 @@ class Usuario
 	public function getList()
 	{
 		$query = "SELECT id_usuario,nombre,apellido,email,usuario,clave,activo,enabled,usuario 
-		    FROM usuarios ";
+					FROM usuarios ";
 		$resultado = array();
 		foreach ($this->con->query($query) as $key => $usuario) {
 			$resultado[$key] = $usuario;
@@ -70,11 +70,12 @@ class Usuario
 			if (!is_array($value)) {
 				if ($value != null) {
 					$columns[] = $key;
-					$datos[] = $value;
+					$datos[] = $value;		
 				}
 			}
 		}
-		$sql = "INSERT INTO usuarios(" . implode(',', $columns) . ") VALUES('" . implode("','", $datos) . "')";
+		//$sql = "INSERT INTO usuarios(" . implode(',', $columns) . ") VALUES('" . implode("','", $datos) . "')";		
+		$sql = "INSERT INTO usuarios(".implode(',',$columns).") VALUES('".implode("','",$datos)."')";
 		$this->con->exec($sql);
 		$id_usuario = $this->con->lastInsertId();
 
@@ -102,12 +103,13 @@ class Usuario
 		}
 
 		foreach ($data as $key => $value) {
-			if ($value != null) {
-				$columns[] = $key . " = '" . $value . "'";
-			}
+			if(!is_array($value)){
+				if ($value != null) {
+					$columns[] = $key . " = '" . $value . "'";
+				}
+			}			
 		}
-		$sql = "UPDATE usuarios SET " . implode(',', $columns) . " WHERE id_usuario = " . $id;
-
+		$sql = "UPDATE usuarios SET " . implode(',', $columns) . " WHERE id_usuario = " . $id;		
 		$this->con->exec($sql);
 
 
@@ -149,7 +151,7 @@ class Usuario
 	public function login($data)
 	{
 		$sql = "SELECT id_usuario,nombre,apellido,email,usuario,clave,activo,salt
-		        FROM usuarios WHERE activo = 1 AND email = '" . $data['email'] . "'";
+				FROM usuarios WHERE activo = 1 AND email = '" . $data['email'] . "'";
 		$datos = $this->con->query($sql)->fetch(PDO::FETCH_ASSOC);
 		if (isset($datos['id_usuario'])) {
 			if ($this->encrypt($data['clave'], $datos['salt']) == $datos['clave']) {
@@ -180,5 +182,10 @@ class Usuario
 			return true;
 		}
 		return false;
+	}
+
+	public function update($modif, $id){
+		$act = ($modif -1) * -1;				
+		$this->con->exec("UPDATE usuarios SET activo = ".$act." WHERE id_usuario = ".$id);
 	}
 }
