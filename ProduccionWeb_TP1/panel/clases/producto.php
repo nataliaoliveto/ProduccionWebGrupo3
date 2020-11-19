@@ -78,6 +78,13 @@ Class Producto{
 		return $this->con->query($query); 
 	}
 
+	public function getPlataformas(){
+		$query = "	SELECT *
+					FROM plataformas 
+					WHERE plataformas.enabled = 1 AND plataformas.estado = 1 ";
+		return $this->con->query($query); 
+	}
+
 	public function getGeneros(){
 		$query = "SELECT * FROM generos WHERE estado = 1 AND generos.enabled = 1";
 		return $this->con->query($query);

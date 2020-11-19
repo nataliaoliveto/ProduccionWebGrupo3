@@ -53,9 +53,12 @@ require('inc/header.php');
             </div>
 
             <div class="form-group">
-                <label for="nombre" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Destacado</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="destacado" name="destacado" placeholder="" value="<?php echo (isset($productito->destacado) ? $productito->destacado : ''); ?>">
+                <label for="nombre" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Destacado</label>                
+                <div class="col-sm-10">                    
+                    <select id="destacado" name="destacado">
+                        <option value = 0>No</option>                                                
+                        <option value = 1 <?php echo(isset($productito->destacado) ? (($productito->destacado == 1) ? 'selected' : '') : '');?>>Si</option>                        
+                    </select>                  
                 </div>
             </div>          
             
@@ -74,23 +77,21 @@ require('inc/header.php');
             </div>
 
             <div class="form-group">
-                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Descripción</label>
-                <div class="col-sm-10">                    
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="" value="<?php echo (isset($productito->descripcion) ? $productito->descripcion : ''); ?>">
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Fecha de Lanzamiento</label>
                 <div class="col-sm-10">                    
-                    <input type="text" class="form-control" id="fechadelanzamiento" name="fechadelanzamiento" placeholder="" value="<?php echo (isset($productito->fechadelanzamiento) ? $productito->fechadelanzamiento : ''); ?>">
+                    <input type="date" class="form-control" id="fechadelanzamiento" name="fechadelanzamiento" placeholder="" value="<?php echo (isset($productito->fechadelanzamiento) ? $productito->fechadelanzamiento : ''); ?>">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Plataforma</label>
-                <div class="col-sm-10">                    
-                    <input type="text" class="form-control" id="plataforma" name="plataforma" placeholder="" value="<?php echo (isset($productito->plataforma) ? $productito->plataforma : ''); ?>">
+                <div class="col-sm-10">                     
+                    <select id="plataforma" name="plataforma">
+                        <?php
+                            foreach ($produ->getPlataformas() as $plataformita) { ?>
+                                <option value = <?php echo $plataformita['id'];?>><?php echo$plataformita['nombre'];?></option>
+                        <?php } ?>
+                    </select>                        
                 </div>
             </div>
 
