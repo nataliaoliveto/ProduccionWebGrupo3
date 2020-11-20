@@ -38,7 +38,7 @@ Class Plataforma{
 		$query = "SELECT count(1) as cantidad FROM productos WHERE plataforma = ".$id." AND enabled = '1' ;";
 		$consulta = $this->con->query($query)->fetch(PDO::FETCH_OBJ);
 		if($consulta->cantidad == 0){
-			$query = "UPDATE plataformas SET enabled = '0' WHERE id = ".$id.";"; 
+			$query = "UPDATE plataformas SET enabled = 0, estado = 0 WHERE id = ".$id; 
 			$this->con->exec($query); 
 			return 1;
 		}

@@ -63,7 +63,7 @@ Class Genero{
 		$query = "SELECT count(1) as cantidad FROM genero_edades INNER JOIN productos ON genero_edades.idgen = productos.genero WHERE idgen = ".$id." AND genero_edades.enabled = 1 AND productos.enabled = 1";
 		$consulta = $this->con->query($query)->fetch(PDO::FETCH_OBJ);
 		if($consulta->cantidad == 0){
-			$query = "UPDATE generos SET enabled = '0' WHERE id = ".$id.";"; 
+			$query = "UPDATE generos SET enabled = 0, estado = 0 WHERE id = ".$id; 
 			$this->con->exec($query); 
 			return 1;
 		}

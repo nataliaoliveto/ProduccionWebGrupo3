@@ -108,6 +108,15 @@ require('inc/header.php');
             </div>
 
             <div class="form-group">
+                <label for="edad" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Edad</label>
+                <div class="col-sm-10">      
+                    <select id="edad" name="edad">
+                    <!-- Magia JavaScript -->
+                    </select>                        
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default" name="formulario_productos">Guardar</button>
                 </div>
@@ -121,12 +130,12 @@ require('inc/header.php');
 </div>
 </div>
 
+<!-- Magia JavaScript -->
 <script>
-    var productoEdad = <?php echo $productito->edad; ?>;
+    var productoEdad = <?php echo (isset($productito->edad) ? $productito->edad : 0); ?>;
     var edadesData = <?php echo json_encode($produ->getEdades()->fetchAll(), JSON_HEX_TAG); ?>;
     var generosEdadesData = <?php echo json_encode($produ->getGeneroEdadesTotal()->fetchAll(), JSON_HEX_TAG); ?>;
-            
-    console.log(productoEdad);
+
     generosEdadesData.sort(function(a, b) {
         if(a.nombre < b.nombre) { return -1; }
         if(a.nombre > b.nombre) { return 1; }
@@ -136,7 +145,7 @@ require('inc/header.php');
     function onGeneroChange() {
         var seleccionado = document.getElementById("genero").value;
         var edadSelect = document.getElementById("edad");
-    
+
         for (i = edadSelect.options.length; i >= 0 ; i--) {
             edadSelect.remove(i);
         }
@@ -162,7 +171,6 @@ require('inc/header.php');
         }
     }
     onGeneroChange();
-
 </script>
 
 <?php include('inc/footer.php'); ?>

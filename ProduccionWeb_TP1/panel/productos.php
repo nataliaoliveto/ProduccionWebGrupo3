@@ -16,14 +16,20 @@ if ($_POST['id'] > 0) {
 header('Location: productos.php?pagina=1');
 }
 
-if (isset($_GET['modif'], $_GET['id'])) {
-$produ->update($_GET['modif'], $_GET['id']);
-header('Location: productos.php?pagina=1');
+if (isset($_GET['modif'], $_GET['id'], $_GET['generos'], $_GET['edades'])) {
+	$produ->update($_GET['modif'], $_GET['id']);
+	$genero = isset($_GET['generos']) ? $_GET['generos'] : '';
+	$plataforma = isset($_GET['edades']) ? $_GET['edades'] : '';
+	$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : '';
+	header('Location: productos.php?&generos='.$genero.'&edades='.$plataforma.'&pagina='.$pagina);
 }
 
-if (isset($_GET['del'])) {
+if (isset($_GET['del'], $_GET['generos'], $_GET['edades'])) {
 	$produ->del($_GET['del']);
-	header('Location: productos.php?pagina=1');
+	$genero = isset($_GET['generos']) ? $_GET['generos'] : '';
+	$plataforma = isset($_GET['edades']) ? $_GET['edades'] : '';
+	$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : '';
+	header('Location: productos.php?&generos='.$genero.'&edades='.$plataforma.'&pagina='.$pagina);
 }
 
 
@@ -159,11 +165,11 @@ if (isset($_GET['del'])) {
 					<td>
 						<a href="productos_ae.php?edit=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a> 
 						<?php if ($productos['estado'] == 0) { ?>
-							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 						<?php } else { ?>
-							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
 						<?php } ?>
-						<a href="productos.php?del=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+						<a href="productos.php?del=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
 					</td>
 				</tr>
 			<?php } ?>

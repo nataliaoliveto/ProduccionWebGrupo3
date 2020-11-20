@@ -86,7 +86,7 @@ Class Producto{
 	}
 
 	public function getGeneros(){
-		$query = "SELECT * FROM generos WHERE estado = 1 AND generos.enabled = 1";
+		$query = "SELECT G.id, G.nombre, G.estado, G.enabled FROM generos G INNER JOIN genero_edades GE ON G.id = GE.idgen WHERE G.estado = 1 AND G.enabled = 1 GROUP BY G.id, G.nombre, G.estado, G.enabled";
 		return $this->con->query($query);
 	}
 
@@ -113,7 +113,7 @@ Class Producto{
 
 
 	public function del($id){
-			$query = "UPDATE productos SET enabled = '0' WHERE id = ".$id.";"; 
+			$query = "UPDATE productos SET enabled = 0, estado = 0 WHERE id = ".$id; 
 			$this->con->exec($query);
 	}
 	
