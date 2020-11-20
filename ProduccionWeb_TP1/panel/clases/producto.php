@@ -95,8 +95,18 @@ Class Producto{
 		return $this->con->query($query);
 	}
 
+	public function getGeneroEdadesTotal(){
+		$query = "SELECT * FROM genero_edades WHERE genero_edades.enabled = 1";
+		return $this->con->query($query);
+	}
+
 	public function getEdadNombre($edadID){
 		$query = "SELECT * FROM edades WHERE estado = 1 AND id = $edadID AND edades.enabled = 1";
+		return $this->con->query($query);
+	}	
+	
+	public function getEdades(){
+		$query = "SELECT * FROM edades WHERE estado = 1 AND edades.enabled = 1";
 		return $this->con->query($query);
 	}
 

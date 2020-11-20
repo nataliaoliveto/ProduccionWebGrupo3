@@ -85,34 +85,25 @@ require('inc/header.php');
 
             <div class="form-group">
                 <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Plataforma</label>
-                <div class="col-sm-10">                     
+                <div class="col-sm-10">      
                     <select id="plataforma" name="plataforma">
                         <?php
                             foreach ($produ->getPlataformas() as $plataformita) { ?>
-                                <option value = <?php echo $plataformita['id'];?>><?php echo$plataformita['nombre'];?></option>
-                        <?php } ?>
+                            <option value = "<?php echo $plataformita['id'];?>"<?php echo(isset($productito->plataforma) ? (($productito->plataforma == $plataformita['id']) ? 'selected' : '') : '');?>> <?php echo $plataformita['nombre'];?></option>
+                        <?php } ?>                                
                     </select>                        
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Genero</label>
-                <div class="col-sm-10">                    
-                    <input type="text" class="form-control" id="genero" name="genero" placeholder="" value="<?php echo (isset($productito->genero) ? $productito->genero : ''); ?>">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Calificacion</label>
-                <div class="col-sm-10">                    
-                    <input type="text" class="form-control" id="calificacion" name="calificacion" placeholder="" value="<?php echo (isset($productito->calificacion) ? $productito->calificacion : ''); ?>">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Edad</label>
-                <div class="col-sm-10">                    
-                    <input type="text" class="form-control" id="edad" name="edad" placeholder="" value="<?php echo (isset($productito->edad) ? $productito->edad : ''); ?>">
+                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Género</label>
+                <div class="col-sm-10">      
+                    <select id="genero" name="genero" onchange="onGeneroChange()">
+                        <?php
+                            foreach ($produ->getGeneros() as $generito) { ?>
+                            <option value = "<?php echo $generito['id'];?>"<?php echo(isset($productito->genero) ? (($productito->genero == $generito['id']) ? 'selected' : '') : '');?>> <?php echo $generito['nombre'];?></option>
+                        <?php } ?>                                
+                    </select>                        
                 </div>
             </div>
 
@@ -121,17 +112,57 @@ require('inc/header.php');
                     <button type="submit" class="btn btn-default" name="formulario_productos">Guardar</button>
                 </div>
             </div>
-
+            
             <input type="hidden" class="form-control" id="id" name="id" placeholder="" value="<?php echo (isset($productito->id) ? $productito->id : ''); ?>">
 
         </form>
     </div>
-
-
 </div>
-
 </div>
 </div>
 
-<!-- nombre, descripcion, precio, plataforma, género, edad
+<script>
+    var productoEdad = <?php echo $productito->edad; ?>;
+    var edadesData = <?php echo json_encode($produ->getEdades()->fetchAll(), JSON_HEX_TAG); ?>;
+    var generosEdadesData = <?php echo json_encode($produ->getGeneroEdadesTotal()->fetchAll(), JSON_HEX_TAG); ?>;
+            
+    console.log(productoEdad);
+    generosEdadesData.sort(function(a, b) {
+        if(a.nombre < b.nombre) { return -1; }
+        if(a.nombre > b.nombre) { return 1; }
+        return 0;
+    });
+
+    function onGeneroChange() {
+        var seleccionado = document.getElementById("genero").value;
+        var edadSelect = document.getElementById("edad");
+    
+        for (i = edadSelect.options.length; i >= 0 ; i--) {
+            edadSelect.remove(i);
+        }
+        
+        for (var i = 0; i < generosEdadesData.length; i++) {
+            if(generosEdadesData[i].idgen == seleccionado){
+                var newOption = document.createElement('option');
+                newOption.text = getEdadNombre(generosEdadesData[i].idedad);
+                newOption.value = generosEdadesData[i].idedad;
+                if(newOption.value == productoEdad){
+                    newOption.selected = true;
+                }
+                edadSelect.add(newOption);  
+            }
+        }
+    }
+
+    function getEdadNombre(edadID){
+        for (var i = 0; i < edadesData.length; i++) {
+            if(edadesData[i].id == edadID){
+                return edadesData[i].nombre;
+            }
+        }
+    }
+    onGeneroChange();
+
+</script>
+
 <?php include('inc/footer.php'); ?>

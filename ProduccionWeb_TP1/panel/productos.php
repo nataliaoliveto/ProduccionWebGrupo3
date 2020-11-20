@@ -157,7 +157,7 @@ if (isset($_GET['del'])) {
 							echo 'Inactivo';
 						} 	?></td>
 					<td>
-						<a href="productos_ae.php?edit=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a>
+						<a href="productos_ae.php?edit=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a> 
 						<?php if ($productos['estado'] == 0) { ?>
 							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 						<?php } else { ?>
