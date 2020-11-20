@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2020 at 03:30 AM
+-- Generation Time: Nov 19, 2020 at 09:31 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -99,7 +99,7 @@ INSERT INTO `generos` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (6, 'Plataformas', 1, 1),
 (7, 'RPG', 1, 1),
 (8, 'Shooter', 1, 1),
-(9, 'sdsdsdsd', 0, 1),
+(9, 'sdsdsdsd', 1, 1),
 (10, 'a', 0, 1);
 
 -- --------------------------------------------------------
@@ -279,7 +279,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `estado`, `precio`, `destacado`, `stock`, `desarrollador`, `fechadelanzamiento`, `plataforma`, `genero`, `calificacion`, `edad`, `enabled`) VALUES
-(1, 'Watch Dogs 2', 'Usa el hackeo como arma en el gigantesco y dinámico mundo abierto de Watch Dogs 2. En 2016 fue implementado en varias ciudades de los Estados Unidos ctOS 2.0, un avanzado sistema operativo de redes e infraestructuras urbanas diseñado para crear metrópolis más seguras y eficientes. Encarna a Marcus Holloway, un joven y brillante hacker que vive justo en el lugar donde tuvo lugar la revolución tecnológica, la bahía de San Francisco. Haz equipo con DedSec, un conocido grupo de hackers, y saca a la luz pública los peligros ocultos del sistema ctOS 2.0, el cual está ya en manos de las corruptas corporaciones y está siendo utilizado para registrar y manipular las vidas de los ciudadanos a una escala masiva. Con la toda potencia de DedSec de tu lado, no dudes en realizar el hackeo del siglo, acabar con ctOS 2.0 y devolver la libertad a quien realmente le pertenece: a la gente.', 1, 5099.99, 0, 67, 'Ubisoft Montreal', '2017-10-13', 1, 1, 4.1, 5, 1),
+(1, 'Watch Dogs 2', 'Usa el hackeo como arma en el gigantesco y dinámico mundo abierto de Watch Dogs 2. En 2016 fue implementado en varias ciudades de los Estados Unidos ctOS 2.0, un avanzado sistema operativo de redes e infraestructuras urbanas diseñado para crear metrópolis más seguras y eficientes. Encarna a Marcus Holloway, un joven y brillante hacker que vive justo en el lugar donde tuvo lugar la revolución tecnológica, la bahía de San Francisco. Haz equipo con DedSec, un conocido grupo de hackers, y saca a la luz pública los peligros ocultos del sistema ctOS 2.0, el cual está ya en manos de las corruptas corporaciones y está siendo utilizado para registrar y manipular las vidas de los ciudadanos a una escala masiva. Con la toda potencia de DedSec de tu lado, no dudes en realizar el hackeo del siglo, acabar con ctOS 2.0 y devolver la libertad a quien realmente le pertenece: a la gente.', 1, 5099.99, 0, 67, 'Ubisoft Montreal', '2017-10-13', 1, 1, 4.1, 5, 0),
 (2, 'The Evil Within 2', 'De la mente maestra Shinji Mikami, The Evil Within 2 es la última evolución del horror de supervivencia. El detective Sebastian Castellanos lo ha perdido todo, incluida su hija, Lily. Para salvarla, debe descender al mundo de pesadilla de STEM. Amenazas horribles surgen de cada esquina, y debe confiar en su ingenio para sobrevivir. Para su única oportunidad de redención, la única salida es entrar una vez más al mundo de pesadilla de STEM. Horribles amenazas surgen de cada esquina a medida que el mundo gira y se deforma a su alrededor. Se enfrentará Sebastián a la adversidad de frente con armas y trampas, o se escabullirá entre las sombras para sobrevivir?', 1, 5025.99, 0, 30, 'Tango Gameworks', '2017-10-13', 1, 4, 3.8, 5, 1),
 (3, 'Mortal Kombat 11', 'Mortal Kombat 11, la más reciente entrega de la aclamada franquicia, te ofrece una experiencia más profunda y personalizada que nunca. Con las nuevas variantes de personaje tendrás un control sin precedentes para personalizar a tus Luchadores y hacerlos únicos. Mortal Kombat 11 incluye el juego principal y los personajes complementarios jugables: Shang Tsung, Nightwolf, Terminator T-800, Sindel, el Guasón y Spawn.', 1, 8199.99, 0, 52, 'NetherRealm Studios', '2019-04-23', 1, 5, 4.3, 5, 1),
 (4, 'FIFA 20', 'En la pelota: Disfruta de más control sobre los Momentos decisivos que determinan el resultado de cada partido en FIFA 20. Elige tu objetivo y cronometra desde el primer momento. Agregue efectos variados a los tiros libres. Una nueva mecánica de apuntado te da más creatividad con las bolas muertas. Muévete con más agilidad. Atrae al defensor. Derrótalos con velocidad o habilidad. El nuevo dribbling de strafe agrega nuevas dimensiones para atacar el juego en FIFA 20. Recupere la posesión con Active Touch Tackling y nuevas animaciones que lo recompensan por el juego defensivo oportuno. Más acabado clínico cuando uno a uno. Más riesgo con voleas y tiros largos. Los disparos revisados crean más realismo frente a la portería en FIFA 20. Fuera de la pelota: Más tiempo y espacio. Más énfasis en tus 5es en la pelota. Recupéralo con un mejor apoyo defensivo de los jugadores controlados por la IA a través de un sistema de posicionamiento y abordaje revisado. Experimenta un movimiento más natural y realista en todo el campo con innovaciones en el movimiento y posicionamiento del jugador. La pelota: En el aire. En el piso. En FIFA 20, la pelota se mueve más naturalmente que nunca. El movimiento realista de la pelota con giros y rebotes más auténticos crea una experiencia de partido real en FIFA 20. Tiros de curling. Inmersión de tiros libres. Knuckleballs. Golpes crecientes por primera vez. Todo hecho posible por el nuevo Ball Motion System en FIFA 20.', 1, 5043.99, 1, 19, 'Electronic Arts', '2019-09-10', 1, 3, 4.0, 1, 1),
@@ -333,8 +333,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(20) NOT NULL,
   `clave` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `tipo` int(2) NOT NULL,
-  `activo` tinyint(1) NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT 1,
   `salt` varchar(50) NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -343,8 +342,8 @@ CREATE TABLE `usuarios` (
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `usuario`, `clave`, `email`, `tipo`, `activo`, `salt`, `enabled`) VALUES
-(1, 'Admin', 'Sistema', 'admin', '207acd61a3c1bd506d7e9a4535359f8a', 'admin@carrito.com', 1, 1, 'salt', 1);
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `usuario`, `clave`, `email`, `activo`, `salt`, `enabled`) VALUES
+(1, 'Admin', 'Sistema', 'admin', '207acd61a3c1bd506d7e9a4535359f8a', 'admin@carrito.com', 1, 'salt', 1);
 
 -- --------------------------------------------------------
 
@@ -496,7 +495,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usuarios_perfiles`
