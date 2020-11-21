@@ -23,7 +23,7 @@ require('inc/header.php');
         </p>
 
         <h1 class="page-header">
-            Nueva Plataforma
+            Modificar Plataforma
         </h1>
 
         <div class="col-md-2"></div>

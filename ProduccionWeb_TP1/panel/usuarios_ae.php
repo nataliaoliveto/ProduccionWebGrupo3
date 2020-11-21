@@ -19,9 +19,10 @@ require('inc/header.php');
     */
 
     $perfil = new Perfil($con);
-
+    $lblTitulo = "Nuevo Usuario";
     if (isset($_GET['edit'])) {
         $usuario = $user->get($_GET['edit']);
+        $lblTitulo = "Modificar Usuario";
     }
     ?>
 
@@ -35,7 +36,7 @@ require('inc/header.php');
         </p>
 
         <h1 class="page-header">
-            Nuevo Usuario
+            <?php echo $lblTitulo ?>
         </h1>
 
         <div class="col-md-2"></div>
@@ -43,31 +44,31 @@ require('inc/header.php');
             <div class="form-group">
                 <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="<?php echo isset($usuario->nombre) ? $usuario->nombre : ''; ?>">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="<?php echo isset($usuario->nombre) ? $usuario->nombre : ''; ?>" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="apellido" class="col-sm-2 control-label">Apellido</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="" value="<?php echo isset($usuario->apellido) ? $usuario->apellido : ''; ?>">
+                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="" value="<?php echo isset($usuario->apellido) ? $usuario->apellido : ''; ?>" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="usuario" class="col-sm-2 control-label">Usuario</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="" value="<?php echo isset($usuario->usuario) ? $usuario->usuario : ''; ?>">
+                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="" value="<?php echo isset($usuario->usuario) ? $usuario->usuario : ''; ?>" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="clave" class="col-sm-2 control-label">Clave</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="clave" name="clave" placeholder="">
+                    <input type="password" class="form-control" id="clave" name="clave" placeholder="" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">e-Mail</label>
                 <div class="col-sm-10">                               
-                    <input type="email" class="form-control" id="email" name="email" placeholder="" value="<?php echo isset($usuario->email) ? $usuario->email : '';?>" <?php echo isset($_GET['edit']) ? 'disabled' : '' ;?>>                              
+                    <input type="email" class="form-control" id="email" name="email" placeholder="" value="<?php echo isset($usuario->email) ? $usuario->email : '';?>" <?php echo isset($_GET['edit']) ? 'disabled' : '' ;?> required>                              
                 </div>
             </div>
             <div class="form-group">

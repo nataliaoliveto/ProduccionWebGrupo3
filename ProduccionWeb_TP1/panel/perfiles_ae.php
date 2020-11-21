@@ -12,9 +12,10 @@ require('inc/header.php');
     $query = 'SELECT * FROM permisos';
     $permisos = $con->query($query);
     // var_dump($permisos);
-
+    $lblTitulo = "Nuevo Perfil";
     if (isset($_GET['edit'])) {
         $perfiles = $perfil->get($_GET['edit']);
+        $lblTitulo = "Modificar Perfil";
         //var_dump($perfiles);
     }
     ?>
@@ -29,7 +30,7 @@ require('inc/header.php');
         </p>
 
         <h1 class="page-header">
-            Nuevo Perfil
+            <?php echo $lblTitulo ?>
         </h1>
 
         <div class="col-md-2"></div>
@@ -37,7 +38,7 @@ require('inc/header.php');
             <div class="form-group">
                 <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="<?php echo (isset($perfiles->nombre) ? $perfiles->nombre : ''); ?>">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="<?php echo (isset($perfiles->nombre) ? $perfiles->nombre : ''); ?>" required>
                 </div>
             </div>
 

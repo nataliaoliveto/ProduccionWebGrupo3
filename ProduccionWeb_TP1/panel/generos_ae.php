@@ -26,7 +26,7 @@ require('inc/header.php');
         </p>
 
         <h1 class="page-header">
-            Nuevo Género
+            Modificar Género
         </h1>
 
         <div class="col-md-2"></div>
