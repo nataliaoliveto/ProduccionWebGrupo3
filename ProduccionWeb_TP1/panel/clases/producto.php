@@ -170,6 +170,24 @@ Class Producto{
 				
 				redimensionar($ruta,$_FILES['imagen']['name'],$_FILES['imagen']['tmp_name'],$id,$tamanhos);
 			}
+			include 'func2.php';
+
+
+				if(isset($_FILES['caro'])){
+					$tamanhos = array(0 => array('nombre'=>'carouseln','ancho'=>'1000','alto'=>'500')
+									);
+				
+					$ruta = '../imagenes/'.$id.'/';
+					if(!is_dir($ruta))
+						mkdir($ruta);			  
+					
+					foreach($_FILES['caro']['name'] as $pos=>$nombre){
+						redimensionar($ruta,$_FILES['caro']['name'][$pos],$_FILES['caro']['tmp_name'][$pos],$pos,$tamanhos);
+					}
+					redimensionar($ruta,$_FILES['caro']['name'],$_FILES['caro']['tmp_name'],0,$tamanhos);
+				}
+
+
 
 			$sql = '';
 			foreach ($data['extrainfo'] as $extrainfo) {
@@ -224,6 +242,23 @@ Class Producto{
 			
 			redimensionar($ruta,$_FILES['imagen']['name'],$_FILES['imagen']['tmp_name'],$id,$tamanhos);
 		} 
+
+		include 'func2.php';
+
+
+				if(isset($_FILES['caro'])){
+					$tamanhos = array(0 => array('nombre'=>'carouseln','ancho'=>'1000','alto'=>'500')
+									);
+				
+					$ruta = '../imagenes/'.$id.'/';
+					if(!is_dir($ruta))
+						mkdir($ruta);			  
+					
+					foreach($_FILES['caro']['name'] as $pos=>$nombre){
+						redimensionar($ruta,$_FILES['caro']['name'][$pos],$_FILES['caro']['tmp_name'][$pos],$pos,$tamanhos);
+					}
+					redimensionar($ruta,$_FILES['caro']['name'],$_FILES['caro']['tmp_name'],0,$tamanhos);
+				}
 
 
 		$sql = "UPDATE productos SET ".implode(',',$columns)." WHERE id = ".$id;

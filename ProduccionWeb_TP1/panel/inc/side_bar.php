@@ -5,6 +5,7 @@
 		<ul class="nav nav-sidebar">
 		<?php if (in_array('user', $_SESSION['usuario']['permisos']['seccion'])) { ?>
 			<li class="<?php echo isset($comentarioMenu) ? 'active' : '' ?>"><a href="comentarios.php?estado=0&pagina=1&idprod=0">Comentarios</a></li>
+			<li class="<?php echo isset($campoComentarioMenu) ? 'active' : '' ?>"><a href="campos_comentarios.php">Campos Comentarios</a></li>
 			<li class="<?php echo isset($edadMenu) ? 'active' : '' ?>"><a href="edades.php">Edades</a></li>
 			<li class="<?php echo isset($generoMenu) ? 'active' : '' ?>"><a href="generos.php">Géneros</a></li>
 			<li class="<?php echo isset($perfilMenu) ? 'active' : '' ?>"><a href="perfiles.php">Perfiles</a></li>

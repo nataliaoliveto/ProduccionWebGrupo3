@@ -149,6 +149,16 @@ require('inc/header.php');
                 </div>
                 
             </div>
+
+            <div class="form-group">
+                <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Carousell</label>
+                <div class="col-sm-10">      
+                    
+                    <input type="file" name="caro[]">
+                    
+                </div>
+                
+            </div>
             
 
 

@@ -9,6 +9,7 @@ include('clases/plataforma.php');
 include('clases/genero.php');
 include('clases/edad.php');
 include('clases/producto.php');
+include('clases/campo_comentario.php');
 
 
 try {
