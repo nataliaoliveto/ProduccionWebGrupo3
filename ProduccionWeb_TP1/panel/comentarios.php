@@ -11,7 +11,8 @@ require('inc/filtro.php');
 	if(isset($_GET['modif'], $_GET['id'])){
 		$comen->update($_GET['modif'], $_GET['id']);
 		$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : '';
-		header('Location: comentarios.php?estado='.$_GET['estado'].'&pagina='.$pagina);	
+		$idprod = isset($_GET['idprod']) ? $_GET['idprod'] : '0';
+		header('Location: comentarios.php?estado='.$_GET['estado'].'&pagina='.$pagina.'&idprod='.$idprod);	
 	}
 
 	?>
@@ -67,13 +68,13 @@ require('inc/filtro.php');
 					<?php echo $lblSort ?>
 					</button>
 					<div class="dropdown-menu">          
-						<a class="dropdown-item" href="comentarios.php?estado=0&pagina=1">
+						<a class="dropdown-item" href="comentarios.php?estado=0&pagina=1&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>">
 						Inactivos
 						</a>
-						<a class="dropdown-item" href="comentarios.php?estado=1&pagina=1">
+						<a class="dropdown-item" href="comentarios.php?estado=1&pagina=1&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>">
 						Activos
 						</a>
-						<a class="dropdown-item" href="comentarios.php?estado=2&pagina=1">
+						<a class="dropdown-item" href="comentarios.php?estado=2&pagina=1&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>">
 						Todos
 						</a>
 					</div>
@@ -83,7 +84,8 @@ require('inc/filtro.php');
 				
 					<?php 
 					$pagina = empty($_GET['pagina']) ? 0 : $_GET['pagina'];
-					foreach ($comen->getList($_GET['estado'], $pagina) as $comentarios) { ?>
+					$idProd = isset($_GET['idprod']) ? $_GET['idprod'] : '0';
+					foreach ($comen->getList($_GET['estado'], $pagina, $idProd) as $comentarios) { ?>
 						<tr>
 						<td><?php echo $comentarios['id'];?></td>
 						<td><?php echo $comentarios['calificacion'];?></td>
@@ -92,9 +94,9 @@ require('inc/filtro.php');
 						<td><?php echo $comentarios['descripcion'];?></td>
 						<td>
 							<?php if($comentarios['estado'] == 0){ ?>
-								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
 							<?php } else { ?>
-								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
 							<?php } ?>
 						</td>
 						</tr>

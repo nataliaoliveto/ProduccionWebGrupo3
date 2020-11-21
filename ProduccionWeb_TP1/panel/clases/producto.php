@@ -190,4 +190,14 @@ Class Producto{
 
 		return $this->con->query($query)->fetchColumn(); 
 	}
+
+	public function getCountComentarios($id){
+		$query = "	SELECT 
+						COUNT(*)
+					FROM comentarios 
+					WHERE IDproducto = ".$id;
+
+		return $this->con->query($query)->fetchColumn(); 
+
+	}
 }

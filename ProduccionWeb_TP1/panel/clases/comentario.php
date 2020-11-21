@@ -7,7 +7,7 @@ Class Comentario{
 		$this->con = $con;
 	}
 
-	public function getList($estado, $pag){
+	public function getList($estado, $pag, $idprod){
 		$desde = ($pag - 1) * 10;
 		$hasta = $desde + 10;
 		
@@ -15,7 +15,7 @@ Class Comentario{
 					FROM comentarios 
 					INNER JOIN productos 
 					ON comentarios.IDproducto = productos.id
-					WHERE comentarios.enabled = 1 AND (comentarios.estado = " .$estado. " OR " .$estado. " = 2) 
+					WHERE comentarios.enabled = 1 AND (comentarios.estado = " .$estado. " OR " .$estado. " = 2) AND (comentarios.IDproducto = " .$idprod. " OR " .$idprod. " = 0)
 					LIMIT $desde, $hasta";
 
         return $this->con->query($query); 

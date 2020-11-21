@@ -170,6 +170,12 @@ if (isset($_GET['del'], $_GET['generos'], $_GET['edades'])) {
 							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
 						<?php } ?>
 						<a href="productos.php?del=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+						<?php $countComentarios = $produ->getCountComentarios($productos['id']);
+							if ($countComentarios > 0) { ?>
+								<a href="comentarios.php?estado=2&pagina=1&idprod=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Comentarios">C</button></a> 
+						<?php } else { ?>
+							<button type="button" class="btn btn-info" title="Comentarios" disabled>C</button></a> 
+						<?php } ?>						
 					</td>
 				</tr>
 			<?php } ?>
