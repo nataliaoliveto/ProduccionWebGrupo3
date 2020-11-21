@@ -23,25 +23,36 @@ Class Producto{
 		$query = "SELECT id, nombre, descripcion, precio, destacado, stock, desarrollador, fechadelanzamiento, plataforma, genero, calificacion, edad
 					FROM productos WHERE id = ".$id;
         $query = $this->con->query($query); 
+
+		$prod = $query->fetch(PDO::FETCH_OBJ);
 			
-		$perfil = $query->fetch(PDO::FETCH_OBJ);
-			
-			$sql = 'SELECT perfil_id, permiso_id
-					FROM perfil_permisos  
-					WHERE perfil_id = '.$perfil->id;
+			$sql = 'SELECT id_prod, id_din
+					FROM producto_campos_dinamicos  
+					WHERE id_prod = '.$prod->id;
 					
-			foreach($this->con->query($sql) as $permiso){
-				$perfil->permisos[] = $permiso['permiso_id'];
+			foreach($this->con->query($sql) as $prod_din){
+				$prod->prod_din[] = $prod_din['id_din'];
 			}
 			/*echo '<pre>';
 			var_dump($perfil);echo '</pre>'; */
-            return $perfil;
+            return $prod;
 	}
 
 	public function update($modif, $id){
 		$act = ($modif -1) * -1;
 		$this->con->exec("UPDATE productos SET estado = ".$act." WHERE id = ".$id);
 	}
+
+	/*public function getCamposDinamicos($id){
+		$query = " SELECT id_prod, id_din
+					FROM producto_campos_dinamicos  
+					WHERE id_prod = ".$id;
+
+			foreach($this->con->query($query) as $prod_din){
+				$prod->prod_din[] = $prod_din['id_din'];
+			}
+		return $this->con->query($query);
+	}*/
 
 	public function getPermisos($id){
 		$query = "	SELECT permisos.nombre
@@ -110,8 +121,6 @@ Class Producto{
 		return $this->con->query($query);
 	}
 
-
-
 	public function del($id){
 			$query = "UPDATE productos SET enabled = 0, estado = 0 WHERE id = ".$id; 
 			$this->con->exec($query);
@@ -135,8 +144,49 @@ Class Producto{
             $sql = "INSERT INTO productos(".implode(',',$columns).") VALUES('".implode("','",$datos)."')";
 			//echo $sql;die();
 			
-            $this->con->exec($sql);
-			$id = $this->con->lastInsertId();
+			$this->con->exec($sql);
+			
+			//$id_prod = $this->con->lastInsertId();
+
+			$sql = "	SELECT
+							MAX(id)
+						FROM productos";
+
+			$id_prod = $this->con->query($sql)->fetchColumn(); 
+			$id = $id_prod;
+			include 'funcs.php';
+
+			if(isset($_FILES['imagen']))
+			//	var_dump($_FILES['imagen']); die;
+
+			if(isset($_FILES['imagen'])){
+				$tamanhos = array(0 => array('nombre'=>'caratula','ancho'=>'580','alto'=>'730'),
+								1 => array('nombre'=>'caratulamin','ancho'=>'290','alto'=>'365'),
+								);
+				$ruta = '../imagenes/'. $id .'/';
+				if(!is_dir($ruta))
+					mkdir($ruta);	
+				//	var_dump($id)	; die;	  
+				
+				redimensionar($ruta,$_FILES['imagen']['name'],$_FILES['imagen']['tmp_name'],$id,$tamanhos);
+			}
+
+			$sql = '';
+			foreach ($data['extrainfo'] as $extrainfo) {
+				$sql .= "	INSERT INTO producto_extra_info(id_producto, label, texto) 
+							VALUES (". $id_prod .",'".implode("','",$extrainfo)."')";
+			}
+			$this->con->exec($sql);
+
+			/*
+			$sql='';
+			foreach($data['campos_din'] as $campos_din){
+				$sql .= 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
+							VALUES ('.$id.','.$campos_din.');';
+			}
+			//echo $sql;die();
+			$this->con->exec($sql);
+			/*
 			
 			$sql = '';
 			foreach($data['permisos'] as $permisos){
@@ -144,34 +194,63 @@ Class Producto{
 							VALUES ('.$id.','.$permisos.');';
 			}
 			//echo $sql;die();
-			$this->con->exec($sql);
+			$this->con->exec($sql);*/
 	} 
 	
 	public function edit($data){
-			$id = $data['id'];
-			unset($data['id']);
-            
-            foreach($data as $key => $value){
-				if(!is_array($value)){
-					if($value != null){	
-						$columns[]=$key." = '".$value."'"; 
-					}
+		$id = $data['id'];
+		unset($data['id']);
+		
+		foreach($data as $key => $value){
+			if(!is_array($value)){
+				if($value != null){	
+					$columns[]=$key." = '".$value."'"; 
 				}
-            }
-            $sql = "UPDATE productos SET ".implode(',',$columns)." WHERE id = ".$id;
-            //echo $sql; die();
-            $this->con->exec($sql);
-			
-			$sql = 'DELETE FROM perfil_permisos WHERE perfil_id= '.$id;
-			$this->con->exec($sql);
-			
-			$sql = '';
-			foreach($data['permisos'] as $permisos){
-				$sql .= 'INSERT INTO perfil_permisos(perfil_id,permiso_id) 
-							VALUES ('.$id.','.$permisos.');';
 			}
-			$this->con->exec($sql);
+		}
+		include 'funcs.php';
+		
+		if(isset($_FILES['imagen']))
+		//	var_dump($_FILES['imagen']); die;
+
+		if(isset($_FILES['imagen'])){
+			$tamanhos = array(0 => array('nombre'=>'caratula','ancho'=>'580','alto'=>'730'),
+							1 => array('nombre'=>'caratulamin','ancho'=>'290','alto'=>'365'),
+							);
+			$ruta = '../imagenes/'. $id .'/';
+			if(!is_dir($ruta))
+				mkdir($ruta);	
+			//	var_dump($id)	; die;	  
 			
+			redimensionar($ruta,$_FILES['imagen']['name'],$_FILES['imagen']['tmp_name'],$id,$tamanhos);
+		} 
+
+
+		$sql = "UPDATE productos SET ".implode(',',$columns)." WHERE id = ".$id;
+		//echo $sql; die();
+		$this->con->exec($sql); 
+
+		$sql = 'DELETE FROM producto_campos_dinamicos WHERE id_prod= '.$id;
+		$this->con->exec($sql);
+
+		$sql='';
+		foreach($data['campos_din'] as $campos_din){
+			$sql .= 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
+						VALUES ('.$id.','.$campos_din.');';
+		}
+		//echo $sql; die();
+		$this->con->exec($sql);
+		//var_dump($sql); die();
+		
+
+		$sql = 'DELETE FROM producto_extra_info WHERE id_producto= '.$id;
+		$this->con->exec($sql);
+
+		foreach ($data['extrainfo'] as $extrainfo) {
+			$sql .= "	INSERT INTO producto_extra_info(id_producto, label, texto) 
+						VALUES (". $id .",'".implode("','",$extrainfo)."')";
+		}
+		$this->con->exec($sql);
 	} 
 
 	public function getPaginas($genID, $edadID){
@@ -198,6 +277,10 @@ Class Producto{
 					WHERE IDproducto = ".$id;
 
 		return $this->con->query($query)->fetchColumn(); 
+	}
 
+	public function getProducto_extra_info($id){
+		$query = "SELECT * FROM producto_extra_info WHERE id_producto = ".$id;
+		return $this->con->query($query);
 	}
 }

@@ -8,6 +8,7 @@ require('inc/filtro.php');
 include('inc/side_bar.php');
 
 if (isset($_POST['formulario_productos'])) {
+
 if ($_POST['id'] > 0) {
 	$produ->edit($_POST);
 } else {

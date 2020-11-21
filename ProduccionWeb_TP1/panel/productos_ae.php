@@ -9,15 +9,18 @@ require('inc/header.php');
 
     $produ = new Producto($con);
 
-    $query = 'SELECT * FROM permisos';
-    $permisos = $con->query($query);
+    $query = 'SELECT * FROM campos_dinamicos';
+    $campos_din = $con->query($query);
     // var_dump($permisos);
     $lblTitulo = "Nuevo Producto";
     if (isset($_GET['edit'])) {
         $productito = $produ->get($_GET['edit']);
         $lblTitulo = "Modificar Producto";
-        //var_dump($productito);
+        //var_dump($productito); die();
     }
+
+    //var_dump($productito); die();
+
     ?>
 
     <div class="col-sm-9 col-md-10 main">
@@ -31,7 +34,7 @@ require('inc/header.php');
         </h1>
 
         <div class="col-md-2"></div>
-        <form action="productos.php" method="post" class="col-md-6 from-horizontal">
+        <form action="productos.php" method="post" class="col-md-6 from-horizontal"  enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Nombre</label>
                 <div class="col-sm-10">
@@ -115,16 +118,48 @@ require('inc/header.php');
                 <div class="col-sm-10">                    
                     <input type="number" class="form-control" id="Stock" name="Stock" placeholder="" value="<?php echo (isset($productito->stock) ? $productito->stock : ''); ?>" required>
                 </div>
-            </div>                                    
+            </div>     
+            
+            <div class="form-group">
+                <label for="tipo" class="col-sm-2 control-label">Comentarios Dinámicos</label>
+                <div class="col-sm-10">
+                    <select name="campos_din[]" id="campos_din" multiple='multiple'>
+                        <?php foreach ($campos_din as $cd) { ?>
+                            <option value="<?php echo $cd['id_din'] ?>" 
+                            <?php
+                            if (isset($productito->prod_din)) {
+                                if (in_array($cd['id_din'], $productito->prod_din)) {
+                                    echo ' selected="selected" ';
+                                }
+                            }
+                        ?>><?php echo $cd['label'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            
+            
+
+            <div class="form-group">
+                <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Subir imagen</label>
+                <div class="col-sm-10">      
+                    
+                    <input type="file" name="imagen">
+                    
+                </div>
+                
+            </div>
+            
+
+
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default" name="formulario_productos">Guardar</button>
                 </div>
             </div>
-            
+            </div>
             <input type="hidden" class="form-control" id="id" name="id" placeholder="" value="<?php echo (isset($productito->id) ? $productito->id : ''); ?>">
-
         </form>
     </div>
 </div>
@@ -174,4 +209,4 @@ require('inc/header.php');
     onGeneroChange();
 </script>
 
-<?php include('inc/footer.php'); ?>
+
