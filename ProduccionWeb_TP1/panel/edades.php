@@ -46,7 +46,7 @@ require('inc/header.php');
 		<div class="container-fluid">
 
 			<form action="edades.php" method="post" class="navbar-form navbar-left">
-				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva edad"> 
+				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva edad" required> 
 				<button type="submit" class="btn btn-success" name="alta_edades" title="Agregar">Nueva Edad</button></a>
 				<?php if ($mensaje) {
 				?>  <p id="errorComentario"> Error al cargar edad: nombre existente </p>

@@ -46,7 +46,7 @@ require('inc/header.php');
 		<div class="container-fluid">
 
 			<form action="generos.php" method="post" class="navbar-form navbar-left">
-				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo género"> 
+				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo género" required> 
 				<button type="submit" class="btn btn-success" name="alta_generos" title="Agregar">Nuevo Género</button></a>
 				<?php if ($mensaje) {
 				?>  <p id="errorComentario"> Error al cargar género: nombre existente </p>

@@ -47,7 +47,7 @@ require('inc/header.php');
 		<div class="container-fluid">
 
 			<form action="plataformas.php" method="post" class="navbar-form navbar-left">
-				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva plataforma"> 
+				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva plataforma" required> 
 				<button type="submit" class="btn btn-success" name="alta_plataformas" title="Agregar">Nueva Plataforma</button></a>
 				<?php if ($mensaje) {
 				?>  <p id="errorComentario"> Error al cargar plataforma: nombre existente </p>
