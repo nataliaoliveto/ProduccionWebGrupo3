@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2020 at 03:05 AM
+-- Generation Time: Nov 22, 2020 at 05:53 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -56,7 +56,10 @@ INSERT INTO `campos_dinamicos` (`id_din`, `label`, `type`, `opcion`, `estado`, `
 (12, 'Arcade', 'checkbox', '', 1, 1, 0),
 (13, 'alta', 'checkbox', '', 1, 1, 0),
 (14, 'asd', 'text', 'sd', 1, 1, 0),
-(15, 'rpeubasd', 'checkbox', '', 1, 1, 0);
+(15, 'rpeubasd', 'checkbox', '', 1, 1, 0),
+(16, 'sss', 'text', 'NULL', 0, 0, 0),
+(17, 'asd', 'checkbox', 'NULL', 0, 0, 0),
+(18, 'fffffffffff', 'text', 'NULL', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -81,11 +84,11 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id`, `mail`, `descripcion`, `IDproducto`, `calificacion`, `fecha`, `estado`, `IP`, `enabled`) VALUES
-(1, 'AY@AY.COM', 'AY@AY.COM', 7, 3, '2020-11-14 21:53:42', 0, '::1', 1),
-(2, 'asda@asda.com', 'asda@asda.com', 5, 3, '2020-11-14 22:28:30', 1, '::1', 1),
+(1, 'AY@AY.COM', 'AY@AY.COM', 7, 3, '2020-11-22 15:36:42', 0, '::1', 1),
+(2, 'asda@asda.com', 'asda@asda.com', 5, 3, '2020-11-22 15:12:51', 1, '::1', 1),
 (41, 'matiasborgogno@gmail.com', 'Gran juego! Muy divertido\r\n', 0, 5, '2020-11-21 01:07:25', 0, '235.198.96.163', 1),
 (42, 'matiasborgogno@gmail.com', 'Gran juego! Muy divertido', 0, 5, '2020-11-21 01:10:42', 0, '235.198.96.163', 1),
-(199, 'alexanderdominguez@gmail.com', 'Muy bueno', 1, 4, '2020-11-21 01:20:56', 0, '235.198.96.162', 1),
+(199, 'alexanderdominguez@gmail.com', 'Muy bueno', 1, 4, '2020-11-22 15:12:51', 1, '235.198.96.162', 1),
 (200, 'lucashoyos@gmail.com', 'Gran juego! Muy divertido', 2, 5, '2020-11-21 01:20:56', 0, '1.186.79.215', 1),
 (201, 'luisabram@gmail.com', 'Muy bueno', 3, 4, '2020-11-21 01:21:36', 0, '159.118.8234', 1),
 (202, 'miguelbrizuela@gmail.com', 'Meh, mas o menos', 4, 3, '2020-11-21 01:20:56', 0, '71.182.95.95', 1),
@@ -157,7 +160,7 @@ INSERT INTO `comentarios` (`id`, `mail`, `descripcion`, `IDproducto`, `calificac
 (268, 'marianopavone@gmail.com', 'Meh, mas o menos', 11, 3, '2020-11-21 02:01:33', 0, '220.16.71.214', 1),
 (269, 'fabiancubero@gmail.com', 'Meh, mas o menos', 12, 3, '2020-11-21 02:01:33', 0, '80.47.150.94', 1),
 (270, 'matiasborgogno@gmail.com', 'Muy bueno', 13, 4, '2020-11-21 02:01:33', 0, '149.29.64.50', 1),
-(271, 'alexanderdominguez@gmail.com', 'Muy bueno', 39, 4, '2020-11-21 02:01:33', 0, '245.249.44.97', 1),
+(271, 'alexanderdominguez@gmail.com', 'Muy bueno', 39, 4, '2020-11-22 15:18:24', 0, '245.249.44.97', 1),
 (272, 'lucashoyos@gmail.com', 'Gran juego! Muy divertido', 8, 5, '2020-11-21 02:01:33', 0, '184169113176', 1),
 (273, 'luisabram@gmail.com', 'Gran juego! Muy divertido', 5, 5, '2020-11-21 02:01:33', 0, '144.26.181.186', 1),
 (274, 'miguelbrizuela@gmail.com', 'Muy bueno', 4, 4, '2020-11-21 02:01:33', 0, '20.11.248.121', 1),
@@ -246,7 +249,10 @@ INSERT INTO `edades` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (5, 'PEGI 18 - Mayores de 18 años', 1, 1),
 (6, 'sdasda s', 0, 1),
 (7, 'asd', 0, 1),
-(8, '', 1, 1);
+(8, '', 1, 1),
+(9, 'sssss  ', 0, 0),
+(10, 'fffff ', 0, 0),
+(11, 'fffffffffffff', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -275,7 +281,10 @@ INSERT INTO `generos` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (7, 'RPG', 1, 1),
 (8, 'Shooter', 1, 1),
 (9, 'sdsdsdsd', 1, 1),
-(10, 'a', 0, 1);
+(10, 'a', 0, 1),
+(11, 'ssdsdsd  ', 0, 0),
+(12, 'fffff ', 0, 0),
+(13, 'ffffffffffffffffffffffffffffffff', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -297,6 +306,7 @@ INSERT INTO `genero_edades` (`idedad`, `idgen`, `enabled`) VALUES
 (1, 2, 1),
 (1, 3, 1),
 (1, 6, 1),
+(1, 12, 1),
 (2, 6, 1),
 (2, 7, 1),
 (3, 2, 1),
@@ -305,15 +315,22 @@ INSERT INTO `genero_edades` (`idedad`, `idgen`, `enabled`) VALUES
 (3, 6, 1),
 (3, 7, 1),
 (3, 8, 1),
+(3, 12, 1),
 (4, 1, 1),
 (4, 6, 1),
 (4, 7, 1),
 (4, 8, 1),
+(4, 11, 1),
 (5, 1, 1),
 (5, 4, 1),
 (5, 5, 1),
 (5, 7, 1),
-(5, 8, 1);
+(5, 8, 1),
+(9, 3, 1),
+(9, 4, 1),
+(10, 1, 1),
+(10, 2, 1),
+(11, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -333,13 +350,18 @@ CREATE TABLE `perfil` (
 --
 
 INSERT INTO `perfil` (`id`, `nombre`, `enabled`, `estado`) VALUES
-(1, 'Administrador', 1, 1),
-(2, 'Marketing', 1, 1),
-(3, 'RRHH', 1, 1),
-(10, ' test2', 0, 0),
+(1, 'Administrador', 0, 1),
+(2, 'Comentarios', 1, 1),
+(3, 'Usuarios', 1, 1),
+(10, 'Perfiles', 1, 1),
 (11, 'sadasdasd', 0, 0),
 (12, 'Administrador', 0, 0),
-(13, 'BackOffice', 1, 1);
+(13, 'Productos', 1, 1),
+(14, 'fffff', 0, 0),
+(15, 'a', 0, 0),
+(16, 'Edades', 1, 1),
+(17, 'Generos', 1, 1),
+(18, 'Plataformas', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -362,13 +384,77 @@ INSERT INTO `perfil_permisos` (`id`, `perfil_id`, `permiso_id`, `enabled`) VALUE
 (1, 9, 2, 1),
 (2, 9, 3, 1),
 (3, 9, 4, 1),
-(19, 10, 1, 0),
-(20, 10, 4, 0),
-(46, 1, 1, 1),
-(47, 1, 2, 1),
-(48, 1, 3, 1),
-(49, 1, 4, 1),
-(50, 1, 5, 1);
+(135, 14, 1, 0),
+(136, 1, 1, 0),
+(137, 1, 2, 0),
+(138, 1, 3, 0),
+(139, 1, 4, 0),
+(140, 1, 5, 0),
+(141, 1, 6, 0),
+(142, 1, 7, 0),
+(143, 1, 8, 0),
+(144, 1, 9, 0),
+(145, 1, 10, 0),
+(146, 1, 11, 0),
+(147, 1, 12, 0),
+(148, 1, 13, 0),
+(149, 1, 14, 0),
+(150, 1, 15, 0),
+(151, 1, 16, 0),
+(152, 1, 17, 0),
+(153, 1, 18, 0),
+(154, 1, 19, 0),
+(155, 1, 20, 0),
+(156, 1, 21, 0),
+(157, 1, 22, 0),
+(158, 1, 23, 0),
+(159, 1, 24, 0),
+(160, 1, 25, 0),
+(161, 1, 26, 0),
+(162, 1, 27, 0),
+(163, 1, 28, 0),
+(164, 1, 29, 0),
+(165, 1, 30, 0),
+(166, 1, 31, 0),
+(167, 1, 32, 0),
+(168, 1, 33, 0),
+(169, 1, 34, 0),
+(170, 1, 35, 0),
+(171, 1, 36, 0),
+(172, 1, 37, 0),
+(178, 10, 19, 1),
+(179, 10, 20, 1),
+(180, 10, 21, 1),
+(181, 10, 22, 1),
+(182, 3, 32, 1),
+(183, 3, 33, 1),
+(184, 3, 34, 1),
+(185, 3, 35, 1),
+(186, 3, 36, 1),
+(187, 2, 6, 1),
+(188, 2, 7, 1),
+(189, 2, 8, 1),
+(190, 2, 9, 1),
+(191, 2, 10, 1),
+(192, 2, 31, 1),
+(193, 2, 37, 1),
+(194, 15, 1, 0),
+(195, 16, 11, 1),
+(196, 16, 12, 1),
+(197, 16, 13, 1),
+(198, 16, 14, 1),
+(199, 17, 15, 1),
+(200, 17, 16, 1),
+(201, 17, 17, 1),
+(202, 17, 18, 1),
+(203, 18, 23, 1),
+(204, 18, 24, 1),
+(205, 18, 25, 1),
+(206, 18, 26, 1),
+(211, 13, 27, 1),
+(212, 13, 28, 1),
+(213, 13, 29, 1),
+(214, 13, 30, 1);
 
 -- --------------------------------------------------------
 
@@ -389,11 +475,38 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id`, `nombre`, `cod`, `seccion`, `enabled`) VALUES
-(1, 'Agregar usuarios', 'user.add', 'user', 1),
-(2, 'Modificar usuarios', 'user.edit', 'user', 1),
-(3, 'Borrar Usuarios', 'user.del', 'user', 1),
-(4, 'Ver Usuarios', 'user.see', 'user', 1),
-(5, 'Agregar Noticias', 'news.add', 'news', 1);
+(6, 'Activar Comentarios', 'comen.act', 'comen', 1),
+(7, 'Agregar Campos Comentarios', 'camcom.add', 'camcom', 1),
+(8, 'Modificar Campos Comentarios', 'camcom.edit', 'camcom', 1),
+(9, 'Eliminar Campos Comentarios', 'camcom.del', 'camcom', 1),
+(10, 'Activar Campos Comentarios', 'camcom.act', 'camcom', 1),
+(11, 'Agregar Edades', 'edad.add', 'edad', 1),
+(12, 'Modificar Edades', 'edad.edit', 'edad', 1),
+(13, 'Eliminar Edades', 'edad.del', 'edad', 1),
+(14, 'Activar Edades', 'edad.act', 'edad', 1),
+(15, 'Agregar Generos', 'gen.add', 'gen', 1),
+(16, 'Modificar Generos', 'gen.edit', 'gen', 1),
+(17, 'Eliminar Generos', 'gen.del', 'gen', 1),
+(18, 'Activar Generos', 'gen.act', 'gen', 1),
+(19, 'Agregar Perfiles', 'per.add', 'per', 1),
+(20, 'Modificar Perfiles', 'per.edit', 'per', 1),
+(21, 'Eliminar Perfiles', 'per.del', 'per', 1),
+(22, 'Activar Perfiles', 'per.act', 'per', 1),
+(23, 'Agregar Plataformas', 'pla.add', 'pla', 1),
+(24, 'Modificar Plataformas', 'pla.edit', 'pla', 1),
+(25, 'Eliminar Plataformas', 'pla.del', 'pla', 1),
+(26, 'Activar Plataformas', 'pla.act', 'pla', 1),
+(27, 'Agregar Productos', 'prod.add', 'prod', 1),
+(28, 'Modificar Productos', 'prod.edit', 'prod', 1),
+(29, 'Eliminar Productos', 'prod.del', 'prod', 1),
+(30, 'Activar Productos', 'prod.act', 'prod', 1),
+(31, 'Ver Comentarios Productos', 'prod.ver', 'prod', 1),
+(32, 'Agregar Usuarios', 'usu.add', 'usu', 1),
+(33, 'Modificar Usuarios', 'usu.edit', 'usu', 1),
+(34, 'Eliminar Usuarios', 'usu.del', 'usu', 1),
+(35, 'Activar Usuarios', 'usu.act', 'usu', 1),
+(36, 'Ver Perfiles', 'per.ver', 'per', 1),
+(37, 'Ver Productos', 'prod.ver', 'prod', 1);
 
 -- --------------------------------------------------------
 
@@ -419,7 +532,10 @@ INSERT INTO `plataformas` (`id`, `nombre`, `estado`, `enabled`) VALUES
 (4, 'PC', 1, 1),
 (6, 'FUNCIONA', 0, 1),
 (7, 'asdaaa', 0, 1),
-(8, 'aaaaaaa', 0, 0);
+(8, 'aaaaaaa', 0, 0),
+(9, 'aaaa ', 0, 0),
+(10, 'sd ', 0, 0),
+(11, 'a ', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -508,7 +624,10 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `estado`, `precio`, `des
 (57, 'FIFA 20', 'En la pelota: Disfruta de más control sobre los Momentos decisivos que determinan el resultado de cada partido en FIFA 20. Elige tu objetivo y cronometra desde el primer momento. Agregue efectos variados a los tiros libres. Una nueva mecánica de apuntado te da más creatividad con las bolas muertas. Muévete con más agilidad. Atrae al defensor. Derrótalos con velocidad o habilidad. El nuevo dribbling de strafe agrega nuevas dimensiones para atacar el juego en FIFA 20. Recupere la posesión con Active Touch Tackling y nuevas animaciones que lo recompensan por el juego defensivo oportuno. Más acabado clínico cuando uno a uno. Más riesgo con voleas y tiros largos. Los disparos revisados crean más realismo frente a la portería en FIFA 20. Fuera de la pelota: Más tiempo y espacio. Más énfasis en tus 5es en la pelota. Recupéralo con un mejor apoyo defensivo de los jugadores controlados por la IA a través de un sistema de posicionamiento y abordaje revisado. Experimenta un movimiento más natural y realista en todo el campo con innovaciones en el movimiento y posicionamiento del jugador. La pelota: En el aire. En el piso. En FIFA 20, la pelota se mueve más naturalmente que nunca. El movimiento realista de la pelota con giros y rebotes más auténticos crea una experiencia de partido real en FIFA 20. Tiros de curling. Inmersión de tiros libres. Knuckleballs. Golpes crecientes por primera vez. Todo hecho posible por el nuevo Ball Motion System en FIFA 20.', 0, 5043.99, 1, 19, 'Electronic Arts', '2019-09-10', 2, 3, 1, 0),
 (58, 'PREUBA', 'PREUBA', 0, 159, 0, 50, 'PREUBA', '2020-11-03', 2, 2, 3, 0),
 (59, 'asdasdasdasd', 'asdasdasdasd', 0, 159, 0, 14, 'asdasdasd', '2020-11-03', 1, 1, 4, 0),
-(60, 'aaaaaa', 'aaaaaaaaa', 0, 159, 0, 3, 'aaaaaaaa', '2020-11-24', 1, 1, 4, 0);
+(60, 'aaaaaa', 'aaaaaaaaa', 0, 159, 0, 3, 'aaaaaaaa', '2020-11-24', 1, 1, 4, 0),
+(61, 'asd', 'asd', 0, 159, 1, 15, 'ddddddd', '2020-11-10', 1, 1, 4, 0),
+(62, 'd', 'd', 0, 47, 1, 47, 'd', '2020-11-17', 1, 1, 4, 0),
+(63, 'asd', 'dasddddd', 0, 47, 0, 47, 'asddddddddd', '2020-11-09', 1, 1, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -532,7 +651,8 @@ INSERT INTO `producto_campos_dinamicos` (`id_prod`, `id_din`) VALUES
 (43, 1),
 (43, 2),
 (43, 3),
-(4, 1);
+(4, 1),
+(62, 17);
 
 -- --------------------------------------------------------
 
@@ -546,13 +666,6 @@ CREATE TABLE `producto_extra_info` (
   `label` varchar(50) NOT NULL,
   `texto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `producto_extra_info`
---
-
-INSERT INTO `producto_extra_info` (`id_info`, `id_producto`, `label`, `texto`) VALUES
-(1, 1, 'ASD', 'FGH');
 
 -- --------------------------------------------------------
 
@@ -581,8 +694,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `usuario`, `clave`, 
 (2, 'Recursos', 'Humanos', 'RRHH', '6d2cf6795418cc133aad8f135d03f6e8', 'rrhh@gamestore.com', 1, '5fb71d3602324', 1),
 (3, 'Back', 'Office', 'BackOffice', '843b01751d4e2a6765fda7ccbbfad82a', 'backoffice@gamestore.com', 1, '5fb99dcd3760c', 1),
 (4, 'Marke', 'Ting', 'Marketing', '74f8925497838e2f8f9843b7091e79ea', 'marketing@gamestore.com', 1, '5fb99e259b80f', 1),
-(5, 'asd', 'asd', 'asd', 'a6360ed0645ccf58b91d29db46555b7f', 'asd@asd.com', 0, '5fb9b18e4e6d1', 1),
-(6, '2asd', '2asd', '2asd', '76950a9596e891cb07755ce3a0691585', '2asd@asd.com', 1, '5fb9b29f8c037', 1);
+(8, 'asd', 'asd', 'asd', '3e0c7a2cf87b7f47fe202f7bbdec1cb2', 'asd@asd.com', 0, '5fba816c35fc6', 1),
+(9, 'prueba', 'prueba', 'prueba', 'dcafbb154a85b870f4c537457c0972ed', 'prueba@prueba.com', 1, '5fba85f92ab22', 1);
 
 -- --------------------------------------------------------
 
@@ -602,13 +715,26 @@ CREATE TABLE `usuarios_perfiles` (
 --
 
 INSERT INTO `usuarios_perfiles` (`id`, `usuario_id`, `perfil_id`, `enabled`) VALUES
-(10, 3, 13, 1),
 (12, 4, 2, 1),
-(13, 1, 1, 1),
-(14, 1, 2, 1),
-(15, 1, 3, 1),
-(16, 1, 13, 1),
-(20, 2, 3, 1);
+(20, 2, 3, 1),
+(47, 3, 13, 1),
+(48, 3, 16, 1),
+(49, 3, 17, 1),
+(50, 3, 18, 1),
+(51, 8, 2, 1),
+(52, 8, 3, 1),
+(53, 8, 10, 1),
+(54, 8, 13, 1),
+(55, 8, 16, 1),
+(56, 8, 17, 1),
+(57, 8, 18, 1),
+(58, 1, 2, 1),
+(59, 1, 3, 1),
+(60, 1, 10, 1),
+(61, 1, 13, 1),
+(62, 1, 16, 1),
+(63, 1, 17, 1),
+(64, 1, 18, 1);
 
 --
 -- Indexes for dumped tables
@@ -700,7 +826,7 @@ ALTER TABLE `usuarios_perfiles`
 -- AUTO_INCREMENT for table `campos_dinamicos`
 --
 ALTER TABLE `campos_dinamicos`
-  MODIFY `id_din` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_din` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `comentarios`
@@ -712,43 +838,43 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT for table `edades`
 --
 ALTER TABLE `edades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `generos`
 --
 ALTER TABLE `generos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `perfil_permisos`
 --
 ALTER TABLE `perfil_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT for table `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `plataformas`
 --
 ALTER TABLE `plataformas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `producto_extra_info`
@@ -760,13 +886,13 @@ ALTER TABLE `producto_extra_info`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `usuarios_perfiles`
 --
 ALTER TABLE `usuarios_perfiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
