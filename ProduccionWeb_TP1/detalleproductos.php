@@ -101,6 +101,11 @@ $Comen = new Comentarios($con);
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                         <p><img src="imagenes/iconos/iconodesarrollador50.png" alt="Icono desarrollador" width="50" height="50">Desarrollado por: <?php echo $prod['desarrollador'];  ?></p>
                                     </div>
+                                            <?php foreach($Prod->getProducto_extra_info($_GET['prod']) as $prodExtra){ ?>
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                                                <p><img src="imagenes/iconos/iconodesarrollador50.png" alt="Icono desarrollador" width="50" height="50"><?php echo $prodExtra['label'].': '.$prodExtra['texto']; ?></p>
+                                            </div>
+                                        <?php } ?>
                                 </div>
                             </div>
                         </div>

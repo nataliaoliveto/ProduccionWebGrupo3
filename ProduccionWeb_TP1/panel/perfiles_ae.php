@@ -18,9 +18,7 @@ require('inc/header.php');
         $lblTitulo = "Modificar Perfil";
         //var_dump($perfiles);
     }
-    
 
-    var_dump($perfiles); die();
     ?>
     <div class="col-sm-9 col-md-10 main">
 

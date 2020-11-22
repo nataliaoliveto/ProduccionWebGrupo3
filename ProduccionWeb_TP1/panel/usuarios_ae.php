@@ -62,7 +62,7 @@ require('inc/header.php');
             <div class="form-group">
                 <label for="clave" class="col-sm-2 control-label">Clave</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="clave" name="clave" placeholder="" required>
+                    <input type="password" class="form-control" id="clave" name="clave" placeholder="" <?php echo isset($usuario->clave) ? '' : 'required'; ?>>
                 </div>
             </div>
             <div class="form-group">

@@ -26,8 +26,8 @@ require('inc/filtro.php');
 		<h1 class="page-header">
 			<?php echo $comentarioMenu ?>
 		</h1>
-
-		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
 			<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&pagina=1"><button type="button" class="btn btn-warning" title="Primera">|<-</button></a>
 			<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&pagina=<?php echo(($_GET['pagina'] != 1) ? ($_GET['pagina'] - 1) : $_GET['pagina']); ?>"><button type="button" class="btn btn-warning" title="Anterior"><</button></a>
 			<div class="btn-group">
@@ -61,8 +61,8 @@ require('inc/filtro.php');
 						<th>Comentario</th>
 						</tr> 
 				</thead>
+				<tbody>
 				
-				<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
 					<div class="btn-group">
 					<button type="button" id= "buttonOrderBy" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<?php echo $lblSort ?>
@@ -105,8 +105,8 @@ require('inc/filtro.php');
 			</table>
 		</div>
 	</div>
-	
+	</div>
 </div>
-</div>
+
 
 <?php include('inc/footer.php'); ?>

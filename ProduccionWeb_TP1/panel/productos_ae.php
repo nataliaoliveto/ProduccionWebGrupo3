@@ -99,12 +99,10 @@ require('inc/header.php');
             <div class="form-group">
                 <label for="destacado" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Destacado</label>                
                 <div class="col-sm-10">                    
-                    <select id="destacado" name="destacado">
-                        <option value = 0>No</option>                                                
-                        <option value = 1 <?php echo(isset($productito->destacado) ? (($productito->destacado == 1) ? 'selected' : '') : '');?>>Si</option>                        
-                    </select>                  
-                </div>
-            </div>    
+                <input type="hidden" name="destacado" id="destacado" value= 0 <?php echo (isset($productito->destacado) ? (($productito->destacado == 0) ? '' : 'checked') : '');?>>
+                <input type="checkbox" name="destacado" id="destacado" value= 1 <?php echo (isset($productito->destacado) ? (($productito->destacado == 1) ? 'checked' : '') : '');?>>
+            </div>
+            </div>  
 
             <div class="form-group">
                 <label for="precio" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Precio ($)</label>

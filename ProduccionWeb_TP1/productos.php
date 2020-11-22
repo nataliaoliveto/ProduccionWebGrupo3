@@ -30,10 +30,18 @@
                     )
                     ORDER BY RAND() LIMIT 6";
             return $this->con->query($query);
-        }
+        } 
         
         public function getProductoUnico($prodId){
-            $query = "SELECT * FROM productos WHERE id = $prodId";
+            $query = "  SELECT P.id, P.nombre, P.descripcion, P.plataforma, P.genero, P.precio, P.stock, P.desarrollador, P.fechadelanzamiento, ROUND(AVG(C.calificacion),1) AS calificacion  
+                        FROM productos P 
+                        LEFT JOIN comentarios C ON P.id = C.IDproducto 
+                        INNER JOIN plataformas PL ON P.plataforma = PL.id 
+                        INNER JOIN generos G ON P.genero = G.id 
+                        INNER JOIN edades E ON P.edad = E.id 
+                        WHERE P.id = $prodId
+                        GROUP BY P.id, P.nombre, P.descripcion, P.genero, P.plataforma, P.precio, P.stock, P.desarrollador, P.fechadelanzamiento ";
+
             return $this->con->query($query);          
         }
 
@@ -63,5 +71,11 @@
             }
             return $this->con->query($query);
         }
+
+        public function getProducto_extra_info($id){
+            $query = "SELECT * FROM producto_extra_info WHERE id_producto = ".$id;
+            return $this->con->query($query);
+        }
+
     }    
 ?>

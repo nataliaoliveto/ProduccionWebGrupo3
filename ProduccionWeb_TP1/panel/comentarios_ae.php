@@ -28,7 +28,7 @@ require('inc/header.php');
         <div class="col-md-2"></div>
         <form action="campos_comentarios.php" method="post" class="col-md-6 from-horizontal">
         <div class="form-group">
-                <label for="label" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">label</label>
+                <label for="label" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Label</label>
                 <div class="col-sm-10">                                        
                     <input type="text" class="form-control" id="label" name="label" placeholder="" value="<?php echo (isset($comentarito->label) ? $comentarito->label : ''); ?>" required>
                 </div>
@@ -51,21 +51,9 @@ require('inc/header.php');
                     <input type="text" class="form-control" id="opcion" name="opcion" placeholder="" value="<?php echo (isset($comentarito->opcion) ? $comentarito->opcion : 'NULL'); ?>">
                 </div>
             </div>
-
-            <div class="form-group">
-                <label for="required" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Requerido</label>                
-                <div class="col-sm-10">                    
-                    <select id="required" name="required">
-                        <option value = 0>No</option>                                                
-                        <option value = 1 <?php echo(isset($comentarito->required) ? (($comentarito->required == 1) ? 'selected' : '') : '');?>>Si</option>                        
-                    </select>                  
-                </div>
-            </div>
-
-            <!-- <div class="form-group">
-            <input id='required' type='checkbox' name='required' value= '1'>
-            <input id='requiredHidden' type='hidden' name='required' value= '0'>
-            </div> -->
+            
+            <input type="hidden" name="required" id="required" value= 0 <?php echo ($comentarito->required == 0 ? '' : 'checked');?>>
+            <input type="checkbox" name="required" id="required" value= 1 <?php echo ($comentarito->required == 1 ? 'checked' : '');?>>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
