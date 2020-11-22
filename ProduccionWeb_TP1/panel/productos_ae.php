@@ -136,6 +136,30 @@ require('inc/header.php');
                 </div>
             </div>
             
+            <table class="table">
+            <input type="text" id="produ_extra_label" placeholder="Label">
+            <input type="text" id="produ_extra_texto" placeholder="Texto">
+            <input type="button" class="add-row" value="Add Row">
+                <thead>
+                    <tr>
+                        <th scope="col">Select</th>
+                        <th scope="col">Label</th>
+                        <th scope="col">Texto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Magia jQuery -->
+                    <?php if (isset($_GET['edit'])) {
+                    foreach ($produ->getProducto_extra_info(1) as $pei) { ?>
+                        <tr><td><input type="checkbox" name="record"></td>
+                        <td><input name="produ_extra_label[]" value="<?php echo (isset($pei['label']) ? $pei['label'] : '')?>"></td>
+                        <td><input name="produ_extra_texto[]" value="<?php echo (isset($pei['texto']) ? $pei['texto'] : '')?>"></td>
+                        </tr> 
+                    <?php } }
+                    ?>
+                </tbody>
+            </table>
+            <button type="button" class="delete-row">Delete Row</button>
             
 
             <div class="form-group">
@@ -152,7 +176,7 @@ require('inc/header.php');
                 <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Carousell</label>
                 <div class="col-sm-10">      
                     
-                 <input type="file" name="caro[]" multiple title="caro">
+                <input type="file" name="caro[]" multiple title="caro">
 
                     <!-- <form method="post" action="?" enctype="multipart/form-data">
                     <input type="file" name="imagen[]" value="" multiple><br>
@@ -160,12 +184,8 @@ require('inc/header.php');
                     </form>
                     -->
                 </div>
-                
             </div>
-            
-
-
-
+        
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default" name="formulario_productos">Guardar</button>
@@ -180,6 +200,7 @@ require('inc/header.php');
 </div>
 
 <!-- Magia JavaScript -->
+<?php include('inc/footer.php'); ?>
 <script>
     var productoEdad = <?php echo (isset($productito->edad) ? $productito->edad : 0); ?>;
     var edadesData = <?php echo json_encode($produ->getEdades()->fetchAll(), JSON_HEX_TAG); ?>;
@@ -220,6 +241,29 @@ require('inc/header.php');
         }
     }
     onGeneroChange();
+    
+                    
+    $(document).ready(function(){
+        $(".add-row").click(function(){
+            var label = $("#produ_extra_label").val();
+            var texto = $("#produ_extra_texto").val();
+            if(label == '' || texto == ''){ return; }
+            var markup = '<tr><td><input type="checkbox" name="record"></td><td><input name="produ_extra_label[]" value="'+label+'"></td><td><input name="produ_extra_texto[]" value="'+texto+'"></td></tr>';
+            $("table tbody").append(markup);
+            $("#produ_extra_label").val('');
+            $("#produ_extra_texto").val('');
+        });
+        
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+                if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+    }); 
+
 </script>
 
 

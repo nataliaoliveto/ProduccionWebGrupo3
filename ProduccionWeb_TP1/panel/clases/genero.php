@@ -46,6 +46,11 @@ Class Genero{
             return $perfil;
 	}
 
+	public function getEdades(){
+		$query = 'SELECT * FROM edades WHERE enabled = 1';
+    	return  $this->con->query($query);
+	}
+
 	public function selEdad($id){
 		$query = "SELECT idedad
 					FROM genero_edades
@@ -65,6 +70,10 @@ Class Genero{
 		if($consulta->cantidad == 0){
 			$query = "UPDATE generos SET enabled = 0, estado = 0 WHERE id = ".$id; 
 			$this->con->exec($query); 
+
+			$query = "DELETE FROM genero_edades WHERE idgen = ".$id;
+			$this->con->exec($query); 
+
 			return 1;
 		}
 		return 'Género relacionado con una edad y/o producto';

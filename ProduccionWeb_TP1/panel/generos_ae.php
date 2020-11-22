@@ -8,12 +8,6 @@ require('inc/header.php');
 	$gen = new Genero($con);
 	include('inc/side_bar.php');
 
-    $query = 'SELECT * FROM permisos';
-    $permisos = $con->query($query);
-
-    $queryEdades = 'SELECT * FROM edades';
-    $edades = $con->query($queryEdades);
-
     if (isset($_GET['edit'])) {
         $generitos = $gen->get($_GET['edit']);
     } 
@@ -42,7 +36,7 @@ require('inc/header.php');
                     <label for="tipo" class="col-sm-2 control-label">Edades</label>
                     <div class="col-sm-10">
                         <select name="edades[]" id="edades" multiple='multiple' >
-                            <?php  foreach($edades as $e){?>
+                            <?php  foreach($gen->getEdades() as $e){?>
                                 <option value="<?php echo $e['id']?>"
                                 <?php 
                                     foreach ($gen->selEdad($generitos->id) as $subcat) {

@@ -19,6 +19,8 @@ Class Campo_comentario{
 	}
 
 	public function getList(){
+		
+
 		$query = "SELECT * 
 				FROM campos_dinamicos
 				WHERE enabled = 1";
@@ -27,15 +29,21 @@ Class Campo_comentario{
 	
 	public function save($data){
 		
+		$hayOpcion = 0;
+		var_dump($data); die();
 		foreach($data as $key => $value){
 			
 			if(!is_array($value)){
 				if($value != null){
+					if($key != "option"){
+						$datos[] = '';
+					}
 					$columns[]=$key;
 					$datos[]=$value;
 				}
 			}
 		}
+
 		//var_dump($datos);die();
 		$sql = "INSERT INTO campos_dinamicos(".implode(',',$columns).") VALUES('".implode("','",$datos)."')";
 		//echo $sql;die();
@@ -62,7 +70,7 @@ Class Campo_comentario{
 		}
 		
 		if($hayOpcion == 0){
-			$columns[]= "opcion = NULL";
+			$columns[]= "opcion = ''";
 		}		
 		$sql = "UPDATE campos_dinamicos SET ".implode(',',$columns)." WHERE id_din = ".$id;		
 		$this->con->exec($sql);			

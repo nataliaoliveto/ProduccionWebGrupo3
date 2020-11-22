@@ -16,7 +16,8 @@ class Usuario
 	public function getList()
 	{
 		$query = "SELECT id_usuario,nombre,apellido,email,usuario,clave,activo,enabled,usuario 
-					FROM usuarios ";
+					FROM usuarios 
+					WHERE enabled = 1";
 		$resultado = array();
 		foreach ($this->con->query($query) as $key => $usuario) {
 			$resultado[$key] = $usuario;
@@ -137,7 +138,7 @@ class Usuario
 
 	public function del($id)
 	{
-		$sql = "DELETE FROM usuarios WHERE id_usuario = " . $id . ';';
+		$sql = "UPDATE usuarios SET enabled = 0 WHERE id_usuario = " . $id . ';';
 		$sql .= 'DELETE FROM usuarios_perfiles WHERE usuario_id = ' . $id;
 
 		$this->con->exec($sql);

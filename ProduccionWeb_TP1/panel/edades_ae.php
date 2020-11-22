@@ -8,12 +8,6 @@ require('inc/header.php');
 	$edad = new Edad($con);
 	include('inc/side_bar.php');
 
-    $query = 'SELECT * FROM permisos';
-    $permisos = $con->query($query);
-
-    $queryGeneros = 'SELECT * FROM generos';
-    $generos = $con->query($queryGeneros);
-
     if (isset($_GET['edit'])) {
         $edadmini = $edad->get($_GET['edit']);
     }
@@ -42,7 +36,7 @@ require('inc/header.php');
                     <label for="tipo" class="col-sm-2 control-label">Géneros</label>
                     <div class="col-sm-10">
                         <select name="generos[]" id="generos" multiple='multiple' >
-                            <?php  foreach($generos as $g){?>
+                            <?php  foreach($edad->getGeneros() as $g){?>
                                 <option value="<?php echo $g['id']?>"
                                 <?php 
                                     foreach ($edad->selGen($edadmini->id) as $cate) {
