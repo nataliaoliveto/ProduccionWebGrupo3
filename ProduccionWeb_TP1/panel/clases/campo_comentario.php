@@ -60,7 +60,7 @@ Class Campo_comentario{
 				}
 			}
 		}
-		// 👁👄👁 d
+		
 		if($hayOpcion == 0){
 			$columns[]= "opcion = NULL";
 		}		

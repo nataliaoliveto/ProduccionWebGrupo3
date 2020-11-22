@@ -42,7 +42,9 @@ require('inc/header.php');
 			<?php echo $campoComentarioMenu ?>
 		</h1>
 
-		<a href="comentarios_ae.php"><button type="button" class="btn btn-success" title="Agregar">Alta de Campo Comentario</button></a>
+		<?php if (in_array('camcom.add', $_SESSION['usuario']['permisos']['cod'])) { ?>
+			<a href="comentarios_ae.php"><button type="button" class="btn btn-success" title="Agregar">Alta de Campo Comentario</button></a>
+		<?php } ?>		
 
 		<div class="table-responsive">
 			<table class="table table-striped">
@@ -78,13 +80,21 @@ require('inc/header.php');
 							echo 'Inactiva';
 						} 	?></td>
 						<td>
-						<a href="comentarios_ae.php?edit=<?php echo $comentarios['id_din']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
-							<?php if($comentarios['estado'] == 0){ ?>
-								<a href="campos_comentarios.php?modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id_din']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
-							<?php } else { ?>
-								<a href="campos_comentarios.php?modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id_din']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+							<?php if (in_array('camcom.edit', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="comentarios_ae.php?edit=<?php echo $comentarios['id_din']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
 							<?php } ?>
-							<a href="campos_comentarios.php?del=<?php echo $comentarios['id_din'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+
+							<?php if (in_array('camcom.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<?php if($comentarios['estado'] == 0){ ?>
+									<a href="campos_comentarios.php?modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id_din']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+								<?php } else { ?>
+									<a href="campos_comentarios.php?modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id_din']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+								<?php } ?>
+							<?php } ?>
+							
+							<?php if (in_array('camcom.del', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="campos_comentarios.php?del=<?php echo $comentarios['id_din'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+							<?php } ?>
 						</td>
 						</tr>
 					<?php } ?> 

@@ -93,11 +93,13 @@ require('inc/filtro.php');
 						<td><?php echo $comentarios['fecha'];?></td>
 						<td><?php echo $comentarios['descripcion'];?></td>
 						<td>
-							<?php if($comentarios['estado'] == 0){ ?>
-								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
-							<?php } else { ?>
-								<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
-							<?php } ?>
+							<?php if (in_array('comen.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<?php if($comentarios['estado'] == 0){ ?>
+									<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+								<?php } else { ?>
+									<a href="comentarios.php?estado=<?php echo $_GET['estado']?>&modif=<?php echo $comentarios['estado'] ?>&id=<?php echo $comentarios['id']?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>&idprod=<?php echo isset($_GET['idprod']) ? $_GET['idprod'] : '0' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+								<?php } ?>
+							<?php } ?>							
 						</td>
 						</tr>
 					<?php } ?> 

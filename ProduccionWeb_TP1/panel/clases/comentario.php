@@ -42,7 +42,7 @@ Class Comentario{
 
 	public function update($modif, $id){
 		$act = ($modif -1) * -1;
-		$this->con->exec("UPDATE campos_dinamicos SET estado = ".$act." WHERE id = ".$id);
+		$this->con->exec("UPDATE comentarios SET estado = ".$act." WHERE id = ".$id);
 	}	
 	
 	public function getPaginas($estado){

@@ -52,8 +52,8 @@ require('inc/header.php');
                 </div>
             </div>
             
-            <input type="hidden" name="required" id="required" value= 0 <?php echo ($comentarito->required == 0 ? '' : 'checked');?>>
-            <input type="checkbox" name="required" id="required" value= 1 <?php echo ($comentarito->required == 1 ? 'checked' : '');?>>
+            <input type="hidden" name="required" id="required" value= 0 <?php echo (isset($comentarito->required) ? (($comentarito->required == 0) ? '' : 'checked') : '');?>>
+            <input type="checkbox" name="required" id="required" value= 1 <?php echo (isset($comentarito->required) ? (($comentarito->required == 1) ? 'checked' : '') : '');?>>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">

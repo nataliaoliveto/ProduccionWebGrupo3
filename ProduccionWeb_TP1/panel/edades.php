@@ -44,14 +44,15 @@ require('inc/header.php');
 		</h1>
 
 		<div class="container-fluid">
-
-			<form action="edades.php" method="post" class="navbar-form navbar-left">
-				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva edad" required> 
-				<button type="submit" class="btn btn-success" name="alta_edades" title="Agregar">Nueva Edad</button></a>
-				<?php if ($mensaje) {
-				?>  <p id="errorComentario"> Error al cargar edad: nombre existente </p>
-				<?php } ?>
-			</form>
+			<?php if (in_array('edad.add', $_SESSION['usuario']['permisos']['cod'])) { ?>
+				<form action="edades.php" method="post" class="navbar-form navbar-left">
+					<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva edad" required> 
+					<button type="submit" class="btn btn-success" name="alta_edades" title="Agregar">Nueva Edad</button></a>
+					<?php if ($mensaje) {
+					?>  <p id="errorComentario"> Error al cargar edad: nombre existente </p>
+					<?php } ?>
+				</form>
+			<?php } ?>				
 		</div>
 
 		<div class="table-responsive">
@@ -88,13 +89,21 @@ require('inc/header.php');
 									echo "No hay géneros relacionados";
 								} ?></td>
 						<td>
-						<a href="edades_ae.php?edit=<?php echo $edades['id']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
-							<?php if($edades['estado'] == 0){ ?>
-								<a href="edades.php?modif=<?php echo $edades['estado'] ?>&id=<?php echo $edades['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
-							<?php } else { ?>
-								<a href="edades.php?modif=<?php echo $edades['estado'] ?>&id=<?php echo $edades['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
-							<?php } 
-							?><a href="edades.php?del=<?php echo $edades['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+							<?php if (in_array('edad.edit', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="edades_ae.php?edit=<?php echo $edades['id']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
+							<?php } ?>
+
+							<?php if (in_array('edad.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<?php if($edades['estado'] == 0){ ?>
+									<a href="edades.php?modif=<?php echo $edades['estado'] ?>&id=<?php echo $edades['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+								<?php } else { ?>
+									<a href="edades.php?modif=<?php echo $edades['estado'] ?>&id=<?php echo $edades['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+								<?php } ?>
+							<?php } ?>
+							
+							<?php if (in_array('edad.del', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="edades.php?del=<?php echo $edades['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+							<?php } ?>
 						</td>
 						</tr>
 					<?php } ?> 

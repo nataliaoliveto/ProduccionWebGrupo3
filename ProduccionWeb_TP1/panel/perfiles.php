@@ -44,7 +44,10 @@ require('inc/header.php');
 			Perfiles
 		</h1>
 
-		<a href="perfiles_ae.php"><button type="button" class="btn btn-success" title="Agregar">Alta de perfil</button></a>
+		<?php if (in_array('prod.add', $_SESSION['usuario']['permisos']['cod'])) { ?>
+			<a href="perfiles_ae.php"><button type="button" class="btn btn-success" title="Agregar">Alta de perfil</button></a>
+		<?php } ?>
+		
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -80,13 +83,22 @@ require('inc/header.php');
 								echo 'Inactivo';
 							} 	?></td>
 							<td>
-								<a href="perfiles_ae.php?edit=<?php echo $perfil['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a>
-								<?php if($perfil['estado'] == 0){ ?>
-								<a href="perfiles.php?modif=<?php echo $perfil['estado'] ?>&id=<?php echo $perfil['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
-							<?php } else { ?>
-								<a href="perfiles.php?modif=<?php echo $perfil['estado'] ?>&id=<?php echo $perfil['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
-							<?php } ?>
-								<a href="perfiles.php?del=<?php echo $perfil['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+								<?php if (in_array('per.edit', $_SESSION['usuario']['permisos']['cod'])) { ?>
+									<a href="perfiles_ae.php?edit=<?php echo $perfil['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a>
+								<?php } ?>
+
+								<?php if (in_array('per.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
+									<?php if($perfil['estado'] == 0){ ?>
+										<a href="perfiles.php?modif=<?php echo $perfil['estado'] ?>&id=<?php echo $perfil['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+									<?php } else { ?>
+										<a href="perfiles.php?modif=<?php echo $perfil['estado'] ?>&id=<?php echo $perfil['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+									<?php } ?>
+								<?php } ?>
+
+								<?php if (in_array('per.del', $_SESSION['usuario']['permisos']['cod'])) { ?>
+									<a href="perfiles.php?del=<?php echo $perfil['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+								<?php } ?>
+	
 							</td>
 						</tr>
 					<?php } ?>

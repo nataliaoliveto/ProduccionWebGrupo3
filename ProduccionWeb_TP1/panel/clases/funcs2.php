@@ -1,4 +1,4 @@
-<?php
+<<?php
 
 
 
@@ -76,10 +76,9 @@ function redimensionar($ruta,$file_name,$uploadedfile,$id,$tamanhos){
 				imagefill($tmp, 0, 0, $rojo);
 			}
 			imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
-			
+			$idd=$id+1
 			// img_0_small.png
-			$id2=$id+1;
-			$filename = $ruta.$tam['nombre'].$id2.'.'.$extension;
+			$filename = $ruta.$tam['nombre'].$idd.'.'.$extension;
 			if($extension == "png"){
 				$rojo = imagecolorallocate($tmp, 234, 234, 234);
 				imagecolortransparent($tmp,$rojo);
@@ -122,166 +121,3 @@ function eliminar_archivos($carpeta,$id)
 		@rmdir($dir);
 	}
 }
-
-/*
-//funcion para generar las direcciones dinamicas de las publicaciones.
-function obtener_seo_url($titulo,$id,$tabla){
-	$seo_url = generar_url($titulo);
-	$url = $seo_url;
-	//verifico a que tabla corresponde el id
-	$ide = ($tabla == 'proyectos')?$id:0;
-	$ids = ($tabla == 'servicios')?$id:0;
-	//tengo que verificar que la url en cuestion no este en uso por alguna de las publicaciones viejas.
-	while(existe_seo_url('proyectos','id_proyecto', $url,$ide) == true AND existe_seo_url('servicios','id_servicio', $url,$ids) == true ){
-		$cola = substr(md5(date('H:i:s d/m/Y')),0,5); //genero una cola para la url basada en el md5 de la fecha completa actual y de esta saco los primeros 5 caracteres.
-		$url = $seo_url.'-'.$cola;
-	}
-
-	return $url;
-}
-
-//funcion para saber si una url existe
-function existe_seo_url($tabla,$nombre_id ,$url, $id_omitido){
-
-	$con = new Conn();
-	$cons = new query($con);
-	$sql = 'SELECT url_dinamica FROM '.$tabla.' WHERE url_dinamica = "'.$url.'" AND '.$nombre_id.' != '.$id_omitido;
-	$cons->exec($sql);
-	if($cons->numrows > 0){
-		return true;
-	}
-	return false;
-
-}
-
-//funcion para generar las seo url
-function generar_url($titulo){
-//    	generar URL dinamica
-		$data = strtolower($titulo);
-		$data = str_replace(array('/',' ','&aacute;','&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;'
-											 ,'&ccedil;','&atilde;','&acirc;','&ecirc;','&otilde;','&ocirc;','&uuml;','&quot;'),   
-								array('-','-','a','e','i','o','u','n'
-											 ,'c','a','a','e','o','o','u',''),$data);
-		$data =	ereg_replace('[^a-z0-9.-]','',$data);
-		$data = preg_replace('#-{2,}#','-',$data);
-		$data = trim($data,'-');
-		return $data;
-} */
-
-//funcion para cortar un texto pero no las palabras.
-
-function cortar_palabras($texto, $limite, $break=' ', $pad='...'){
-	if(strlen($texto) <= $limite)
-		return $texto;
-	$quiebre = strpos($texto, $break, $limite);
-	if( $quiebre != false){
-		if($quiebre < (strlen($texto) - 1)){
-			$texto = substr($texto, 0, $quiebre).$pad;
-		}
-	}
-	return $texto;
-}
-
-//Funcion para cortar textos
-function cortar($string, $maximo = 80)
-{
-	$cantidad = strlen($string);
-
-
-	if($cantidad > $maximo)
-	{
-		$maximo = $maximo - 3;
-		$a = cut_html(substr($string, 0, $maximo));
-		$a .= "...";
-		return $a;
-	}
-	else
-	{
-		return $string;
-	}
-}
-
-//Funcion para evitar que se cortan caracteres html
-function cut_html($string)
-{
-    $a=$string;
-
-    while ($a = strstr($a, '&'))
-    {
-        $b=strstr($a, ';');
-        if (!$b)
-        {
-        
-            $nb=strlen($a);
-            return substr($string, 0, strlen($string)-$nb);
-        }
-        $a=substr($a,1,strlen($a)-1);
-    }
-    return $string;
-}
-
-
-function obtener_archivos($ruta){
-	$file[0] = 'none';
-	if(is_dir($ruta)){
-		$directorio=opendir($ruta); 
-		$i = 0;
-		while ($archivo = readdir($directorio) ){
-			if( $archivo != '.' and $archivo != '..'){
-				$file[$i] =  $ruta.$archivo;
-				$i++;
-			}
-		}
-		closedir($directorio); 
-	}
-	return $file;
-}
-
-function obtener_imagenes($ruta){
-	$galeria = '';
-	if(is_dir($ruta)){
-		$directorio=opendir($ruta); 
-		while ($archivo = readdir($directorio) ){
-			if( $archivo != '.' and $archivo != '..' and stristr($archivo,'big') !== false){
-				$galeria .= '<li>
-					<img src="'.$ruta.$archivo.'" alt="'.$archivo.'">
-				</li>';
-			}
-		}
-		closedir($directorio); 
-	}
-	return $galeria;
-}
-
-
-
-//funcion para rellenar numeros
-function rellenar_izq($long_total,$valor='',$relleno=' '){
-	$cadena ='';
-	$long_actual = strlen($valor);
-	$long_resto = $long_total - $long_actual;
-	for( $i = 0 ;$i < $long_resto; $i++)
-	{
-		$cadena.=$relleno;
-	}
-	$cadena.= $valor;
-	return $cadena;
-}
-
-
-function cant_imagenes($carpeta,$id,$base ='../' ){
-	$ruta = $base.'file_sitio/'.$carpeta.'/'.$id.'/';
-	$i = 0;
-	if(is_dir($ruta)){
-		$dh = opendir($ruta);
-		while (($file = readdir($dh)) !== false){
-			if ($file!="." && $file!=".."){ 
-				if(stristr($file,'mini') !== false)
-				$i++;
-			}
-		}
-	}
-	return $i;
-}
- 
-?>

@@ -166,7 +166,6 @@ class Usuario
 					$permisos['cod'][$key] = $value['cod'];
 					$permisos['seccion'][$key] = $value['seccion'];
 				}
-
 				$_SESSION['usuario']['permisos'] = $permisos;
 			}
 		}

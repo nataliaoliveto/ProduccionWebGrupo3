@@ -45,14 +45,15 @@ require('inc/header.php');
 		</h1>
 
 		<div class="container-fluid">
-
-			<form action="plataformas.php" method="post" class="navbar-form navbar-left">
-				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva plataforma" required> 
-				<button type="submit" class="btn btn-success" name="alta_plataformas" title="Agregar">Nueva Plataforma</button></a>
-				<?php if ($mensaje) {
-				?>  <p id="errorComentario"> Error al cargar plataforma: nombre existente </p>
-				<?php } ?>
-			</form>
+			<?php if (in_array('pla.add', $_SESSION['usuario']['permisos']['cod'])) { ?>
+				<form action="plataformas.php" method="post" class="navbar-form navbar-left">
+					<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nueva plataforma" required> 
+					<button type="submit" class="btn btn-success" name="alta_plataformas" title="Agregar">Nueva Plataforma</button></a>
+					<?php if ($mensaje) {
+						?>  <p id="errorComentario"> Error al cargar plataforma: nombre existente </p>
+					<?php } ?>
+				</form>
+			<?php } ?>			
 		</div>
 
 		<div class="table-responsive">
@@ -78,13 +79,21 @@ require('inc/header.php');
 							echo 'Inactiva';
 						} 	?></td>
 						<td>
-						<a href="plataformas_ae.php?edit=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
-							<?php if($plataformas['estado'] == 0){ ?>
-								<a href="plataformas.php?modif=<?php echo $plataformas['estado'] ?>&id=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
-							<?php } else { ?>
-								<a href="plataformas.php?modif=<?php echo $plataformas['estado'] ?>&id=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+							<?php if (in_array('pla.edit', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="plataformas_ae.php?edit=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
 							<?php } ?>
-							<a href="plataformas.php?del=<?php echo $plataformas['i	d'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+
+							<?php if (in_array('pla.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<?php if($plataformas['estado'] == 0){ ?>
+									<a href="plataformas.php?modif=<?php echo $plataformas['estado'] ?>&id=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+								<?php } else { ?>
+									<a href="plataformas.php?modif=<?php echo $plataformas['estado'] ?>&id=<?php echo $plataformas['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+								<?php } ?>
+							<?php } ?>
+							
+							<?php if (in_array('pla.del', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="plataformas.php?del=<?php echo $plataformas['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+							<?php } ?>														
 						</td>
 						</tr>
 					<?php } ?> 

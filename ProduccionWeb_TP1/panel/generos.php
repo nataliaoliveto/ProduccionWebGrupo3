@@ -44,14 +44,15 @@ require('inc/header.php');
 		</h1>
 
 		<div class="container-fluid">
-
-			<form action="generos.php" method="post" class="navbar-form navbar-left">
-				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo género" required> 
-				<button type="submit" class="btn btn-success" name="alta_generos" title="Agregar">Nuevo Género</button></a>
-				<?php if ($mensaje) {
-				?>  <p id="errorComentario"> Error al cargar género: nombre existente </p>
-				<?php } ?>
-			</form>
+			<?php if (in_array('gen.add', $_SESSION['usuario']['permisos']['cod'])) { ?>
+				<form action="generos.php" method="post" class="navbar-form navbar-left">
+					<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo género" required> 
+					<button type="submit" class="btn btn-success" name="alta_generos" title="Agregar">Nuevo Género</button></a>
+					<?php if ($mensaje) {
+					?>  <p id="errorComentario"> Error al cargar género: nombre existente </p>
+					<?php } ?>
+				</form>
+			<?php } ?>			
 		</div>
 
 		<div class="table-responsive">
@@ -88,13 +89,21 @@ require('inc/header.php');
 									echo "No hay edades relacionadas";
 								} ?></td>
 						<td>
-						<a href="generos_ae.php?edit=<?php echo $generos['id']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
-							<?php if($generos['estado'] == 0){ ?>
-								<a href="generos.php?modif=<?php echo $generos['estado'] ?>&id=<?php echo $generos['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
-							<?php } else { ?>
-								<a href="generos.php?modif=<?php echo $generos['estado'] ?>&id=<?php echo $generos['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+							<?php if (in_array('gen.edit', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="generos_ae.php?edit=<?php echo $generos['id']?>"><button type="button" class="btn btn-info" title="Modificar nombre">M</button></a>
 							<?php } ?>
-							<a href="generos.php?del=<?php echo $generos['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+
+							<?php if (in_array('gen.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<?php if($generos['estado'] == 0){ ?>
+									<a href="generos.php?modif=<?php echo $generos['estado'] ?>&id=<?php echo $generos['id']?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+								<?php } else { ?>
+									<a href="generos.php?modif=<?php echo $generos['estado'] ?>&id=<?php echo $generos['id']?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+								<?php } ?>
+							<?php } ?>
+							
+							<?php if (in_array('gen.del', $_SESSION['usuario']['permisos']['cod'])) { ?>
+								<a href="generos.php?del=<?php echo $generos['id'] ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+							<?php } ?>				
 						</td>
 						</tr>
 					<?php } ?> 

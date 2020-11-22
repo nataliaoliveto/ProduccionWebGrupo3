@@ -156,7 +156,7 @@ Class Producto{
 			$id = $id_prod;
 			include 'funcs.php';
 
-			if(isset($_FILES['imagen']))
+			if(isset($_FILES['imagen'])) //imagen portada
 			//	var_dump($_FILES['imagen']); die;
 
 			if(isset($_FILES['imagen'])){
@@ -170,22 +170,38 @@ Class Producto{
 				
 				redimensionar($ruta,$_FILES['imagen']['name'],$_FILES['imagen']['tmp_name'],$id,$tamanhos);
 			}
-			include 'func2.php';
+			include 'funcs2.php';
 
-
-				if(isset($_FILES['caro'])){
-					$tamanhos = array(0 => array('nombre'=>'carouseln','ancho'=>'1000','alto'=>'500')
-									);
+			if(isset($_FILES['caro']))
 				
-					$ruta = '../imagenes/'.$id.'/';
-					if(!is_dir($ruta))
-						mkdir($ruta);			  
-					
-					foreach($_FILES['caro']['name'] as $pos=>$nombre){
-						redimensionar($ruta,$_FILES['caro']['name'][$pos],$_FILES['caro']['tmp_name'][$pos],$pos,$tamanhos);
-					}
-					redimensionar($ruta,$_FILES['caro']['name'],$_FILES['caro']['tmp_name'],0,$tamanhos);
+			
+			if(isset($_FILES['caro'])){
+				$tamanhos = array(0 => array('nombre'=>'carouseln','ancho'=>'1000','alto'=>'500'),
+								  );
+				
+				$ruta = '../imagenes/'.$id.'/';
+				if(!is_dir($ruta))
+					mkdir($ruta);			  
+				
+				foreach($_FILES['caro']['name'] as $pos=>$nombre){
+					redimensionar($ruta,$_FILES['caro']['name'][$pos],$_FILES['caro']['tmp_name'][$pos],$pos,$tamanhos);
 				}
+			}
+
+/* 				if (isset($_FILES['caro'])){ //imagen carrousel prueba
+	
+					$cantidad= count($_FILES["carrousel"]["tmp_carrousel"]);
+					
+					for ($i=0; $i<$cantidad; $i++){
+					//Comprobamos si el fichero es una imagen
+					if ($_FILES['carrousel']['type'][$i]=='image/png' || $_FILES['carrousel']['type'][$i]=='image/jpeg'){
+					
+					//Subimos el fichero al servidor
+					redimensionar($ruta,$_FILES['caro']['name'][$i],$_FILES['caro']['tmp_name'],0,$tamanhos);
+					//move_uploaded_file($_FILES["imagen"]["tmp_name"][$i], $_FILES["imagen"]["name"][$i]);
+					$validar=true;
+					}
+					else $validar=false; */
 
 
 

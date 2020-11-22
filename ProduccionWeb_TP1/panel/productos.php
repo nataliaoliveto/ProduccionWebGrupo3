@@ -46,8 +46,9 @@ if (isset($_GET['del'], $_GET['generos'], $_GET['edades'])) {
 <h1 class="page-header">
 	<?php echo $productoMenu ?>
 </h1>
-
-<a href="productos_ae.php"><button type="button" class="btn btn-success" title="Agregar">Alta de producto</button></a>
+<?php if (in_array('prod.add', $_SESSION['usuario']['permisos']['cod'])) { ?>
+	<a href="productos_ae.php"><button type="button" class="btn btn-success" title="Agregar">Alta de producto</button></a>
+<?php } ?>
 
 <!-- filtro -->
 <div class="btn-group">
@@ -164,19 +165,30 @@ if (isset($_GET['del'], $_GET['generos'], $_GET['edades'])) {
 							echo 'Inactivo';
 						} 	?></td>
 					<td>
-						<a href="productos_ae.php?edit=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a> 
-						<?php if ($productos['estado'] == 0) { ?>
-							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
-						<?php } else { ?>
-							<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+						<?php if (in_array('prod.edit', $_SESSION['usuario']['permisos']['cod'])) { ?>
+							<a href="productos_ae.php?edit=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Modificar">M</button></a> 
 						<?php } ?>
-						<a href="productos.php?del=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
-						<?php $countComentarios = $produ->getCountComentarios($productos['id']);
-							if ($countComentarios > 0) { ?>
-								<a href="comentarios.php?estado=2&pagina=1&idprod=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Comentarios">C</button></a> 
-						<?php } else { ?>
-							<button type="button" class="btn btn-info" title="Comentarios" disabled>C</button></a> 
-						<?php } ?>						
+						
+						<?php if (in_array('prod.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
+							<?php if ($productos['estado'] == 0) { ?>
+								<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-success" title="Activar">A</button></a>
+							<?php } else { ?>
+								<a href="productos.php?modif=<?php echo $productos['estado'] ?>&id=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-warning" title="Desactivar">D</button></a>
+							<?php } ?>
+						<?php } ?>
+						
+						<?php if (in_array('prod.del', $_SESSION['usuario']['permisos']['cod'])) { ?>
+							<a href="productos.php?del=<?php echo $productos['id'] ?>&generos=<?php echo isset($_GET['generos']) ? $_GET['generos'] : '' ?>&edades=<?php echo isset($_GET['edades']) ? $_GET['edades'] : '' ?>&pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '' ?>"><button type="button" class="btn btn-danger" title="Borrar">X</button></a>
+						<?php } ?>
+
+						<?php if (in_array('prod.ver', $_SESSION['usuario']['permisos']['cod'])) { ?>
+							<?php $countComentarios = $produ->getCountComentarios($productos['id']);
+								if ($countComentarios > 0) { ?>
+									<a href="comentarios.php?estado=2&pagina=1&idprod=<?php echo $productos['id'] ?>"><button type="button" class="btn btn-info" title="Comentarios">C</button></a> 
+							<?php } else { ?>
+								<button type="button" class="btn btn-info" title="Comentarios" disabled>C</button></a> 
+							<?php } ?>
+						<?php } ?>																								
 					</td>
 				</tr>
 			<?php } ?>
