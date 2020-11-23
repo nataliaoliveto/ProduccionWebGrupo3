@@ -13,11 +13,11 @@ class Producto
 	public function getList($genID, $edadID, $pag)
 	{
 		$desde = ($pag - 1) * 10;
-		$hasta = $desde + 10;
+
 		$query = "SELECT id, nombre, descripcion, precio, plataforma, genero, edad, estado
 					FROM productos
 					WHERE enabled = '1' AND (genero = " . $genID . " OR " . $genID . " = 0) AND (edad = " . $edadID . " OR " . $edadID . " = 0)
-					LIMIT $desde, $hasta";
+					LIMIT $desde, 10";
 		return $this->con->query($query);
 	}
 

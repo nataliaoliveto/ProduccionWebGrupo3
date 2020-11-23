@@ -9,14 +9,13 @@ Class Comentario{
 
 	public function getList($estado, $pag, $idprod){
 		$desde = ($pag - 1) * 10;
-		$hasta = $desde + 10;
 		
 		$query = " 	SELECT productos.nombre, comentarios.id, comentarios.descripcion, comentarios.calificacion, comentarios.fecha, comentarios.estado
 					FROM comentarios 
 					INNER JOIN productos 
 					ON comentarios.IDproducto = productos.id
 					WHERE comentarios.enabled = 1 AND (comentarios.estado = " .$estado. " OR " .$estado. " = 2) AND (comentarios.IDproducto = " .$idprod. " OR " .$idprod. " = 0)
-					LIMIT $desde, $hasta";
+					LIMIT $desde, 10";
 
         return $this->con->query($query); 
 	}
