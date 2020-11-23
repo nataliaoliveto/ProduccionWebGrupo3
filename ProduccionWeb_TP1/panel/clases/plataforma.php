@@ -51,7 +51,7 @@ Class Plataforma{
 	}
 	
 	public function save($data){
-		$query = "SELECT COUNT(*) FROM plataformas WHERE UPPER(nombre) = UPPER('".$data['nombre']."')";
+		$query = "SELECT COUNT(*) FROM plataformas WHERE enabled = 1 AND UPPER(nombre) = UPPER('".$data['nombre']."')";
 		$consulta = $this->con->query($query)->fetchColumn();  
 
 		if($consulta == 0){

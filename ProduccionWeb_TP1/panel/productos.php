@@ -129,7 +129,6 @@ if (isset($_GET['del'], $_GET['generos'], $_GET['edades'])) {
 				<th>Plataforma</th>
 				<th>Género</th>
 				<th>Edad</th>
-				<th>Descripción</th>
 				<th>Estado</th>
 				<th>Acciones</th>
 			</tr>
@@ -158,7 +157,6 @@ if (isset($_GET['del'], $_GET['generos'], $_GET['edades'])) {
 						foreach ($produ->getEdad($productos['edad']) as $nombre) {
 							echo ucfirst(substr($nombre['nombre'], 0, 7));
 						} ?></td>
-					<td><?php echo ucfirst(substr($productos['descripcion'], 0, 200)) . '...'; ?></td>
 					<td><?php if ($productos['estado'] == 1) {
 							echo 'Activo';
 						} else {

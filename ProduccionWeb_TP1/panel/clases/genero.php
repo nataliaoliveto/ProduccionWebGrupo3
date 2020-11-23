@@ -84,7 +84,7 @@ Class Genero{
 	}
 	
 	public function save($data){
-		$query = "SELECT COUNT(*) FROM generos WHERE UPPER(nombre) = UPPER('".$data['nombre']."')";
+		$query = "SELECT COUNT(*) FROM generos WHERE enabled = 1 AND UPPER(nombre) = UPPER('".$data['nombre']."')";
 		$consulta = $this->con->query($query)->fetchColumn();  
 
 		if($consulta == 0){
@@ -113,12 +113,15 @@ Class Genero{
 			$sql = 'DELETE FROM genero_edades WHERE idgen= '.$id;
 			$this->con->exec($sql); 
 			
-			$sql = '';
-			foreach($data['edades'] as $edades){
-				$sql .= 'INSERT INTO genero_edades(idgen,idedad) 
-							VALUES ('.$id.','.$edades.');';
+			if(isset($data['edades'])){
+				$sql = '';
+				foreach($data['edades'] as $edades){
+					$sql .= 'INSERT INTO genero_edades(idgen,idedad) 
+								VALUES ('.$id.','.$edades.');';
+				}
+				$this->con->exec($sql);
 			}
-			$this->con->exec($sql);
+			
 	}
 
 }

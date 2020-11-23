@@ -59,6 +59,7 @@ require('inc/filtro.php');
 						<th>Producto</th>
 						<th>Fecha</th>
 						<th>Comentario</th>
+						<th>Campos</th>
 						</tr> 
 				</thead>
 				<tbody>
@@ -92,6 +93,31 @@ require('inc/filtro.php');
 						<td><?php echo $comentarios['nombre'];?></td>
 						<td><?php echo $comentarios['fecha'];?></td>
 						<td><?php echo $comentarios['descripcion'];?></td>
+						<td> 
+							<?php 
+								$haysubcat = false;
+								foreach ($comen->getCamposDin($comentarios['id']) as $camposdin) {
+											$haysubcat = true;
+											$valor = '';
+											if ($camposdin['type'] == 'checkbox') {
+												if ($camposdin['valor_ingresado'] == '1') {
+													$valor = 'Sip =)';
+												} else {
+													$valor = 'Nope >=(';
+												}
+												
+											} else {
+												$valor = $camposdin['valor_ingresado'];
+											}
+											
+											echo $camposdin['label']. ": ". $valor;
+											?> <br> <?php
+										}
+								if(!$haysubcat){
+									echo "No hay Campos.";
+								} 
+							?>
+						</td>
 						<td>
 							<?php if (in_array('comen.act', $_SESSION['usuario']['permisos']['cod'])) { ?>
 								<?php if($comentarios['estado'] == 0){ ?>

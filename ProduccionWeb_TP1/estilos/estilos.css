@@ -220,6 +220,13 @@ listadoplataforma listadogenero #cuerpodetalle {
     padding: 15px;
 }
 
+.card .pcomentariosdin {
+    font-size: 1em;
+    color: #388F53;
+    text-align: left;
+    padding: 10px;
+}
+
 .card .emailcomentarios {
     border-bottom-style: double;
     border-top-style: double;

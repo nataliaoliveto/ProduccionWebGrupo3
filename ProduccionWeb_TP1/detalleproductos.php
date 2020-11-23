@@ -104,7 +104,7 @@ $Comen = new Comentarios($con);
                                     </div>
                                         <?php foreach($Prod->getProducto_extra_info($_GET['prod']) as $prodExtra){ ?>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                                            <p><img src="imagenes/iconos/iconodesarrollador50.png" alt="Icono desarrollador" width="50" height="50"><?php echo $prodExtra['label'].': '.$prodExtra['texto']; ?></p>
+                                            <p><img src="imagenes/iconos/iconoextra50.png" alt="Icono info extra" width="40" height="40"><?php echo $prodExtra['label'].': '.$prodExtra['texto']; ?></p>
                                         </div>
                                         <?php } ?>
                                 </div>
@@ -164,7 +164,7 @@ $Comen = new Comentarios($con);
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <article>
-                            <form action="" method="post">
+                            <form role="form" action="" method="post">
                                 <fieldset >
                                     <div class="row">
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -184,28 +184,32 @@ $Comen = new Comentarios($con);
                                                 </p>
                                             </div>
 
-                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                                            <?php foreach($Prod->getProducto_campos_dinamicos($_GET['prod']) as $prodCamposDin){ 
-                                                $html = ""; ?>
-                                                <?php //echo $prodCamposDin['label'].$prodCamposDin['type'].$prodCamposDin['opcion'].$prodCamposDin['required']; 
-                                                switch($prodCamposDin['type']){
-                                                    case "text":
-                                                        $html = '<textarea rows="5" cols="20" class="input-xlarge" name="valor_ingresado'.$prodCamposDin['id_din'].'"></textarea>';
-                                                        break;
-                                                    case "option":
-                                                        $opciones = explode('|', $prodCamposDin['opcion']);
-                                                        $html = '<label class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">'.$prodCamposDin['label'].'</label><select name="valor_ingresado'.$prodCamposDin['id_din'].'"'.($prodCamposDin['required'] == 1 ? 'required' : '').'>';
-                                                        for($i = 0; $i < count($opciones); $i++){
-                                                            $html .= '<option value = '.$opciones[$i].'>'.$opciones[$i].'</option>';
-                                                        }   
-                                                        $html .= '</select></div></div>';
-                                                        break;
-                                                    case "checkbox": 
-                                                        $html = '<label class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">'.$prodCamposDin['label'].'</label><input type="hidden" name="valor_ingresado" value= 0 ><input type="checkbox" name="valor_ingresado'.$prodCamposDin['id_din'].'" value= 1 >';
-                                                        break; 
-                                                }  echo $html; 
-                                            } ?>
+                                            
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <?php foreach($Prod->getProducto_campos_dinamicos($_GET['prod']) as $prodCamposDin){ 
+                                                        $html = ""; ?>
+                                                        <?php //echo $prodCamposDin['label'].$prodCamposDin['type'].$prodCamposDin['opcion'].$prodCamposDin['required']; 
+                                                        switch($prodCamposDin['type']){
+                                                            case "text":
+                                                                $html = $prodCamposDin['label'].'<br><textarea rows="3" cols="40" class="input-xlarge" name="valor_ingresado'.$prodCamposDin['id_din'].'"></textarea>';
+                                                                break;
+                                                            case "option":
+                                                                $opciones = explode('|', $prodCamposDin['opcion']);
+                                                                $html = '<div class="form-group">'.$prodCamposDin['label'].'<select name="valor_ingresado'.$prodCamposDin['id_din'].'"'.($prodCamposDin['required'] == 1 ? 'required' : '').'>';
+                                                                for($i = 0; $i < count($opciones); $i++){
+                                                                    $html .= '<option value = '.$opciones[$i].'>'.$opciones[$i].'</option>';
+                                                                }   
+                                                                $html .= '</select></div>';
+                                                                break;
+                                                            case "checkbox": 
+                                                                $html = '<div class="checkbox">'.$prodCamposDin['label'].'<input type="hidden" name="valor_ingresado" value= 0 ><input type="checkbox" name="valor_ingresado'.$prodCamposDin['id_din'].'" value = 1 ></div>';
+                                                                break; 
+                                                        }  echo $html; 
+                                                    } ?>
+                                                </div>
                                             </div>
+                                            
                                             
 											
                                             <div class="row">
@@ -291,6 +295,26 @@ $Comen = new Comentarios($con);
                                     <p class="fechacomentarios"><?php echo $comentario['fecha']; ?></p>
                                     <p class="emailcomentarios"><?php echo $comentario['mail']; ?></p>
                                     <p class="pcomentarios"><?php echo $comentario['descripcion']; ?></p>
+                                    <p class="pcomentariosdin">
+                                    <?php 
+                                        foreach ($Comen->getCamposDin($comentario['id']) as $camposdin) {
+                                            $valor = '';
+                                            if ($camposdin['type'] == 'checkbox') {
+                                                if ($camposdin['valor_ingresado'] == '1') {
+                                                    $valor = 'Sip =)';
+                                                } else {
+                                                    $valor = 'Nope >=(';
+                                                }
+                                                
+                                            } else {
+                                                $valor = $camposdin['valor_ingresado'];
+                                            }
+                                            
+                                            echo $camposdin['label']. ": ". $valor;
+                                            ?> <br> <?php
+                                        }
+                                    ?>
+                                    </p>
                                 </article>
                             </div>
                         <?php  

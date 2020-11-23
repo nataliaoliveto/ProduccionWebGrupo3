@@ -40,15 +40,24 @@
                             VALUES(".$id_comentario.", ".$iddin['id_din']." , '".$data['valor_ingresado'.$iddin['id_din']]."')";
                     echo($sql);
                     $this->con->exec($sql);
-                }
-                die();
-                /*
-                $str = 'In My Cart : valor_ingresado1 valor_ingresado3 valor_ingresado7  items';
-                preg_match_all('!\d+!', $str, $matches);
-                $str = $matches;
-                var_dump($str);
-                */                             
+                }                          
             }
         }
+
+        public function getCamposDin($idcom){
+
+            $query = "	SELECT
+                            CD.label, 
+                            CD.type,
+                            CCD.valor_ingresado
+                        FROM comentarios_campos_din CCD
+                        INNER JOIN campos_dinamicos CD ON
+                            CCD.id_campo = CD.id_din
+                        WHERE CCD.id_comentario = ". $idcom;
+    
+            return $this->con->query($query);
+    
+        }
+
     }
 ?>

@@ -9,21 +9,17 @@ require('inc/header.php');
 
     $produ = new Producto($con);
 
-    $query = 'SELECT * FROM campos_dinamicos';
+    $query = 'SELECT * FROM campos_dinamicos WHERE estado = 1';
     $campos_din = $con->query($query);
-    // var_dump($permisos);
     $lblTitulo = "Nuevo Producto";
     if (isset($_GET['edit'])) {
         $productito = $produ->get($_GET['edit']);
         $lblTitulo = "Modificar Producto";
-        //var_dump($productito); die();
     }
-
-    //var_dump($productito); die();
 
     ?>
 
-    <div class="col-sm-9 col-md-10 main">
+    <div class="col-md-9 main">
 
         <p class="visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
@@ -33,8 +29,8 @@ require('inc/header.php');
             <?php echo $lblTitulo ?>
         </h1>
 
-        <div class="col-md-2"></div>
-        <form action="productos.php" method="post" class="col-md-6 from-horizontal"  enctype="multipart/form-data">
+        <div class="col-md-12">
+        <form action="productos.php" method="post" class="col-sm-12 from-horizontal"  enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Nombre</label>
                 <div class="col-sm-10">
@@ -43,14 +39,23 @@ require('inc/header.php');
             </div>          
             
             <div class="form-group">
-                <label for="descripcion" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Descripción</label>
+                <label for="descripcion" class="col-sm-12 control-label">Descripción</label>
                 <div class="col-sm-10">                                        
                     <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="" value="<?php echo (isset($productito->descripcion) ? $productito->descripcion : ''); ?>" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="plataforma" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Plataforma</label>
+            <div class="checkbox">
+                <label for="destacado" class="col-sm-3 control-label">Destacado</label>                
+                <div class="col-sm-9">                    
+                <input type="hidden" name="destacado" id="destacado" value= 0 <?php echo (isset($productito->destacado) ? (($productito->destacado == 0) ? '' : 'checked') : '');?>>
+                <input type="checkbox" name="destacado" id="destacado" value= 1 <?php echo (isset($productito->destacado) ? (($productito->destacado == 1) ? 'checked' : '') : '');?>>
+            </div></div>
+            </div> 
+
+            <div class="form-group">
+                <label for="plataforma" class="col-sm-12 control-label">Plataforma</label>
                 <div class="col-sm-10">      
                     <select id="plataforma" name="plataforma">
                         <?php
@@ -62,7 +67,7 @@ require('inc/header.php');
             </div>
 
             <div class="form-group">
-                <label for="genero" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Género</label>
+                <label for="genero" class="col-sm-12 control-label">Género</label>
                 <div class="col-sm-10">      
                     <select id="genero" name="genero" onchange="onGeneroChange()">
                         <?php
@@ -74,7 +79,7 @@ require('inc/header.php');
             </div>
 
             <div class="form-group">
-                <label for="edad" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Edad</label>
+                <label for="edad" class="col-sm-12 control-label">Edad</label>
                 <div class="col-sm-10">      
                     <select id="edad" name="edad">
                     <!-- Magia JavaScript -->
@@ -83,43 +88,35 @@ require('inc/header.php');
             </div>
 
             <div class="form-group">
-                <label for="desarrolador" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Desarrollador</label>
+                <label for="desarrolador" class="col-sm-12 control-label">Desarrollador</label>
                 <div class="col-sm-10">                    
                     <input type="text" class="form-control" id="desarrolador" name="desarrollador" placeholder="" value="<?php echo (isset($productito->desarrollador) ? $productito->desarrollador : ''); ?>" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="fechadelanzamiento" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Fecha de Lanzamiento</label>
+                <label for="fechadelanzamiento" class="col-sm-12 control-label">Fecha de Lanzamiento</label>
                 <div class="col-sm-10">                    
                     <input type="date" class="form-control" id="fechadelanzamiento" name="fechadelanzamiento" placeholder="" value="<?php echo (isset($productito->fechadelanzamiento) ? $productito->fechadelanzamiento : ''); ?>" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="destacado" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Destacado</label>                
-                <div class="col-sm-10">                    
-                <input type="hidden" name="destacado" id="destacado" value= 0 <?php echo (isset($productito->destacado) ? (($productito->destacado == 0) ? '' : 'checked') : '');?>>
-                <input type="checkbox" name="destacado" id="destacado" value= 1 <?php echo (isset($productito->destacado) ? (($productito->destacado == 1) ? 'checked' : '') : '');?>>
-            </div>
-            </div>  
-
-            <div class="form-group">
-                <label for="precio" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Precio ($)</label>
+                <label for="precio" class="col-sm-12 control-label">Precio ($)</label>
                 <div class="col-sm-10">                    
                     <input type="number" class="form-control" id="precio" name="precio" placeholder="" value="<?php echo (isset($productito->precio) ? $productito->precio : ''); ?>" required>
                 </div>
             </div>                  
             
             <div class="form-group">
-                <label for="Stock" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Stock</label>
+                <label for="Stock" class="col-sm-12 control-label">Stock</label>
                 <div class="col-sm-10">                    
                     <input type="number" class="form-control" id="Stock" name="Stock" placeholder="" value="<?php echo (isset($productito->stock) ? $productito->stock : ''); ?>" required>
                 </div>
             </div>     
             
             <div class="form-group">
-                <label for="tipo" class="col-sm-2 control-label">Comentarios Dinámicos</label>
+                <label for="tipo" class="col-sm-12 control-label">Comentarios Dinámicos</label>
                 <div class="col-sm-10">
                     <select name="campos_din[]" id="campos_din" multiple='multiple'>
                         <?php foreach ($campos_din as $cd) { ?>
@@ -136,6 +133,9 @@ require('inc/header.php');
                 </div>
             </div>
             
+            <div class="form-group">
+            <label for="tipo" class="col-sm-12 control-label">Información Extra</label>
+            <div class="col-sm-10">
             <table class="table">
             <input type="text" id="produ_extra_label" placeholder="Label">
             <input type="text" id="produ_extra_texto" placeholder="Texto">
@@ -160,16 +160,15 @@ require('inc/header.php');
                 </tbody>
             </table>
             <button type="button" class="delete-row">Delete Row</button>
+            </div>
+            </div>
             
 
             <div class="form-group">
                 <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Subir imagen</label>
                 <div class="col-sm-10">      
-                    
                     <input type="file" name="imagen">
-                    
                 </div>
-                
             </div>
 
             <div class="form-group"> <!-- upload img carrousel -->
@@ -194,9 +193,8 @@ require('inc/header.php');
             </div>
             <input type="hidden" class="form-control" id="id" name="id" placeholder="" value="<?php echo (isset($productito->id) ? $productito->id : ''); ?>">
         </form>
+        </div>
     </div>
-</div>
-</div>
 </div>
 
 <!-- Magia JavaScript -->

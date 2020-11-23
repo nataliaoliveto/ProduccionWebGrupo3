@@ -61,4 +61,20 @@ Class Comentario{
 
 		return $this->con->query($query)->fetchColumn(); 
 	}
+
+	public function getCamposDin($idcom){
+
+		$query = "	SELECT
+						CD.label, 
+						CD.type,
+						CCD.valor_ingresado
+					FROM comentarios_campos_din CCD
+					INNER JOIN campos_dinamicos CD ON
+						CCD.id_campo = CD.id_din
+					WHERE CCD.id_comentario = ". $idcom;
+
+		return $this->con->query($query);
+
+	}
+
 }

@@ -30,15 +30,13 @@ class Producto
 
 		$prod = $query->fetch(PDO::FETCH_OBJ);
 
-		$sql = 'SELECT id_prod, id_din
-					FROM producto_campos_dinamicos  
+		$sql = 'SELECT id_prod, id_din 
+					FROM producto_campos_dinamicos 
 					WHERE id_prod = ' . $prod->id;
 
 		foreach ($this->con->query($sql) as $prod_din) {
 			$prod->prod_din[] = $prod_din['id_din'];
 		}
-		/*echo '<pre>';
-			var_dump($perfil);echo '</pre>'; */
 		return $prod;
 	}
 

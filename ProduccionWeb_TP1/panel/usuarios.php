@@ -1,6 +1,5 @@
 <?php
 require('inc/header.php');
-//include('clases/usuarios.php');
 ?>
 
 <div class="container-fluid">
@@ -42,7 +41,6 @@ require('inc/header.php');
 
 	<div class="col-sm-9 col-md-10 main">
 
-		<!--toggle sidebar button-->
 		<p class="visible-xs">
 			<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
 		</p>
@@ -50,7 +48,6 @@ require('inc/header.php');
 		<h1 class="page-header">
 			Usuarios
 		</h1>
-
 
 		<?php if (in_array('usu.add', $_SESSION['usuario']['permisos']['cod'])) { ?>
 			<a href="usuarios_ae.php"><button type="button" class="btn btn-success" title="Agregar">Alta de Usuario</button></a>
@@ -110,9 +107,7 @@ require('inc/header.php');
 			</table>
 		</div>
 	</div>
-	<!--/row-->
 </div>
 </div>
-<!--/.container-->
 
 <?php include('inc/footer.php'); ?>
