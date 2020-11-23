@@ -7,7 +7,6 @@ require('inc/header.php');
     <?php $userMenu = 'Usuarios';
     include('inc/side_bar.php');
 
-    $perfil = new Perfil($con);
     $lblTitulo = "Nuevo Usuario";
     if (isset($_GET['edit'])) {
         $usuario = $user->get($_GET['edit']);
@@ -61,7 +60,7 @@ require('inc/header.php');
                 <label for="tipo" class="col-sm-2 control-label">Perfil</label>
                 <div class="col-sm-10">
                     <select name="perfil[]" id="perfil" multiple='multiple'>
-                        <?php foreach ($perfil->getList() as $t) { ?>
+                        <?php foreach ($user->getListPerfil() as $t) { ?>
                             <option value="<?php echo $t['id'] ?>" <?php
                                 if (isset($usuario->perfiles)) {
                                     if (in_array($t['id'], $usuario->perfiles)) {

@@ -33,6 +33,13 @@ class Usuario
 		return $resultado;
 	}
 
+	public function getListPerfil(){
+		$query = "SELECT id, nombre, estado 
+					FROM perfil
+					WHERE estado = '1' ";
+        return $this->con->query($query); 
+	}
+
 	/**
 	 * obtengo un usuario
 	 */
