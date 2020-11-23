@@ -49,17 +49,6 @@ class Producto
 
 	}
 
-	/*public function getCamposDinamicos($id){
-		$query = " SELECT id_prod, id_din
-					FROM producto_campos_dinamicos  
-					WHERE id_prod = ".$id;
-
-			foreach($this->con->query($query) as $prod_din){
-				$prod->prod_din[] = $prod_din['id_din'];
-			}
-		return $this->con->query($query);
-	}*/
-
 	public function getPermisos($id)
 	{
 		$query = "	SELECT permisos.nombre
@@ -76,10 +65,7 @@ class Producto
 		$query = "	SELECT edades.nombre
 					FROM edades 
 					WHERE edades.id=" . $id . " AND edades.enabled = 1 AND edades.estado = 1 ";
-		/*
-		$query = "	SELECT ".$tabla."nombre
-					FROM ".$tabla." 
-					WHERE ".$tabla.".id=".$id." AND ".$tabla.".enabled = 1 AND ".$tabla.".estado = 1 ";*/
+		
 		return $this->con->query($query);
 	}
 
@@ -112,7 +98,7 @@ class Producto
 		$query = "	SELECT *
 					FROM generos 
 					WHERE enabled = 1 AND estado = 1 ";
-		//$query = "SELECT G.id, G.nombre, G.estado, G.enabled FROM generos G INNER JOIN genero_edades GE ON G.id = GE.idgen WHERE G.estado = 1 AND G.enabled = 1 GROUP BY G.id, G.nombre, G.estado, G.enabled";
+		
 		return $this->con->query($query);
 	}
 
@@ -160,13 +146,10 @@ class Producto
 				}
 			}
 		}
-		//var_dump($datos);die();
+		
 		$sql = "INSERT INTO productos(" . implode(',', $columns) . ") VALUES('" . implode("','", $datos) . "')";
-		//echo $sql;die();
-
-		$this->con->exec($sql);
-
-		//$id_prod = $this->con->lastInsertId();
+		
+		$this->con->exec($sql);		
 
 		$sql = "	SELECT
 							MAX(id)
@@ -178,7 +161,6 @@ class Producto
 		include 'funcs.php';
 
 		if (isset($_FILES['imagen']))
-			//	var_dump($_FILES['imagen']); die;
 
 			if (isset($_FILES['imagen'])) {
 				$tamanhos = array(
@@ -187,8 +169,7 @@ class Producto
 				);
 				$ruta = '../imagenes/' . $id . '/';
 				if (!is_dir($ruta))
-					mkdir($ruta);
-				//	var_dump($id)	; die;	  
+					mkdir($ruta);  
 
 				redimensionar($ruta, $_FILES['imagen']['name'], $_FILES['imagen']['tmp_name'], $id, $tamanhos);
 			}
@@ -241,7 +222,6 @@ class Producto
 		include 'funcs.php';
 
 		if (isset($_FILES['imagen']))
-			//	var_dump($_FILES['imagen']); die;
 
 			if (isset($_FILES['imagen'])) {
 				$tamanhos = array(
@@ -251,7 +231,6 @@ class Producto
 				$ruta = '../imagenes/' . $id . '/';
 				if (!is_dir($ruta))
 					mkdir($ruta);
-				//	var_dump($id)	; die;	  
 
 				redimensionar($ruta, $_FILES['imagen']['name'], $_FILES['imagen']['tmp_name'], $id, $tamanhos);
 			}
@@ -270,7 +249,6 @@ class Producto
 
 
 		$sql = "UPDATE productos SET " . implode(',', $columns) . " WHERE id = " . $id;
-		// echo $sql; die();
 		$this->con->exec($sql);
 
 		$sql = 'DELETE FROM producto_campos_dinamicos WHERE id_prod= ' . $id;
@@ -278,21 +256,13 @@ class Producto
 		$this->con->exec($sql);
 
 		$sql = '';
-		// @TODO arreglar el nulo en capos_din
 	
 		foreach ($data['campos_din'] as $campos_din) {
 			$sql = 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
 						VALUES (' . $id . ',' . $campos_din . ');';
 			$this->con->exec($sql);
 		}
-		/*
-		for ($i=0; $i < count($data['campos_din']); $i++) { 
-			$sql = 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
-						VALUES (' . $id . ',' . $data['campos_din'][$i] . ');';
 
-			$this->con->exec($sql);
-		}
-		*/
 		$sql = 'DELETE FROM producto_extra_info WHERE id_producto= ' . $id;
 		$this->con->exec($sql);
 
