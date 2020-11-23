@@ -35,7 +35,7 @@
                             <a href="detalleproductos.php?prod=<?php echo $productito['id']?>"><img src="imagenes/<?php echo $productito['id']. '/caratula.jpg' ?>" alt="Carátula <?php echo $productito['nombre'] ?>" width="580" height="730" class="img-fluid"></a>
                             <h2><a href="detalleproductos.php?prod=<?php echo $productito['id']?>"><?php echo $productito['nombre'] . "<br />"; ?></a></h2>
                             <div class="visualcard">
-                            <p><?php echo ucfirst(substr($productito['descripcion'],0,125)); ?><a href="detalleproductos.php?prod=<?php echo $productito['id']?>"> Ver más...</a></p>
+                            <p><?php echo ucfirst(substr($productito['descripcion'],0,120)); ?><a href="detalleproductos.php?prod=<?php echo $productito['id']?>"> Ver más...</a></p>
                             <p class="listadogenero">Género: <?php 
                             foreach($Gen->getGeneros() as $generito){
                                 if($generito['id'] == $productito['genero']){
