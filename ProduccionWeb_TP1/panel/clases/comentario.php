@@ -27,17 +27,8 @@ Class Comentario{
         $query = $this->con->query($query); 
 			
 		$comentario = $query->fetch(PDO::FETCH_OBJ);
-			
-			$sql = 'SELECT perfil_id, permiso_id
-					FROM perfil_permisos  
-					WHERE perfil_id = '.$comentario->id;
-					
-			foreach($this->con->query($sql) as $permiso){
-				$comentario->permisos[] = $permiso['permiso_id'];
-			}
-			/*echo '<pre>';
-			var_dump($comentario);echo '</pre>'; */
-            return $comentario;
+						
+        return $comentario;
 	}
 
 	public function update($modif, $id){

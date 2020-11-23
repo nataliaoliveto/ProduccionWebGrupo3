@@ -35,11 +35,13 @@ require('inc/header.php');
                 </div>
 
                 <div class="form-group">
+                <div class="checkbox">
                     <label for="type" class="col-md-6 control-label">¿Es requerido?</label>
-                    <div class="checkbox">
+                    <div class="col-sm-6"> 
                         <input type="hidden" name="required" id="required" value=0 <?php echo (isset($comentarito->required) ? (($comentarito->required == 0) ? '' : 'checked') : ''); ?>>
                         <input type="checkbox" name="required" id="required" value=1 <?php echo (isset($comentarito->required) ? (($comentarito->required == 1) ? 'checked' : '') : ''); ?>>
                     </div>
+                </div>
                 </div>
 
                 <div class="form-group">
@@ -78,7 +80,6 @@ require('inc/header.php');
         var seleccionado = document.getElementById("type").value;
         var opcionFormGroup = document.getElementById("opcion-form-group");
         var opcionInput = document.getElementById("opcion");
-        //var hasOptions = false;
         //si el campo no puede tener opciones, agregar null desde el lado servidor
         for (var i = 0; i < fieldWithOptions.length; i++) {
             if (seleccionado == fieldWithOptions[i]) {
@@ -90,12 +91,6 @@ require('inc/header.php');
             }
         }
 
-        /*if (hasOptions){
-            opcionFormGroup.style.display="block";
-        }else{
-            opcionInput.value = "NULL";
-            opcionFormGroup.style.display="none";
-        }*/
     }
     onTypeChange();
 </script>

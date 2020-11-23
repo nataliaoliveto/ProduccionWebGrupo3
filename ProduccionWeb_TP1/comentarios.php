@@ -36,9 +36,14 @@
                             WHERE id_prod =".$data['IDproducto'];
                             
                 foreach ($this->con->query($query) as $iddin) {
-                    $sql = "INSERT INTO comentarios_campos_din (id_comentario, id_campo, valor_ingresado)  
-                            VALUES(".$id_comentario.", ".$iddin['id_din']." , '".$data['valor_ingresado'.$iddin['id_din']]."')";
-                    echo($sql);
+                    if(isset($data['valor_ingresado'.$iddin['id_din']])){
+                        $valoringresado = $data['valor_ingresado'.$iddin['id_din']];
+                    }else{
+                        $valoringresado = 0;
+                    }
+
+                    $sql = "INSERT INTO comentarios_campos_din (id_comentario, id_campo, valor_ingresado) 
+                            VALUES(".$id_comentario.", ".$iddin['id_din']." , '".$valoringresado."')";                                                 
                     $this->con->exec($sql);
                 }                          
             }

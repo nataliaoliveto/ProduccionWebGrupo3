@@ -8,6 +8,7 @@ footer {
   background-color: #fff;
 }
 
+
 /*
  * Off Canvas
  * --------------------------------------------------
@@ -99,4 +100,22 @@ footer {
     overflow: auto;
     margin-right: 0px;
     right: 0px;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+a:hover {
+  background-color: #9b9b9b ;
+  color: #212529;
 }

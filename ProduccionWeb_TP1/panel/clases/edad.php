@@ -29,18 +29,17 @@ Class Edad{
 				FROM edades WHERE id = ".$id;
         $query = $this->con->query($query); 
 			
-		$perfil = $query->fetch(PDO::FETCH_OBJ);
+		$edad = $query->fetch(PDO::FETCH_OBJ);
 			
 			$sql = 'SELECT idedad, idgen
 					FROM genero_edades  
-					WHERE idedad = '.$perfil->id;
+					WHERE idedad = '.$edad->id;
 					
-			foreach($this->con->query($sql) as $permiso){
-				$perfil->permisos[] = $permiso['idedad'];
+			foreach($this->con->query($sql) as $edadmini){
+				$edad->edades[] = $edadmini['idedad'];
 			}
-			/*echo '<pre>';
-			var_dump($perfil);echo '</pre>'; */
-            return $perfil;
+
+            return $edad;
 	}
 
 	public function getGeneros(){
@@ -103,13 +102,13 @@ Class Edad{
 			}
 		}
 		$sql = "UPDATE edades SET ".implode(',',$columns)." WHERE id = ".$id;
-		//echo $sql; die();
+
 		$this->con->exec($sql);
 				
 		$sql = 'DELETE FROM genero_edades WHERE idedad= '.$id;
 		$this->con->exec($sql); 
 		
-		if(isset($data['edades'])){
+		if(isset($data['generos'])){
 			$sql = '';
 			foreach($data['generos'] as $generos){
 				$sql .= 'INSERT INTO genero_edades(idedad,idgen) 

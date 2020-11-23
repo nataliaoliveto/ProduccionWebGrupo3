@@ -29,8 +29,6 @@ Class Perfil{
 			foreach($this->con->query($sql) as $permiso){
 				$perfil->permisos[] = $permiso['permiso_id'];
 			}
-			/*echo '<pre>';
-			var_dump($perfil);echo '</pre>'; */
             return $perfil;
 	}
 
@@ -53,9 +51,10 @@ Class Perfil{
 		$query = "SELECT count(1) as cantidad FROM usuarios_perfiles WHERE perfil_id = ".$id." AND enabled = '1' ;";
 		$consulta = $this->con->query($query)->fetch(PDO::FETCH_OBJ);
 		if($consulta->cantidad == 0){
-			$query = "UPDATE perfil SET enabled = '0' WHERE id = ".$id.";"; 
+			$query = "UPDATE perfil SET estado = 0, enabled = '0' WHERE id = ".$id.";"; 
 			$this->con->exec($query); 
-			$query = "UPDATE perfil_permisos SET enabled = '0' WHERE perfil_id = ".$id.";";
+			$query = "DELETE FROM perfil_permisos WHERE perfil_id = ".$id;
+
 			$this->con->exec($query); 
 			return 1;
 		}
@@ -76,9 +75,7 @@ Class Perfil{
 					}
 				}
 			}
-			//var_dump($datos);die();
             $sql = "INSERT INTO perfil(".implode(',',$columns).") VALUES('".implode("','",$datos)."')";
-			//echo $sql;die();
 			
             $this->con->exec($sql);
 			$id = $this->con->lastInsertId();
@@ -88,7 +85,7 @@ Class Perfil{
 				$sql .= 'INSERT INTO perfil_permisos(perfil_id,permiso_id) 
 							VALUES ('.$id.','.$permisos.');';
 			}
-			//echo $sql;die();
+
 			$this->con->exec($sql);
 	} 
 	
@@ -104,7 +101,7 @@ Class Perfil{
 				}
             }
             $sql = "UPDATE perfil SET ".implode(',',$columns)." WHERE id = ".$id;
-            //echo $sql; die();
+
             $this->con->exec($sql);
 			
 			$sql = 'DELETE FROM perfil_permisos WHERE perfil_id= '.$id;

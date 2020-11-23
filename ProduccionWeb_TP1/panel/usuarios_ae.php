@@ -1,22 +1,11 @@
 <?php
 require('inc/header.php');
-
-//include('clases/usuarios.php');
 ?>
 
 <div class="container-fluid">
 
     <?php $userMenu = 'Usuarios';
     include('inc/side_bar.php');
-
-    /*
-    if (
-        !in_array('user.add', $_SESSION['usuario']['permisos']) &&
-        !in_array('user.edit', $_SESSION['usuario']['permisos'])
-    ) {
-        header('Location: index.php');
-    }
-    */
 
     $perfil = new Perfil($con);
     $lblTitulo = "Nuevo Usuario";
@@ -26,11 +15,8 @@ require('inc/header.php');
     }
     ?>
 
+<div class="col-sm-9 col-md-10 main">
 
-
-    <div class="col-sm-9 col-md-10 main">
-
-        <!--toggle sidebar button-->
         <p class="visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
         </p>
@@ -99,11 +85,8 @@ require('inc/header.php');
         </form>
     </div>
 
-
-</div>
-<!--/row-->
+    </div>                            
 </div>
 </div>
-<!--/.container-->
 
 <?php include('inc/footer.php'); ?>

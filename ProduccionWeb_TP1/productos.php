@@ -90,7 +90,7 @@
                         WHERE PCD.id_prod = ".$id. " AND CD.estado = 1";
             
             return $this->con->query($query);
-            // label, type, opcion, ricuaird
+            
         }
     }    
 ?>

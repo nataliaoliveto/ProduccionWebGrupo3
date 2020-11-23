@@ -57,9 +57,7 @@ Class Campo_comentario{
 			}
 		}
 
-		//var_dump($datos);die();
 		$sql = "INSERT INTO campos_dinamicos(".implode(',',$columns).") VALUES('".implode("','",$datos)."')";
-		//echo $sql;die();
 		
 		$this->con->exec($sql);
 			

@@ -165,23 +165,16 @@ require('inc/header.php');
             
 
             <div class="form-group">
-                <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Subir imagen</label>
+                <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Carátula</label>
                 <div class="col-sm-10">      
                     <input type="file" name="imagen">
                 </div>
             </div>
 
-            <div class="form-group"> <!-- upload img carrousel -->
-                <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Carousell</label>
+            <div class="form-group"> 
+                <label for="imagen" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Carousel</label>
                 <div class="col-sm-10">      
-                    
                 <input type="file" name="caro[]" multiple title="caro">
-
-                    <!-- <form method="post" action="?" enctype="multipart/form-data">
-                    <input type="file" name="imagen[]" value="" multiple><br>
-                    <input type="submit" value="Subir Imagen">
-                    </form>
-                    -->
                 </div>
             </div>
         
@@ -252,7 +245,6 @@ require('inc/header.php');
             $("#produ_extra_texto").val('');
         });
         
-        // Find and remove selected table rows
         $(".delete-row").click(function(){
             $("table tbody").find('input[name="record"]').each(function(){
                 if($(this).is(":checked")){

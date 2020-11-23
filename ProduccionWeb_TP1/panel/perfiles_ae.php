@@ -11,12 +11,12 @@ require('inc/header.php');
 
     $query = 'SELECT * FROM permisos';
     $permisos = $con->query($query);
-    // var_dump($permisos);
+
     $lblTitulo = "Nuevo Perfil";
     if (isset($_GET['edit'])) {
         $perfiles = $perfil->get($_GET['edit']);
         $lblTitulo = "Modificar Perfil";
-        //var_dump($perfiles);
+
     }
 
     ?>

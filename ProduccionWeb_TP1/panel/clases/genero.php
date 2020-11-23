@@ -32,18 +32,16 @@ Class Genero{
 				FROM generos WHERE id = ".$id;
         $query = $this->con->query($query); 
 			
-		$perfil = $query->fetch(PDO::FETCH_OBJ);
+		$genero = $query->fetch(PDO::FETCH_OBJ);
 			
 			$sql = 'SELECT idedad, idgen
 					FROM genero_edades  
-					WHERE idgen = '.$perfil->id;
+					WHERE idgen = '.$genero->id;
 					
-			foreach($this->con->query($sql) as $permiso){
-				$perfil->permisos[] = $permiso['idgen'];
+			foreach($this->con->query($sql) as $genervar){
+				$genero->generito[] = $genervar['idgen'];
 			}
-			/*echo '<pre>';
-			var_dump($perfil);echo '</pre>'; */
-            return $perfil;
+            return $genero;
 	}
 
 	public function getEdades(){
@@ -97,7 +95,6 @@ Class Genero{
 	public function edit($data){
 			$id = $data['id'];
 			unset($data['id']);
-			//$this->con->exec("UPDATE generos SET nombre = '".$data['nombre']."' WHERE id = ".$id);
 
 			foreach($data as $key => $value){
 				if(!is_array($value)){
@@ -107,7 +104,6 @@ Class Genero{
 				}
 			}
 			$sql = "UPDATE generos SET ".implode(',',$columns)." WHERE id = ".$id;
-			//echo $sql; die();
 			$this->con->exec($sql);
 					
 			$sql = 'DELETE FROM genero_edades WHERE idgen= '.$id;

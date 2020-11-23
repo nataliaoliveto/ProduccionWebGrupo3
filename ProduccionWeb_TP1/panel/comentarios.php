@@ -40,7 +40,7 @@ require('inc/filtro.php');
 					<div class="dropdown-menu">
 						<?php 
 							for($i = 1; $i <= $paginado; $i++){ ?>
-							<a class="dropdown-item" href="comentarios.php?estado=<?php echo $_GET['estado']?>&pagina=<?php echo $i ?>">
+							<a id="paginado" class="dropdown-item" href="comentarios.php?estado=<?php echo $_GET['estado']?>&pagina=<?php echo $i ?>">
 							<?php 		
 							echo $i; ?> </a>
 						<?php }?>

@@ -21,8 +21,7 @@ $Comen = new Comentarios($con);
         $ipOK = false;
         if (isset($_POST['comentar'])) {
             $huboComentario = true;
-            $data = $_POST;
-            //var_dump($data); die();            
+            $data = $_POST;         
             if(isset($data['calificacion'])){
                 $calificacion = $data['calificacion'];
             };
@@ -189,7 +188,7 @@ $Comen = new Comentarios($con);
                                                 <div class="col-12">
                                                     <?php foreach($Prod->getProducto_campos_dinamicos($_GET['prod']) as $prodCamposDin){ 
                                                         $html = ""; ?>
-                                                        <?php //echo $prodCamposDin['label'].$prodCamposDin['type'].$prodCamposDin['opcion'].$prodCamposDin['required']; 
+                                                        <?php  
                                                         switch($prodCamposDin['type']){
                                                             case "text":
                                                                 $html = $prodCamposDin['label'].'<br><textarea rows="3" cols="40" class="input-xlarge" name="valor_ingresado'.$prodCamposDin['id_din'].'"></textarea>';

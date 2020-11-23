@@ -15,7 +15,6 @@ require('inc/header.php');
 
 	if(isset($_POST['formulario_plataformas'])){ 
 		$plata->edit($_POST); 
-		//$id, $nombre
 	} 
 
 	$mensaje = false;

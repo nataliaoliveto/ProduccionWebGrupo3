@@ -29,8 +29,7 @@ class Usuario
 				$resultado[$key]['perfiles'][] = $perfil['nombre'];
 			}
 		}
-		/* echo '<pre>';
-			var_dump($resultado);echo '</pre>'; */
+
 		return $resultado;
 	}
 
@@ -52,8 +51,7 @@ class Usuario
 		foreach ($this->con->query($sql) as $perfil) {
 			$usuario->perfiles[] = $perfil['perfil_id'];
 		}
-		/*echo '<pre>';
-			var_dump($usuario);echo '</pre>'; */
+
 		return $usuario;
 	}
 
@@ -64,7 +62,7 @@ class Usuario
 	public function save($data)
 	{
 		$data['salt'] = uniqid();
-		// $data['salt'] = md5(date("Y-m-d H:i:s"));
+
 		$data['clave'] = $this->encrypt($data['clave'], $data['salt']);
 
 		foreach ($data as $key => $value) {
@@ -75,7 +73,7 @@ class Usuario
 				}
 			}
 		}
-		//$sql = "INSERT INTO usuarios(" . implode(',', $columns) . ") VALUES('" . implode("','", $datos) . "')";		
+			
 		$sql = "INSERT INTO usuarios(".implode(',',$columns).") VALUES('".implode("','",$datos)."')";
 		$this->con->exec($sql);
 		$id_usuario = $this->con->lastInsertId();
