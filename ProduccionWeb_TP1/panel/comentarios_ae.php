@@ -56,7 +56,8 @@ require('inc/header.php');
             <input type="checkbox" name="required" id="required" value= 1 <?php echo (isset($comentarito->required) ? (($comentarito->required == 1) ? 'checked' : '') : '');?>>
 
             <div class="form-group">
-                <div class="col-sm-offset-2 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-sm-offset-2 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                
                     <button type="submit" class="btn btn-default" name="submit">Guardar</button>
                 </div>
             </div>

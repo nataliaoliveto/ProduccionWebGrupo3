@@ -20,6 +20,8 @@ Class Campo_comentario{
 
 	public function getList(){
 		
+		$query = "UPDATE campos_dinamicos SET opcion = '' WHERE type <> 'option'";
+		$this->con->exec($query);
 
 		$query = "SELECT * 
 				FROM campos_dinamicos
@@ -29,17 +31,28 @@ Class Campo_comentario{
 	
 	public function save($data){
 		
-		$hayOpcion = 0;
-		var_dump($data); die();
+		$type = "";
+
 		foreach($data as $key => $value){
-			
+						
 			if(!is_array($value)){
 				if($value != null){
-					if($key != "option"){
-						$datos[] = '';
+					if($key == "type"){
+						$type = $value;
 					}
+
 					$columns[]=$key;
-					$datos[]=$value;
+
+					if($key == "opcion"){
+						if ($type == "option") {
+							$datos[]=$value;
+						} else {
+							$datos[]= "NULL";
+						}
+					}else{
+						$datos[]=$value;
+					}
+					
 				}
 			}
 		}

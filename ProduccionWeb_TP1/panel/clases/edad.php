@@ -74,6 +74,10 @@ Class Edad{
 	public function update($modif, $id){
 		$act = ($modif -1) * -1;
 		$this->con->exec("UPDATE edades SET estado = ".$act." WHERE id = ".$id);
+
+		$query = "UPDATE genero_edades SET enabled = ".$act." WHERE idedad = ".$id;	
+		$this->con->exec($query);
+
 	}
 	
 	public function save($data){

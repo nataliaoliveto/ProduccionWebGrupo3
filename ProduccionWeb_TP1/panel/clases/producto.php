@@ -46,6 +46,9 @@ class Producto
 	{
 		$act = ($modif - 1) * -1;
 		$this->con->exec("UPDATE productos SET estado = " . $act . " WHERE id = " . $id);
+		
+		
+
 	}
 
 	/*public function getCamposDinamicos($id){
@@ -108,13 +111,16 @@ class Producto
 
 	public function getGeneros()
 	{
-		$query = "SELECT G.id, G.nombre, G.estado, G.enabled FROM generos G INNER JOIN genero_edades GE ON G.id = GE.idgen WHERE G.estado = 1 AND G.enabled = 1 GROUP BY G.id, G.nombre, G.estado, G.enabled";
+		$query = "	SELECT *
+					FROM generos 
+					WHERE enabled = 1 AND estado = 1 ";
+		//$query = "SELECT G.id, G.nombre, G.estado, G.enabled FROM generos G INNER JOIN genero_edades GE ON G.id = GE.idgen WHERE G.estado = 1 AND G.enabled = 1 GROUP BY G.id, G.nombre, G.estado, G.enabled";
 		return $this->con->query($query);
 	}
 
 	public function getGeneroEdades($genID)
 	{
-		$query = "SELECT * FROM genero_edades WHERE idgen = $genID AND genero_edades.enabled = 1";
+		$query = "SELECT * FROM genero_edades WHERE idgen = $genID AND enabled = 1";
 		return $this->con->query($query);
 	}
 
@@ -213,23 +219,13 @@ class Producto
 
 		$this->con->exec($sql);
 
-		/*
-			$sql='';
-			foreach($data['campos_din'] as $campos_din){
-				$sql .= 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
-							VALUES ('.$id.','.$campos_din.');';
-			}
-			//echo $sql;die();
-			$this->con->exec($sql);
-			/*
-			
-			$sql = '';
-			foreach($data['permisos'] as $permisos){
-				$sql .= 'INSERT INTO perfil_permisos(perfil_id,permiso_id) 
-							VALUES ('.$id.','.$permisos.');';
-			}
-			//echo $sql;die();
-			$this->con->exec($sql);*/
+		$sql='';
+		foreach($data['campos_din'] as $campos_din){
+			$sql = 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
+						VALUES ('.$id.','.$campos_din.');';
+		}
+
+		$this->con->exec($sql);
 	}
 
 	public function edit($data)
@@ -276,24 +272,29 @@ class Producto
 
 
 		$sql = "UPDATE productos SET " . implode(',', $columns) . " WHERE id = " . $id;
-		//echo $sql; die();
+		// echo $sql; die();
 		$this->con->exec($sql);
 
 		$sql = 'DELETE FROM producto_campos_dinamicos WHERE id_prod= ' . $id;
+
 		$this->con->exec($sql);
 
 		$sql = '';
 		// @TODO arreglar el nulo en capos_din
+	
 		foreach ($data['campos_din'] as $campos_din) {
-			$sql .= 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
+			$sql = 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
 						VALUES (' . $id . ',' . $campos_din . ');';
-			//echo $sql; die();
 			$this->con->exec($sql);
-			//var_dump($sql); die();
 		}
-		//["produ_extra_label"]=> array(1) { [0]=> string(4) "asd1" } 
-		//["produ_extra_texto"]=> array(1) { [0]=> string(4) "asd2" }
-		//produ_extra_label[] produ_extra_texto[]
+		/*
+		for ($i=0; $i < count($data['campos_din']); $i++) { 
+			$sql = 'INSERT INTO producto_campos_dinamicos(id_prod,id_din) 
+						VALUES (' . $id . ',' . $data['campos_din'][$i] . ');';
+
+			$this->con->exec($sql);
+		}
+		*/
 		$sql = 'DELETE FROM producto_extra_info WHERE id_producto= ' . $id;
 		$this->con->exec($sql);
 

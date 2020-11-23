@@ -22,15 +22,33 @@
             if(!empty($data)){
 
                 $sql = "INSERT INTO comentarios (mail, descripcion, idproducto, calificacion, fecha, estado, ip) VALUES ('".$data['mail']."', '".$data['descripcion']."', ".$data['IDproducto'].", ".$data['calificacion'].", now(), false, '".$_SERVER['REMOTE_ADDR']."')";                 
+                $this->con->exec($sql);
                 
-                if($this->con->exec($sql) > 0){
-                    return 'comentario almacenado';
-                }else{
-                    return 'error';
-                }
-                
-            }
+                $query = "	SELECT
+							MAX(id)
+						FROM comentarios";
 
+                $id_comentario = $this->con->query($query)->fetchColumn();
+                
+                $query = "  SELECT
+                                id_din
+                            FROM producto_campos_dinamicos
+                            WHERE id_prod =".$data['IDproducto'];
+                            
+                foreach ($this->con->query($query) as $iddin) {
+                    $sql = "INSERT INTO comentarios_campos_din (id_comentario, id_campo, valor_ingresado)  
+                            VALUES(".$id_comentario.", ".$iddin['id_din']." , '".$data['valor_ingresado'.$iddin['id_din']]."')";
+                    echo($sql);
+                    $this->con->exec($sql);
+                }
+                die();
+                /*
+                $str = 'In My Cart : valor_ingresado1 valor_ingresado3 valor_ingresado7  items';
+                preg_match_all('!\d+!', $str, $matches);
+                $str = $matches;
+                var_dump($str);
+                */                             
+            }
         }
     }
 ?>

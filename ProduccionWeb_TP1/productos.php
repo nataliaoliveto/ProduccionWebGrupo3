@@ -77,5 +77,20 @@
             return $this->con->query($query);
         }
 
+        public function getProducto_campos_dinamicos($id){
+            $query = "  SELECT 
+                            CD.id_din,
+                            CD.label,
+                            CD.type,
+                            CD.opcion,
+                            CD.required
+                        FROM producto_campos_dinamicos PCD
+                        INNER JOIN campos_dinamicos CD ON  
+                            PCD.id_din = CD.id_din
+                        WHERE PCD.id_prod = ".$id. " AND CD.estado = 1";
+            
+            return $this->con->query($query);
+            // label, type, opcion, ricuaird
+        }
     }    
 ?>

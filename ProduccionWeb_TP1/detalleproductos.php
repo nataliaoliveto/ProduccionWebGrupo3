@@ -21,7 +21,8 @@ $Comen = new Comentarios($con);
         $ipOK = false;
         if (isset($_POST['comentar'])) {
             $huboComentario = true;
-            $data = $_POST;            
+            $data = $_POST;
+            //var_dump($data); die();            
             if(isset($data['calificacion'])){
                 $calificacion = $data['calificacion'];
             };
@@ -30,7 +31,7 @@ $Comen = new Comentarios($con);
                 $ipOK = true;
                 if ($calificacion != '0') {  // Chequeo que hayan calificado el producto antes de agregarlo
                     $Comen-> setComentarios($data);
-                    }
+                }
             }            
         }
         ?>
@@ -101,10 +102,10 @@ $Comen = new Comentarios($con);
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                         <p><img src="imagenes/iconos/iconodesarrollador50.png" alt="Icono desarrollador" width="50" height="50">Desarrollado por: <?php echo $prod['desarrollador'];  ?></p>
                                     </div>
-                                            <?php foreach($Prod->getProducto_extra_info($_GET['prod']) as $prodExtra){ ?>
-                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                                                <p><img src="imagenes/iconos/iconodesarrollador50.png" alt="Icono desarrollador" width="50" height="50"><?php echo $prodExtra['label'].': '.$prodExtra['texto']; ?></p>
-                                            </div>
+                                        <?php foreach($Prod->getProducto_extra_info($_GET['prod']) as $prodExtra){ ?>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <p><img src="imagenes/iconos/iconodesarrollador50.png" alt="Icono desarrollador" width="50" height="50"><?php echo $prodExtra['label'].': '.$prodExtra['texto']; ?></p>
+                                        </div>
                                         <?php } ?>
                                 </div>
                             </div>
@@ -182,6 +183,31 @@ $Comen = new Comentarios($con);
                                                     <label for="radio5">★</label>
                                                 </p>
                                             </div>
+
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <?php foreach($Prod->getProducto_campos_dinamicos($_GET['prod']) as $prodCamposDin){ 
+                                                $html = ""; ?>
+                                                <?php //echo $prodCamposDin['label'].$prodCamposDin['type'].$prodCamposDin['opcion'].$prodCamposDin['required']; 
+                                                switch($prodCamposDin['type']){
+                                                    case "text":
+                                                        $html = '<textarea rows="5" cols="20" class="input-xlarge" name="valor_ingresado'.$prodCamposDin['id_din'].'"></textarea>';
+                                                        break;
+                                                    case "option":
+                                                        $opciones = explode('|', $prodCamposDin['opcion']);
+                                                        $html = '<label class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">'.$prodCamposDin['label'].'</label><select name="valor_ingresado'.$prodCamposDin['id_din'].'"'.($prodCamposDin['required'] == 1 ? 'required' : '').'>';
+                                                        for($i = 0; $i < count($opciones); $i++){
+                                                            $html .= '<option value = '.$opciones[$i].'>'.$opciones[$i].'</option>';
+                                                        }   
+                                                        $html .= '</select></div></div>';
+                                                        break;
+                                                    case "checkbox": 
+                                                        $html = '<label class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">'.$prodCamposDin['label'].'</label><input type="hidden" name="valor_ingresado" value= 0 ><input type="checkbox" name="valor_ingresado'.$prodCamposDin['id_din'].'" value= 1 >';
+                                                        break; 
+                                                }  echo $html; 
+                                            } ?>
+                                            </div>
+                                            
+											
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="control-group">

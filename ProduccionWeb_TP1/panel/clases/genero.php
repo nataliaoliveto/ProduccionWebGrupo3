@@ -48,7 +48,7 @@ Class Genero{
 
 	public function getEdades(){
 		$query = 'SELECT * FROM edades WHERE enabled = 1';
-    	return  $this->con->query($query);
+		return  $this->con->query($query);
 	}
 
 	public function selEdad($id){
@@ -62,6 +62,10 @@ Class Genero{
 	public function update($modif, $id){
 		$act = ($modif -1) * -1;
 		$this->con->exec("UPDATE generos SET estado = ".$act." WHERE id = ".$id);
+
+		$query = "UPDATE genero_edades SET enabled = ".$act." WHERE idgen = ".$id;
+		$this->con->exec($query);
+
 	}
 	
 	public function del($id){
@@ -71,7 +75,7 @@ Class Genero{
 			$query = "UPDATE generos SET enabled = 0, estado = 0 WHERE id = ".$id; 
 			$this->con->exec($query); 
 
-			$query = "DELETE FROM genero_edades WHERE idgen = ".$id;
+			$query = "DELETE FROM genero_edades WHERE idgen = ".$id;	
 			$this->con->exec($query); 
 
 			return 1;

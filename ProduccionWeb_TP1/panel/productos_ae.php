@@ -150,7 +150,7 @@ require('inc/header.php');
                 <tbody>
                     <!-- Magia jQuery -->
                     <?php if (isset($_GET['edit'])) {
-                    foreach ($produ->getProducto_extra_info(1) as $pei) { ?>
+                    foreach ($produ->getProducto_extra_info($_GET['edit']) as $pei) { ?>
                         <tr><td><input type="checkbox" name="record"></td>
                         <td><input name="produ_extra_label[]" value="<?php echo (isset($pei['label']) ? $pei['label'] : '')?>"></td>
                         <td><input name="produ_extra_texto[]" value="<?php echo (isset($pei['texto']) ? $pei['texto'] : '')?>"></td>
