@@ -222,7 +222,7 @@ $Comen = new Comentarios($con);
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="control-group">
                                                         <br>
-                                                        <textarea rows="5" cols="40" id="textarea" class="input-xlarge" name="descripcion"></textarea>
+                                                        <textarea rows="5" cols="40" id="textarea" class="input-xlarge" name="descripcion" placeholder="Deja aquí el comentario que desees"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
