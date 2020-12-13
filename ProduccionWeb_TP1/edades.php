@@ -9,7 +9,7 @@
         public function getGeneroEdades($genID){
             $query = "  SELECT * 
                         FROM genero_edades GE 
-                        INNER JOIN edades E ON GE.idgen = E.id 
+                        INNER JOIN edades E ON GE.idedad = E.id 
                         WHERE GE.idgen = $genID AND E.estado = 1";            
             return $this->con->query($query);
         }
